@@ -7,7 +7,10 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     DialogIdentification di;
-    di.exec();
+    MainWindow mainWindow;
+    if(di.exec() == QDialog::Accepted){
+        mainWindow.show();
+    }
 
     return a.exec();
 }

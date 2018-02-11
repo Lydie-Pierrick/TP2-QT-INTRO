@@ -75,6 +75,7 @@ public:
 
         lineEdit_Password = new QLineEdit(gridLayoutWidget_2);
         lineEdit_Password->setObjectName(QStringLiteral("lineEdit_Password"));
+        lineEdit_Password->setEchoMode(QLineEdit::Password);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, lineEdit_Password);
 

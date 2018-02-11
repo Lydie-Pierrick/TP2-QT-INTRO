@@ -34,9 +34,10 @@ bool DialogIdentification::checkLogin(QString username, QString password)
 
     if(username == "lydie" && password == "ahah")
     {
-        this->hide();
-        mainWindow = new MainWindow;
-        mainWindow.show();
+        //this->hide();
+        //mainWindow = new MainWindow;
+        //mainWindow.show();
+        accept();
     }
     else
     {
