@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/icons">
+        <file>employee.png</file>
+        <file>client.png</file>
+    </qresource>
+</RCC>

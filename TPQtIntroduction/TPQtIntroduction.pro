@@ -26,12 +26,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    dialogidentification.cpp
+    dialogidentification.cpp \
+    dialogaddclient.cpp
 
 HEADERS += \
         mainwindow.h \
-    dialogidentification.h
+    dialogidentification.h \
+    dialogaddclient.h
 
 FORMS += \
         mainwindow.ui \
-    dialogidentification.ui
+    dialogidentification.ui \
+    dialogaddclient.ui
+
+RESOURCES += \
+    pictures.qrc

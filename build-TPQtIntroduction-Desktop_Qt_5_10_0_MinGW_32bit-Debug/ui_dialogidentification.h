@@ -87,6 +87,7 @@ public:
         QFont font1;
         font1.setPointSize(11);
         pushBtn_Cancel->setFont(font1);
+        pushBtn_Cancel->setFocusPolicy(Qt::NoFocus);
 
         gridLayout->addWidget(pushBtn_Cancel, 1, 1, 1, 1);
 
