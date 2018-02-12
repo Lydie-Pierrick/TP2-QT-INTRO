@@ -25,8 +25,6 @@ void DialogIdentification::on_pushBtn_Login_clicked()
 
 bool DialogIdentification::checkLogin(QString username, QString password)
 {
-    MainWindow mainWindow;
-
     QMessageBox messageBox;
 
     messageBox.setText("Login or password incorrect!");
@@ -34,9 +32,6 @@ bool DialogIdentification::checkLogin(QString username, QString password)
 
     if(username == "lydie" && password == "ahah")
     {
-        //this->hide();
-        //mainWindow = new MainWindow;
-        //mainWindow.show();
         accept();
     }
     else

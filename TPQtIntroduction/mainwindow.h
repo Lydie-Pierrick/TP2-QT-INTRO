@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "ui_mainwindow.h"
 #include "dialogaddclient.h"
+#include "dialogabout.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,8 @@ public:
 
 private slots:
     void on_actionClient_triggered();
+
+    void on_actionAbout_triggered();
 
 private:
     Ui::MainWindow *ui;

@@ -2,5 +2,6 @@
     <qresource prefix="/new/icons">
         <file>employee.png</file>
         <file>client.png</file>
+        <file>polytech.png</file>
     </qresource>
 </RCC>

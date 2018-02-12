@@ -27,17 +27,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     dialogidentification.cpp \
-    dialogaddclient.cpp
+    dialogaddclient.cpp \
+    dialogabout.cpp
 
 HEADERS += \
         mainwindow.h \
     dialogidentification.h \
-    dialogaddclient.h
+    dialogaddclient.h \
+    dialogabout.h
 
 FORMS += \
         mainwindow.ui \
     dialogidentification.ui \
-    dialogaddclient.ui
+    dialogaddclient.ui \
+    dialogabout.ui
 
 RESOURCES += \
     pictures.qrc

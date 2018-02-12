@@ -17,3 +17,10 @@ void MainWindow::on_actionClient_triggered()
 {
 
 }
+
+void MainWindow::on_actionAbout_triggered()
+{
+    DialogAbout da;
+
+    da.exec();
+}
