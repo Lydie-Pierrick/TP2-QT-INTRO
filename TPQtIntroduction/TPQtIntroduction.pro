@@ -29,14 +29,20 @@ SOURCES += \
     dialogidentification.cpp \
     dialogaddclient.cpp \
     dialogabout.cpp \
-    dialogaddemployee.cpp
+    dialogaddemployee.cpp \
+    client.cpp \
+    appointment.cpp \
+    employee.cpp
 
 HEADERS += \
         mainwindow.h \
     dialogidentification.h \
     dialogaddclient.h \
     dialogabout.h \
-    dialogaddemployee.h
+    dialogaddemployee.h \
+    client.h \
+    appointment.h \
+    employee.h
 
 FORMS += \
         mainwindow.ui \

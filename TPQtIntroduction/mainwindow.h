@@ -20,17 +20,14 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionClient_triggered();
-
     void on_actionAbout_triggered();
-
     void on_actionQuit_triggered();
-
+    void on_actionClient_triggered();
     void on_actionClient_2_triggered();
-
+    void addClient();
     void on_actionEmployee_triggered();
-
     void on_actionEmployee_2_triggered();
+    void addEmployee();
 
 private:
     Ui::MainWindow *ui;

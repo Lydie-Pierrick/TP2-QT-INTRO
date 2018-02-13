@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    //ui->tableView->
     ui->setupUi(this);
     ui->statusBar->showMessage("You are logged !");
 }

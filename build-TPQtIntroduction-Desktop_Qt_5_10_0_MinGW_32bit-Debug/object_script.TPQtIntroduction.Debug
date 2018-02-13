@@ -5,6 +5,9 @@ INPUT(
 ./debug\dialogaddclient.o
 ./debug\dialogabout.o
 ./debug\dialogaddemployee.o
+./debug\client.o
+./debug\appointment.o
+./debug\employee.o
 ./debug\qrc_pictures.o
 ./debug\moc_mainwindow.o
 ./debug\moc_dialogidentification.o

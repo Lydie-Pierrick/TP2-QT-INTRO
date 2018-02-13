@@ -5,6 +5,9 @@ INPUT(
 ./release\dialogaddclient.o
 ./release\dialogabout.o
 ./release\dialogaddemployee.o
+./release\client.o
+./release\appointment.o
+./release\employee.o
 ./release\qrc_pictures.o
 ./release\moc_mainwindow.o
 ./release\moc_dialogidentification.o
