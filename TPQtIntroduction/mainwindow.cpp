@@ -5,8 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    createStatusBar();
     ui->setupUi(this);
+    ui->statusBar->showMessage("You are logged !");
 }
 
 MainWindow::~MainWindow()
@@ -14,18 +14,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_actionClient_triggered()
-{
-    DialogAddClient dc;
-
-    dc.exec();
-}
-
 void MainWindow::on_actionAbout_triggered()
 {
-    DialogAbout da;
-
-    da.exec();
+    ui->statusBar->showMessage("You have consulted \"about us\" !");
 }
 
 void MainWindow::on_actionQuit_triggered()
@@ -33,24 +24,44 @@ void MainWindow::on_actionQuit_triggered()
     close();
 }
 
+// ADD CLIENT
+
+void MainWindow::on_actionClient_triggered()
+{
+    addClient();
+}
+
 void MainWindow::on_actionClient_2_triggered()
 {
-    on_actionClient_triggered();
+    addClient();
 }
+
+void MainWindow::addClient()
+{
+    DialogAbout da;
+    da.exec();
+
+    /*if(ClientBD::addClientBD())
+        ui->statusBar->showMessage("You have added a client !");*/
+}
+
+// ADD EMPLOYEE
 
 void MainWindow::on_actionEmployee_triggered()
 {
-    DialogAddEmployee de;
-
-    de.exec();
+    addEmployee();
 }
 
 void MainWindow::on_actionEmployee_2_triggered()
 {
-    on_actionEmployee_triggered();
+    addEmployee();
 }
 
-void MainWindow::createStatusBar()
+void MainWindow::addEmployee()
 {
-    statusBar()->showMessage(tr("Ready"));
+    DialogAddEmployee de;
+    de.exec();
+
+    /*if(EmployeeBD::addEmployeeBD())
+        ui->statusBar->showMessage("You have added an employee !");*/
 }

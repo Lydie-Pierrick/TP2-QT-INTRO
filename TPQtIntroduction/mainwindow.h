@@ -32,8 +32,6 @@ private slots:
 
     void on_actionEmployee_2_triggered();
 
-    void createStatusBar();
-
 private:
     Ui::MainWindow *ui;
 };
