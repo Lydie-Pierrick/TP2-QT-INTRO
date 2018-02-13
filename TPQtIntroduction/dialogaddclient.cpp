@@ -12,3 +12,9 @@ DialogAddClient::~DialogAddClient()
 {
     delete ui;
 }
+
+
+void DialogAddClient::on_buttonBox_accepted()
+{
+    std::cout << "Add Client" << endl;
+}

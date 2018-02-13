@@ -5,6 +5,7 @@
 #include "ui_mainwindow.h"
 #include "dialogaddclient.h"
 #include "dialogabout.h"
+#include "dialogaddemployee.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,16 @@ private slots:
     void on_actionClient_triggered();
 
     void on_actionAbout_triggered();
+
+    void on_actionQuit_triggered();
+
+    void on_actionClient_2_triggered();
+
+    void on_actionEmployee_triggered();
+
+    void on_actionEmployee_2_triggered();
+
+    void createStatusBar();
 
 private:
     Ui::MainWindow *ui;

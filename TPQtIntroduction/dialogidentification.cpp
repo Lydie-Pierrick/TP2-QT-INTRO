@@ -23,7 +23,7 @@ void DialogIdentification::on_pushBtn_Login_clicked()
     checkLogin(ui->lineEdit_Username->text(), ui->lineEdit_Password->text());
 }
 
-bool DialogIdentification::checkLogin(QString username, QString password)
+void DialogIdentification::checkLogin(QString username, QString password)
 {
     QMessageBox messageBox;
 

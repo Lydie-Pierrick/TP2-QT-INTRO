@@ -2,6 +2,9 @@
 #define DIALOGADDCLIENT_H
 
 #include <QDialog>
+#include <iostream>
+
+using namespace std;
 
 namespace Ui {
 class DialogAddClient;
@@ -14,6 +17,10 @@ class DialogAddClient : public QDialog
 public:
     explicit DialogAddClient(QWidget *parent = 0);
     ~DialogAddClient();
+
+private slots:
+
+    void on_buttonBox_accepted();
 
 private:
     Ui::DialogAddClient *ui;

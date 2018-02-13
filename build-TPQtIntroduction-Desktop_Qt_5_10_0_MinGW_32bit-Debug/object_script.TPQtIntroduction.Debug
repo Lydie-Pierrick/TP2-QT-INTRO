@@ -1,0 +1,14 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\dialogidentification.o
+./debug\dialogaddclient.o
+./debug\dialogabout.o
+./debug\dialogaddemployee.o
+./debug\qrc_pictures.o
+./debug\moc_mainwindow.o
+./debug\moc_dialogidentification.o
+./debug\moc_dialogaddclient.o
+./debug\moc_dialogabout.o
+./debug\moc_dialogaddemployee.o
+);

@@ -28,7 +28,7 @@ private slots:
 
 private:
     Ui::DialogIdentification *ui;
-    bool checkLogin(QString username, QString password);
+    void checkLogin(QString username, QString password);
 };
 
 #endif // DIALOGIDENTIFICATION_H
