@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStandardItemModel>
+#include <QStringList>
 #include "ui_mainwindow.h"
 #include "dialogaddclient.h"
 #include "dialogabout.h"
@@ -28,6 +30,7 @@ private slots:
     void on_actionEmployee_triggered();
     void on_actionEmployee_2_triggered();
     void addEmployee();
+    void initTreeViewRessources();
 
 private:
     Ui::MainWindow *ui;
