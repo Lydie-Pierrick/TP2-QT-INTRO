@@ -32,7 +32,10 @@ SOURCES += \
     dialogaddemployee.cpp \
     client.cpp \
     appointment.cpp \
-    employee.cpp
+    employee.cpp \
+    controller_employee.cpp \
+    controller_client.cpp \
+    accesbd.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +45,10 @@ HEADERS += \
     dialogaddemployee.h \
     client.h \
     appointment.h \
-    employee.h
+    employee.h \
+    controller_employee.h \
+    controller_client.h \
+    accesbd.h
 
 FORMS += \
         mainwindow.ui \
@@ -53,3 +59,5 @@ FORMS += \
 
 RESOURCES += \
     pictures.qrc
+
+QT += sql

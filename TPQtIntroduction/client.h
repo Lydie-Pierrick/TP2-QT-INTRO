@@ -5,8 +5,6 @@
 #include <vector>
 #include "appointment.h"
 
-
-
 class Client
 {
 public:
@@ -21,6 +19,5 @@ private:
     unsigned int postalCode;
     vector<Appointment> appointment;
 };
-
 
 #endif // CLIENT_H

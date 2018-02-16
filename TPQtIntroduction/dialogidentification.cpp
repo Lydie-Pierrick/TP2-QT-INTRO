@@ -1,4 +1,5 @@
 #include "dialogidentification.h"
+#include "controller_employee.h"
 
 DialogIdentification::DialogIdentification(QWidget *parent) :
     QDialog(parent),
@@ -27,13 +28,15 @@ void DialogIdentification::on_pushBtn_Login_clicked()
 
 // On doit mettre dans un autre Cpp pour séparer de la vue
 void DialogIdentification::checkLogin(QString username, QString password)
-{
+{    
     QMessageBox messageBox;
 
     messageBox.setText("Login or password incorrect!");
     messageBox.setWindowTitle("Error");
 
-    if(username == "lydie" && password == "ahah")
+    Controller_employee controllerEmployee;
+
+    if(controllerEmployee.checkLogin(username, password))
     {
         accept();
     }
