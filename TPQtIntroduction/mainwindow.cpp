@@ -7,7 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     //ui->tableView->
     ui->setupUi(this);
-    ui->statusBar->showMessage("You are logged !");
+    ui->statusBar->showMessage("You logged in!");
+    initTreeViewRessources();
 }
 
 MainWindow::~MainWindow()
@@ -39,8 +40,8 @@ void MainWindow::on_actionClient_2_triggered()
 
 void MainWindow::addClient()
 {
-    DialogAbout da;
-    da.exec();
+    DialogAddClient dc;
+    dc.exec();
 
     /*if(ClientBD::addClientBD())
         ui->statusBar->showMessage("You have added a client !");*/
@@ -65,4 +66,19 @@ void MainWindow::addEmployee()
 
     /*if(EmployeeBD::addEmployeeBD())
         ui->statusBar->showMessage("You have added an employee !");*/
+}
+
+void MainWindow::initTreeViewRessources(){
+    QStandardItemModel* model = new QStandardItemModel(ui->treeView_Ressource);
+    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("Type")<<QStringLiteral("Nom")));
+
+    QStandardItem* item;
+    item = model->horizontalHeaderItem(0);
+    item->setToolTip(QStringLiteral("Type of employees") );
+
+
+    item = model->horizontalHeaderItem(1);
+    item->setToolTip(QStringLiteral("Name of employees"));
+
+    ui->treeView_Ressource->setModel(model);
 }

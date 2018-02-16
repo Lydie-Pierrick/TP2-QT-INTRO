@@ -16,4 +16,11 @@ DialogAddEmployee::~DialogAddEmployee()
 void DialogAddEmployee::on_buttonBox_accepted()
 {
     cout << "Add employe" << endl;
+    //appeler la fonction pour ajouter le personnel
+}
+
+void DialogAddEmployee::on_pushBtn_reset_clicked()
+{
+    ui->lineEdit_firstName->clear();
+    ui->lineEdit_lastName->clear();
 }

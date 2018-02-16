@@ -25,6 +25,7 @@
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QTreeView>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -51,9 +52,8 @@ public:
     QTableView *tableView_SearchClient;
     QLineEdit *lineEdit_SearchClient;
     QWidget *tab_Planification;
-    QWidget *gridLayoutWidget_3;
-    QGridLayout *gridLayout_3;
-    QTableView *tableView_Planification;
+    QWidget *tab_Ressource;
+    QTreeView *treeView_Ressource;
     QMenuBar *menuBar;
     QMenu *menuiFile;
     QMenu *menuAjouter;
@@ -140,20 +140,13 @@ public:
         tabWidget->addTab(tab_SearchClient, QString());
         tab_Planification = new QWidget();
         tab_Planification->setObjectName(QStringLiteral("tab_Planification"));
-        gridLayoutWidget_3 = new QWidget(tab_Planification);
-        gridLayoutWidget_3->setObjectName(QStringLiteral("gridLayoutWidget_3"));
-        gridLayoutWidget_3->setGeometry(QRect(0, 0, 711, 501));
-        gridLayout_3 = new QGridLayout(gridLayoutWidget_3);
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        gridLayout_3->setContentsMargins(0, 0, 0, 0);
-        tableView_Planification = new QTableView(gridLayoutWidget_3);
-        tableView_Planification->setObjectName(QStringLiteral("tableView_Planification"));
-
-        gridLayout_3->addWidget(tableView_Planification, 0, 0, 1, 1);
-
         tabWidget->addTab(tab_Planification, QString());
+        tab_Ressource = new QWidget();
+        tab_Ressource->setObjectName(QStringLiteral("tab_Ressource"));
+        treeView_Ressource = new QTreeView(tab_Ressource);
+        treeView_Ressource->setObjectName(QStringLiteral("treeView_Ressource"));
+        treeView_Ressource->setGeometry(QRect(0, 0, 721, 511));
+        tabWidget->addTab(tab_Ressource, QString());
 
         gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
 
@@ -187,7 +180,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -205,6 +198,7 @@ public:
         pushButton_SearchClient->setText(QApplication::translate("MainWindow", "Search", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_SearchClient), QApplication::translate("MainWindow", "Client Search", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_Planification), QApplication::translate("MainWindow", "Planification", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Ressource), QApplication::translate("MainWindow", "Ressource", nullptr));
         menuiFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuAjouter->setTitle(QApplication::translate("MainWindow", "Add", nullptr));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
