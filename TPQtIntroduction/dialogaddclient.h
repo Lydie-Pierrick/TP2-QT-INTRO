@@ -2,7 +2,10 @@
 #define DIALOGADDCLIENT_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include <iostream>
+#include "ui_dialogaddclient.h"
+#include "controller_client.h"
 
 using namespace std;
 
@@ -19,13 +22,13 @@ public:
     ~DialogAddClient();
 
 private slots:
-
-    void on_buttonBox_accepted();
-
-    void on_pushButton_clicked();
+    void on_pushButton_reset_clicked();
+    void on_pushButton_ok_clicked();
+    void on_pushButton_cancel_clicked();
 
 private:
     Ui::DialogAddClient *ui;
+    Controller_client controller_client;
 };
 
 #endif // DIALOGADDCLIENT_H

@@ -8,6 +8,7 @@
 #include "dialogaddclient.h"
 #include "dialogabout.h"
 #include "dialogaddemployee.h"
+#include "controller_employee.h"
 
 namespace Ui {
 class MainWindow;

@@ -18,7 +18,7 @@ DialogIdentification::~DialogIdentification()
 
 void DialogIdentification::on_pushBtn_Cancel_clicked()
 {
-    close();
+    reject();
 }
 
 void DialogIdentification::on_pushBtn_Login_clicked()
@@ -29,13 +29,6 @@ void DialogIdentification::on_pushBtn_Login_clicked()
 // On doit mettre dans un autre Cpp pour séparer de la vue
 void DialogIdentification::checkLogin(QString username, QString password)
 {    
-    QMessageBox messageBox;
-
-    messageBox.setText("Login or password incorrect!");
-    messageBox.setWindowTitle("Error");
-
-    Controller_employee controllerEmployee;
-
     if(controllerEmployee.checkLogin(username, password))
     {
         accept();
@@ -43,6 +36,6 @@ void DialogIdentification::checkLogin(QString username, QString password)
     else
     {
         ui->lineEdit_Password->clear();
-        messageBox.exec();
+        QMessageBox::critical(this, tr("Error"), tr("The following input errors have occurred:") + " Login or password incorrect");;
     }
 }

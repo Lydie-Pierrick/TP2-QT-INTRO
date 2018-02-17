@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -18,6 +17,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionAbout_triggered()
 {
+    DialogAbout da;
+    da.exec();
+
     ui->statusBar->showMessage("You have consulted \"about us\" !");
 }
 
@@ -61,14 +63,12 @@ void MainWindow::on_actionEmployee_2_triggered()
 
 void MainWindow::addEmployee()
 {
-    DialogAddEmployee de;
+    DialogAddEmployee de;    
     de.exec();
-
-    /*if(EmployeeBD::addEmployeeBD())
-        ui->statusBar->showMessage("You have added an employee !");*/
 }
 
-void MainWindow::initTreeViewRessources(){
+void MainWindow::initTreeViewRessources()
+{
     QStandardItemModel* model = new QStandardItemModel(ui->treeView_Ressource);
     model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("Type")<<QStringLiteral("Nom")));
 

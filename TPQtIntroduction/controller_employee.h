@@ -10,6 +10,7 @@ class Controller_employee
 public:
     Controller_employee();
     bool checkLogin(QString username, QString password);
+    bool addEmployee(QString firstname, QString lastname, QString type);
 };
 
 #endif // CONTROLLER_EMPLOYEE_H

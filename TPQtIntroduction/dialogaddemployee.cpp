@@ -1,5 +1,4 @@
 #include "dialogaddemployee.h"
-#include "ui_dialogaddemployee.h"
 
 DialogAddEmployee::DialogAddEmployee(QWidget *parent) :
     QDialog(parent),
@@ -13,14 +12,26 @@ DialogAddEmployee::~DialogAddEmployee()
     delete ui;
 }
 
-void DialogAddEmployee::on_buttonBox_accepted()
-{
-    cout << "Add employe" << endl;
-    //appeler la fonction pour ajouter le personnel
-}
-
 void DialogAddEmployee::on_pushBtn_reset_clicked()
 {
     ui->lineEdit_firstName->clear();
     ui->lineEdit_lastName->clear();
+}
+
+void DialogAddEmployee::on_pushButton_ok_clicked()
+{
+    // Call the controller employee and add employee
+    if(controller_employee.addEmployee(ui->lineEdit_firstName->text(), ui->lineEdit_lastName->text(), ui->comboBoxType->currentText()))
+    {
+        accept();
+    }
+    else
+    {
+        QMessageBox::critical(this, tr("Error"), tr("The following input errors have occurred:") + " add employee");
+    }
+}
+
+void DialogAddEmployee::on_pushButton_cancel_clicked()
+{
+    reject();
 }

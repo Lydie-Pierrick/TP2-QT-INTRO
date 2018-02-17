@@ -2,7 +2,10 @@
 #define DIALOGADDEMPLOYEE_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include <iostream>
+#include "ui_dialogaddemployee.h"
+#include "controller_employee.h"
 
 using namespace std;
 
@@ -19,11 +22,13 @@ public:
     ~DialogAddEmployee();
 
 private slots:
-    void on_buttonBox_accepted();
     void on_pushBtn_reset_clicked();
+    void on_pushButton_ok_clicked();
+    void on_pushButton_cancel_clicked();
 
 private:
     Ui::DialogAddEmployee *ui;
+    Controller_employee controller_employee;
 };
 
 #endif // DIALOGADDEMPLOYEE_H
