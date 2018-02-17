@@ -3,7 +3,7 @@
 
 #include <QString>
 #include "employee.h"
-#include "accesbd.h"
+#include "accesdb.h"
 
 class Controller_employee
 {

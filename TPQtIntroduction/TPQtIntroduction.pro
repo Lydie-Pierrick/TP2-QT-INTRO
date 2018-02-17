@@ -35,7 +35,8 @@ SOURCES += \
     employee.cpp \
     controller_employee.cpp \
     controller_client.cpp \
-    accesbd.cpp
+    c_init_bd.cpp \
+    accesdb.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,7 +49,8 @@ HEADERS += \
     employee.h \
     controller_employee.h \
     controller_client.h \
-    accesbd.h
+    c_init_bd.h \
+    accesdb.h
 
 FORMS += \
         mainwindow.ui \
