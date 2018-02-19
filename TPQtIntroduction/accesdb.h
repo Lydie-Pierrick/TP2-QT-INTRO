@@ -8,16 +8,21 @@
 #include <QFile>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <vector>
+
 #include "c_init_bd.h"
+#include "employee.h"
 
 class AccesDB
 {
 public:
     static AccesDB& Instance();
-    bool addEmployee(QString lastname, QString firstname, QString type);
+    bool addEmployee(QString lastname, QString firstname, int type);
+    Employee getEmployeeById(int id);
+    vector<Employee> getEmployeeAll();
 private:
-    AccesDB& operator= (const AccesDB&){}
-    AccesDB(const AccesDB&){}
+    AccesDB& operator= (const AccesDB&) = delete;
+    AccesDB (const AccesDB&){}
     QSqlDatabase db;
 
     static AccesDB m_instance;

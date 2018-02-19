@@ -21,7 +21,7 @@ void DialogAddEmployee::on_pushBtn_reset_clicked()
 void DialogAddEmployee::on_pushButton_ok_clicked()
 {
     // Call the controller employee and add employee
-    if(controller_employee.addEmployee(ui->lineEdit_firstName->text(), ui->lineEdit_lastName->text(), ui->comboBoxType->currentText()))
+    if(controller_employee.addEmployee(ui->lineEdit_firstName->text(), ui->lineEdit_lastName->text(), ui->comboBoxType->currentIndex()))
     {
         accept();
     }
