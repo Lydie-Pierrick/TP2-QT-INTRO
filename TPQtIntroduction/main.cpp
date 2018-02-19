@@ -1,6 +1,5 @@
 #include "mainwindow.h"
-#include "dialogidentification.h"
-#include <QApplication>
+
 
 int main(int argc, char *argv[])
 {

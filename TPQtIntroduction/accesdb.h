@@ -13,9 +13,16 @@
 class AccesDB
 {
 public:
-    AccesDB();
+    static AccesDB& Instance();
+    bool addEmployee(QString lastname, QString firstname, QString type);
 private:
+    AccesDB& operator= (const AccesDB&){}
+    AccesDB(const AccesDB&){}
     QSqlDatabase db;
+
+    static AccesDB m_instance;
+    AccesDB();
+    ~AccesDB();
 };
 
 #endif // ACCESDB_H

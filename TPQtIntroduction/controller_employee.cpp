@@ -21,9 +21,11 @@ bool Controller_employee::checkLogin(QString username, QString password)
 
 bool Controller_employee::addEmployee(QString firstname, QString lastname, QString type)
 {
-    cout << "add employee Controller. Firstname: " << firstname.toStdString() << " and Name: " << lastname.toStdString() << " and Type: " << type.toStdString() << endl;
+    cout << "Remove cout !!! Add employee Controller. Firstname: " << firstname.toStdString() << " and Name: " << lastname.toStdString() << " and Type: " << type.toStdString() << endl;
 
-//    if(!false) // SQL QUERY if return false = already exist
+   // AccesDB& db = AccesDB::Instance();
+
+//    if(!db.addEmployee(firstname, lastname, type)) // SQL QUERY if return false = already exist
 //        return false;
 
     return true;
