@@ -24,8 +24,22 @@ void DialogAddClient::on_pushButton_reset_clicked()
 
 void DialogAddClient::on_pushButton_ok_clicked()
 {
+    // Get all the texts
+    QString firstName = ui->lineEdit_firstName->text();
+    QString lastName = ui->lineEdit_lastName->text();
+    QString address = ui->lineEdit_address->text();
+    QString city = ui->lineEdit_city->text();
+    QString telephone = ui->lineEdit_telephone->text();
+    QString postalCode = ui->lineEdit_postalCode->text();
+    QString duration = ui->lineEdit_duration->text();
+    QString dateAppointment = ui->dateEdit->text();
+    QString priorityAppointment = ui->comboBox_priority->currentText();
+    QString comment = ui->textEdit->toPlainText();
+
+    cout<<dateAppointment.toStdString()<<endl;
     // Call the controller employee and add employee
-    if(controller_client.addClient(ui->lineEdit_firstName->text(), ui->lineEdit_lastName->text(), ui->lineEdit_telephone->text(), ui->lineEdit_address->text(), ui->lineEdit_city->text(), ui->lineEdit_postalCode->text()))
+    if(controller_client.addClient(firstName, lastName, telephone, address, city, postalCode, duration,
+            dateAppointment, priorityAppointment, comment))
     {
         accept();
     }

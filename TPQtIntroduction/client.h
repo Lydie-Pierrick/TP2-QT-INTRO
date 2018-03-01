@@ -2,8 +2,18 @@
 #define CLIENT_H
 
 #include <iostream>
+#include <ctime>
 #include <vector>
-#include "appointment.h"
+#include <string>
+using namespace std;
+
+enum priority{
+    priority1=1,
+    priority2=2,
+    priority3=3,
+    priority4=4,
+    priority5=5
+};
 
 class Client
 {
@@ -11,13 +21,17 @@ public:
     Client();
 
 private:
-    string lastname;
-    string firstname;
+    string lastName;
+    string firstName;
     string address;
     string city;
     unsigned int telephone;
     unsigned int postalCode;
-    vector<Appointment> appointment;
+    unsigned int duration;
+    time_t dateAppointment;
+    priority priorityAppointment;
+    vector<int> idRessources;
+    string comment;
 };
 
 #endif // CLIENT_H

@@ -30,3 +30,14 @@ bool Controller_employee::addEmployee(QString firstname, QString lastname, QStri
 
     return true;
 }
+
+bool Controller_employee::deleteEmployee(int id){
+    cout<<"Delete employee"<<endl;
+    return true;
+}
+
+bool Controller_employee::modifyEmployee(int id){
+    cout<<"Modify employee"<<endl;
+    return true;
+}
+

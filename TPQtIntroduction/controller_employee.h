@@ -11,6 +11,10 @@ public:
     Controller_employee();
     bool checkLogin(QString username, QString password);
     bool addEmployee(QString firstname, QString lastname, QString type);
+    bool searchEmployee(int id);
+    bool searchEmployee(QString name);
+    bool modifyEmployee(int id);
+    bool deleteEmployee(int id);
 };
 
 #endif // CONTROLLER_EMPLOYEE_H

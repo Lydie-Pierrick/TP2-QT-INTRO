@@ -23,6 +23,7 @@ private:
     string lastname;
     string firstname;
     typeEmployee type;
+
 };
 
 #endif // EMPLOYEE_H
