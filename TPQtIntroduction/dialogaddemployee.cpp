@@ -14,14 +14,14 @@ DialogAddEmployee::~DialogAddEmployee()
 
 void DialogAddEmployee::on_pushBtn_reset_clicked()
 {
-    ui->lineEdit_firstName->clear();
-    ui->lineEdit_lastName->clear();
+    ui->lineEdit_Firstname->clear();
+    ui->lineEdit_Lastname->clear();
 }
 
 void DialogAddEmployee::on_pushButton_ok_clicked()
 {
     // Call the controller employee and add employee
-    if(controller_employee.addEmployee(ui->lineEdit_firstName->text(), ui->lineEdit_lastName->text(), ui->comboBoxType->currentText()))
+    if(controller_employee.addEmployee(ui->lineEdit_Firstname->text(), ui->lineEdit_Lastname->text(), ui->comboBox_Type->currentText()))
     {
         accept();
     }

@@ -11,7 +11,8 @@
 #include "dialogaddemployee.h"
 #include "controller_employee.h"
 #include "dialogidentification.h"
-#include "accesdb.h"
+//#include "accesdb.h"
+#include "dialogmodifyemployee.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,8 +22,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-private:
-    int selectedID = 0;
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -31,6 +31,8 @@ private slots:
     void addClient();
     void addEmployee();
     void initTreeViewRessources();
+    void showEmpolyees();
+
     void on_actionAbout_triggered();
     void on_actionQuit_triggered();
     void on_actionClient_triggered();
@@ -45,6 +47,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    Controller_employee controllerEmployee;
 };
 
 #endif // MAINWINDOW_H

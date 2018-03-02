@@ -69,42 +69,38 @@ void MainWindow::addEmployee()
 void MainWindow::initTreeViewRessources()
 {
     QStandardItemModel* model = new QStandardItemModel(ui->treeView_Ressource);
-    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Name")<<QStringLiteral("Type")));
+    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Last name")<<QStringLiteral("First name")<<QStringLiteral("Type")));
 
     QStandardItem* itemHeader;
     itemHeader = model->horizontalHeaderItem(0);
     itemHeader->setToolTip(QStringLiteral("ID of employees"));
 
     itemHeader = model->horizontalHeaderItem(1);
-    itemHeader->setToolTip(QStringLiteral("Name of employees"));
+    itemHeader->setToolTip(QStringLiteral("Last name of employees"));
 
     itemHeader = model->horizontalHeaderItem(2);
+    itemHeader->setToolTip(QStringLiteral("First name of employees"));
+
+    itemHeader = model->horizontalHeaderItem(3);
     itemHeader->setToolTip(QStringLiteral("Type of employees"));
 
-    // Revoir quand on peut acceder a la base de donnes
-    // IDs
-    model->setItem(0, 0, new QStandardItem("1"));
-    model->setItem(1, 0, new QStandardItem("2"));
-    model->setItem(2, 0, new QStandardItem("3"));
-    model->setItem(3, 0, new QStandardItem("4"));
-
-    // Names
-    model->setItem(0, 1, new QStandardItem("A"));
-    model->setItem(1, 1, new QStandardItem("B"));
-    model->setItem(2, 1, new QStandardItem("C"));
-    model->setItem(3, 1, new QStandardItem("D"));
-
-    // Types
-    model->setItem(0, 2, new QStandardItem("Bnaker A"));
-    model->setItem(1, 2, new QStandardItem("Bnaker B"));
-    model->setItem(2, 2, new QStandardItem("Bnaker C"));
-    model->setItem(3, 2, new QStandardItem("Bnaker D"));
+    vector<vector<QString>> v_records = controllerEmployee.getAllEmployees();
+    for(int i = 0; i < v_records.size(); i ++){
+        for(int j = 0; j < v_records[i].size(); j ++){
+             model->setItem(i, j, new QStandardItem(v_records[i][j]));
+        }
+    }
 
     // The items cannot be modified
     ui->treeView_Ressource->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     ui->treeView_Ressource->setModel(model);
 }
+
+void MainWindow::showEmpolyees()
+{
+}
+
 
 void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
 {
@@ -116,20 +112,23 @@ void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
     QModelIndex modelIndex = itemModel->index(index.row(), 0);
     int id = modelIndex.data().toInt();
     // Set selectedID
-    selectedID = id;
-    cout<<id<<endl;
+    //controllerEmployee.setSelectedID(id);
+    Controller_employee::selectedID = id;
 }
 
 void MainWindow::on_pushBtn_Modify_clicked()
 {
-    Controller_employee controllerEmployee;
-    controllerEmployee.modifyEmployee(selectedID);
+    // Open the dialog
+    DialogModifyEmployee dme;
+    dme.exec();
+
+    //controllerEmployee.modifyEmployee(controllerEmployee.getSelectedID());
+    //controllerEmployee.showAllEmployees();
 }
 
 void MainWindow::on_pushBtn_Delete_clicked()
 {
-    Controller_employee controllerEmployee;
-    controllerEmployee.deleteEmployee(selectedID);
+    //controllerEmployee.deleteEmployee(controllerEmployee.getSelectedID());
 }
 
 void MainWindow::on_pushBtn_SearchByIDName_clicked()

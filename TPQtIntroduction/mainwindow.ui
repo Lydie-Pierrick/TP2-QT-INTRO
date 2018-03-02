@@ -67,7 +67,7 @@
         <bool>false</bool>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tab_SearchClient">
         <attribute name="title">
@@ -129,7 +129,18 @@
            </spacer>
           </item>
           <item row="1" column="1">
-           <widget class="QDateEdit" name="dateEdit"/>
+           <widget class="QDateEdit" name="dateEdit">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2018</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+           </widget>
           </item>
           <item row="1" column="2">
            <widget class="QPushButton" name="pushBtn_SearchByDate">

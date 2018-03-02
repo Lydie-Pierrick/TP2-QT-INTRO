@@ -1,5 +1,7 @@
 #include "mainwindow.h"
+#include "c_init_bd.h"
 
+int Controller_employee::selectedID = 0;
 
 int main(int argc, char *argv[])
 {
@@ -14,5 +16,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    // Initialiser BD
+    C_INIT_BD::Creation_BD();
     return a.exec();
 }

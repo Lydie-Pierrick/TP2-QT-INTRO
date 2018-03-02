@@ -31,13 +31,39 @@ bool Controller_employee::addEmployee(QString firstname, QString lastname, QStri
     return true;
 }
 
+vector<QString> Controller_employee::searchEmployee(int id)
+{
+    return daoEmployee.searchEmployee(id);
+}
+
 bool Controller_employee::deleteEmployee(int id){
     cout<<"Delete employee"<<endl;
     return true;
 }
 
-bool Controller_employee::modifyEmployee(int id){
-    cout<<"Modify employee"<<endl;
-    return true;
+vector<vector<QString>> Controller_employee::getAllEmployees()
+{
+    return daoEmployee.getAllEmployees();
 }
 
+bool Controller_employee::modifyEmployee(int id, QString lastname, QString firstname, int idType){
+    if (daoEmployee.modifyEmployee(id, lastname, firstname, idType)){
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/*
+void Controller_employee::setSelectedID(int selectedID)
+{
+    this->selectedID = selectedID;
+}
+
+int Controller_employee::getSelectedID()
+{
+    return selectedID;
+}
+*/
