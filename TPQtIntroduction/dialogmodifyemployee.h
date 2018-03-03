@@ -2,6 +2,7 @@
 #define DIALOGMODIFYEMPLOYEE_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include "controller_employee.h"
 
 namespace Ui {

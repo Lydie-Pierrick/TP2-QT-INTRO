@@ -30,8 +30,16 @@ void DialogModifyEmployee::on_buttonBox_accepted()
     int id = Controller_employee::selectedID;
     QString lastname = ui->lineEdit_Lastname->text();
     QString firstname = ui->lineEdit_Firstname->text();
-    int idType = ui->comboBox_Types->currentIndex();
-    controllerEmployee.modifyEmployee(id, lastname, firstname, idType);
+    int idType = ui->comboBox_Types->currentIndex() + 1;
+
+    if(controllerEmployee.modifyEmployee(id, lastname, firstname, idType))
+    {
+        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the employee !"));
+    }
+    else
+    {
+        QMessageBox::critical(this, tr("Error"), tr("Fail to modify the employee !"));
+    }
 }
 
 void DialogModifyEmployee::on_buttonBox_rejected()

@@ -7,9 +7,23 @@ DAO_Employee::DAO_Employee()
 
 }
 
-bool DAO_Employee::addEmployee(QString firstname, QString lastname, QString type)
+bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType)
 {
+    QSqlQuery sqlQuery;
+    sqlQuery.prepare("INSERT INTO TRessource VALUES (?, ?, ?)");
+    sqlQuery.addBindValue(lastname);
+    sqlQuery.addBindValue(firstname);
+    sqlQuery.addBindValue(idType);
 
+    if(!sqlQuery.exec())
+    {
+        //qDebug()<<sql_query.lastError();
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 vector<vector<QString>> DAO_Employee::getAllEmployees()
@@ -96,4 +110,20 @@ bool DAO_Employee::modifyEmployee(int id, QString firstname, QString lastname, i
     }
 
 
+}
+
+bool DAO_Employee::deleteEmployee(int id)
+{
+    QSqlQuery sqlQuery;
+    sqlQuery.prepare("DELETE FROM TRessource WHERE Id = ? ");
+    sqlQuery.addBindValue(id);
+
+    if(!sqlQuery.exec())
+    {
+        //qDebug()<<sql_query.lastError();
+        return false;
+    }
+    else{
+        return true;
+    }
 }

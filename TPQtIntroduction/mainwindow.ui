@@ -216,6 +216,13 @@
              </widget>
             </item>
             <item>
+             <widget class="QPushButton" name="pushBtn_Refresh">
+              <property name="text">
+               <string>Refresh</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer name="verticalSpacer_2">
               <property name="orientation">
                <enum>Qt::Vertical</enum>

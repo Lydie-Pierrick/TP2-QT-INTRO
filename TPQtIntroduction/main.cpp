@@ -6,9 +6,11 @@ int Controller_employee::selectedID = 0;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    // Initialiser BD
+    C_INIT_BD::Creation_BD();
+
     DialogIdentification di;
     MainWindow mainWindow;
-
     if(di.exec() == QDialog::Accepted) {
         mainWindow.show();
     }
@@ -16,7 +18,6 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    // Initialiser BD
-    C_INIT_BD::Creation_BD();
+
     return a.exec();
 }

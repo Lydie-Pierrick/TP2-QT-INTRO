@@ -112,8 +112,21 @@ void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
     QModelIndex modelIndex = itemModel->index(index.row(), 0);
     int id = modelIndex.data().toInt();
     // Set selectedID
-    //controllerEmployee.setSelectedID(id);
     Controller_employee::selectedID = id;
+}
+
+void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
+{
+    QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+    // Get content of the 1st column of selected line
+    QModelIndex modelIndex = itemModel->index(index.row(), 0);
+    int id = modelIndex.data().toInt();
+    // Set selectedID
+    Controller_employee::selectedID = id;
+
+    // Open the dialog
+    DialogModifyEmployee dme;
+    dme.exec();
 }
 
 void MainWindow::on_pushBtn_Modify_clicked()
@@ -121,14 +134,20 @@ void MainWindow::on_pushBtn_Modify_clicked()
     // Open the dialog
     DialogModifyEmployee dme;
     dme.exec();
-
-    //controllerEmployee.modifyEmployee(controllerEmployee.getSelectedID());
-    //controllerEmployee.showAllEmployees();
 }
 
 void MainWindow::on_pushBtn_Delete_clicked()
 {
-    //controllerEmployee.deleteEmployee(controllerEmployee.getSelectedID());
+    if(controllerEmployee.deleteEmployee(Controller_employee::selectedID))
+    {
+        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully deleted the employee !"));
+    }
+    else
+    {
+        QMessageBox::critical(this, tr("Error"), tr("Fail to delete the employee !"));
+    }
+
+    initTreeViewRessources();
 }
 
 void MainWindow::on_pushBtn_SearchByIDName_clicked()
@@ -144,3 +163,10 @@ void MainWindow::on_pushBtn_SearchByDate_clicked()
     //Controller_client controller_client;
     //controller_client.searchClient()
 }
+
+void MainWindow::on_pushBtn_Refresh_clicked()
+{
+    initTreeViewRessources();
+}
+
+
