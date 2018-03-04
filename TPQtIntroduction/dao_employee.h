@@ -12,7 +12,7 @@ public:
     bool addEmployee(QString firstname, QString lastname, int idType);
     vector<vector<QString>> getAllEmployees();
     vector<QString> searchEmployee(int id);
-    bool modifyEmployee(int id, QString firstname, QString lastname, int idType);
+    bool modifyEmployee(int id, QString lastname, QString firstname, int idType);
     bool deleteEmployee(int id);
 };
 
