@@ -62,8 +62,12 @@ void MainWindow::on_actionEmployee_2_triggered()
 
 void MainWindow::addEmployee()
 {
-    DialogAddEmployee de;    
-    de.exec();
+    DialogAddEmployee dae;
+
+    if(dae.exec() == QDialog::Accepted)
+    {
+        initTreeViewRessources();
+    }
 }
 
 void MainWindow::initTreeViewRessources()
@@ -84,11 +88,12 @@ void MainWindow::initTreeViewRessources()
     itemHeader = model->horizontalHeaderItem(3);
     itemHeader->setToolTip(QStringLiteral("Type of employees"));
 
-    vector<vector<QString>> v_records = controllerEmployee.getAllEmployees();
-    for(int i = 0; i < v_records.size(); i ++){
-        for(int j = 0; j < v_records[i].size(); j ++){
-             model->setItem(i, j, new QStandardItem(v_records[i][j]));
-        }
+    vector<Employee> v_records = controllerEmployee.getAllEmployees();
+    for(unsigned int i = 0; i < v_records.size(); i ++) {
+        model->setItem(i, 0, new QStandardItem(QString::number(v_records[i].getId(),10)));
+        model->setItem(i, 1, new QStandardItem(v_records[i].getFirstname()));
+        model->setItem(i, 2, new QStandardItem(v_records[i].getLastname()));
+        model->setItem(i, 3, new QStandardItem(v_records[i].getType()));
     }
 
     // The items cannot be modified
@@ -126,14 +131,22 @@ void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
 
     // Open the dialog
     DialogModifyEmployee dme;
-    dme.exec();
+
+    if(dme.exec() == QDialog::Accepted)
+    {
+        initTreeViewRessources();
+    }
 }
 
 void MainWindow::on_pushBtn_Modify_clicked()
 {
     // Open the dialog
     DialogModifyEmployee dme;
-    dme.exec();
+
+    if(dme.exec() == QDialog::Accepted)
+    {
+        initTreeViewRessources();
+    }
 }
 
 void MainWindow::on_pushBtn_Delete_clicked()

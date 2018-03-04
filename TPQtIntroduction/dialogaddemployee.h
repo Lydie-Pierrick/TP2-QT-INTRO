@@ -23,8 +23,9 @@ public:
 
 private slots:
     void on_pushBtn_reset_clicked();
-    void on_pushButton_ok_clicked();
     void on_pushButton_cancel_clicked();
+
+    void on_pushButton_ok_clicked();
 
 private:
     Ui::DialogAddEmployee *ui;

@@ -24,18 +24,32 @@ bool Controller_employee::addEmployee(QString firstname, QString lastname, int i
     return daoEmployee.addEmployee(firstname, lastname, idType);
 }
 
-vector<QString> Controller_employee::searchEmployee(int id)
+Employee Controller_employee::searchEmployee(int id)
 {
-    return daoEmployee.searchEmployee(id);
+    vector<QString> attributesEmployee = daoEmployee.searchEmployee(id);
+    Employee e = Employee(attributesEmployee);
+
+    return e;
 }
 
 bool Controller_employee::deleteEmployee(int id){
     return daoEmployee.deleteEmployee(id);
 }
 
-vector<vector<QString>> Controller_employee::getAllEmployees()
+vector<Employee> Controller_employee::getAllEmployees()
 {
-    return daoEmployee.getAllEmployees();
+    vector<vector<QString>> listEmployeeString = daoEmployee.getAllEmployees();
+    vector<Employee> listEmployee;
+    Employee e;
+
+
+    for (unsigned int i = 0; i < listEmployeeString.size(); i++)
+    {
+        e = Employee(listEmployeeString[i]);
+        listEmployee.push_back(e);
+    }
+
+    return listEmployee;
 }
 
 bool Controller_employee::modifyEmployee(int id, QString lastname, QString firstname, int idType)

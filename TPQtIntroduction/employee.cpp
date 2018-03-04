@@ -5,6 +5,14 @@ Employee::Employee()
 
 }
 
+Employee::Employee(vector<QString> elementEmployee)
+{
+    id = elementEmployee[0].toInt();
+    lastname = elementEmployee[1];
+    firstname = elementEmployee[2];
+    type = elementEmployee[3];
+}
+
 int Employee::getId() const
 {
     return id;
@@ -35,12 +43,12 @@ void Employee::setFirstname(const QString &value)
     firstname = value;
 }
 
-int Employee::getType() const
+QString Employee::getType() const
 {
     return type;
 }
 
-void Employee::setType(int value)
+void Employee::setType(QString value)
 {
     type = value;
 }

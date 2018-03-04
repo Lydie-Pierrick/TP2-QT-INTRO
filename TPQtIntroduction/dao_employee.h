@@ -1,6 +1,7 @@
 #ifndef DAO_EMPLOYEE_H
 #define DAO_EMPLOYEE_H
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QDebug>
 #include <vector>
 using namespace std;
@@ -14,6 +15,7 @@ public:
     vector<QString> searchEmployee(int id);
     bool modifyEmployee(int id, QString lastname, QString firstname, int idType);
     bool deleteEmployee(int id);
+    QString convertIntToType(int idType);
 };
 
 #endif // DAO_EMPLOYEE_H

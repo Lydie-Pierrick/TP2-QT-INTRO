@@ -156,13 +156,13 @@ bool C_INIT_BD::Creation_BD()
         }
 
         b_test=query.exec("INSERT INTO TType "
-                          "SELECT '1' AS 'Id', 'Banquier A' AS 'Label'"
-                                  "UNION SELECT 2, 'Banquier B' "
-                                  "UNION SELECT 3, 'Assureur Logement' "
-                                  "UNION SELECT 4, 'Assureur Voiture' "
-                                  "UNION SELECT 5, 'Assureur Vie' "
-                                  "UNION SELECT 6, 'Divers' "
-                                  "UNION SELECT 7, 'Informaticien'");
+                          "SELECT '1' AS 'Id', 'Banker A' AS 'Label'"
+                                  "UNION SELECT 2, 'Banker B' "
+                                  "UNION SELECT 3, 'Housing Insurer' "
+                                  "UNION SELECT 4, 'Car Insurer' "
+                                  "UNION SELECT 5, 'Life Insurer' "
+                                  "UNION SELECT 6, 'Other' "
+                                  "UNION SELECT 7, 'Computer Scientist'");
         if(!b_test)
         {
             qDebug() << query.lastError().text();

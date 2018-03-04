@@ -17,11 +17,11 @@ public:
     Controller_employee();
     bool checkLogin(QString username, QString password);
     bool addEmployee(QString firstname, QString lastname, int idType);
-    vector<QString> searchEmployee(int id);
+    Employee searchEmployee(int id);
     bool searchEmployee(QString name);
     bool modifyEmployee(int id, QString lastname, QString firstname, int idType);
     bool deleteEmployee(int id);
-    vector<vector<QString>> getAllEmployees();
+    vector<Employee> getAllEmployees();
 };
 
 

@@ -19,6 +19,7 @@ class Employee
 {
 public:
     Employee();
+    Employee(vector<QString> elementEmployee);
     int getId() const;
     void setId(int value);
 
@@ -28,14 +29,14 @@ public:
     QString getFirstname() const;
     void setFirstname(const QString &value);
 
-    int getType() const;
-    void setType(int value);
+    QString getType() const;
+    void setType(QString value);
 
 private:
     int id;
     QString lastname;
     QString firstname;
-    int type;
+    QString type;
 };
 
 #endif // EMPLOYEE_H

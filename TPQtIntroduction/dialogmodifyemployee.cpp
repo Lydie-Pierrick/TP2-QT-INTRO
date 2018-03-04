@@ -8,15 +8,17 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
     ui->setupUi(this);
 
     int id = Controller_employee::selectedID;
-    vector<QString> v_record = controllerEmployee.searchEmployee(id);
+    int index = -1;
+    Employee v_record = controllerEmployee.searchEmployee(id);
+
+
 
     ui->text_ID->setText(QString::number(id, 10));
-    if(v_record.size()){
-        ui->lineEdit_Lastname->setText(v_record[0]);
-        ui->lineEdit_Firstname->setText(v_record[1]);
-        //revoir ici
-        ui->comboBox_Types->setCurrentIndex(v_record[2].toInt()-1);
-    }
+    ui->lineEdit_Lastname->setText(v_record.getLastname());
+    ui->lineEdit_Firstname->setText(v_record.getFirstname());
+
+    index = ui->comboBox_Types->findText(v_record.getType());
+    ui->comboBox_Types->setCurrentIndex(index);
 }
 
 DialogModifyEmployee::~DialogModifyEmployee()
@@ -24,8 +26,7 @@ DialogModifyEmployee::~DialogModifyEmployee()
     delete ui;
 }
 
-
-void DialogModifyEmployee::on_buttonBox_accepted()
+void DialogModifyEmployee::on_pushButton_ok_clicked()
 {
     int id = Controller_employee::selectedID;
     QString lastname = ui->lineEdit_Lastname->text();
@@ -35,6 +36,7 @@ void DialogModifyEmployee::on_buttonBox_accepted()
     if(controllerEmployee.modifyEmployee(id, lastname, firstname, idType))
     {
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the employee !"));
+        accept();
     }
     else
     {
@@ -42,7 +44,7 @@ void DialogModifyEmployee::on_buttonBox_accepted()
     }
 }
 
-void DialogModifyEmployee::on_buttonBox_rejected()
+void DialogModifyEmployee::on_pushButton_cancel_clicked()
 {
-
+    reject();
 }
