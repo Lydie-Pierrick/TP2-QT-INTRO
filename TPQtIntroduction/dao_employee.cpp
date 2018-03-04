@@ -10,7 +10,7 @@ DAO_Employee::DAO_Employee()
 bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType)
 {
     QSqlQuery sqlQuery;
-    sqlQuery.prepare("INSERT INTO TRessource VALUES (?, ?, ?)");
+    sqlQuery.prepare("INSERT INTO TRessource (Nom, Prenom, IdType) VALUES (?, ?, ?)");
     sqlQuery.addBindValue(lastname);
     sqlQuery.addBindValue(firstname);
     sqlQuery.addBindValue(idType);
@@ -90,7 +90,7 @@ vector<QString> DAO_Employee::searchEmployee(int id)
     return v_record;
 }
 
-bool DAO_Employee::modifyEmployee(int id, QString firstname, QString lastname, int idType)
+bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, int idType)
 {
     QSqlQuery sqlQuery;
     sqlQuery.prepare("UPDATE TRessource SET Nom = ?, Prenom = ?, IdType = ? WHERE Id = ? ");

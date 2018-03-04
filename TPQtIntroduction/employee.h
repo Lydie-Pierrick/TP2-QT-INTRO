@@ -32,17 +32,10 @@ public:
     void setType(int value);
 
 private:
-<<<<<<< HEAD
-    string lastname;
-    string firstname;
-    typeEmployee type;
-
-=======
     int id;
     QString lastname;
     QString firstname;
     int type;
->>>>>>> master
 };
 
 #endif // EMPLOYEE_H
