@@ -4,7 +4,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    //ui->tableView->
     ui->setupUi(this);
     ui->statusBar->showMessage("You logged in!");
     initTreeViewRessources();
@@ -70,15 +69,104 @@ void MainWindow::addEmployee()
 void MainWindow::initTreeViewRessources()
 {
     QStandardItemModel* model = new QStandardItemModel(ui->treeView_Ressource);
-    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("Type")<<QStringLiteral("Nom")));
+    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Last name")<<QStringLiteral("First name")<<QStringLiteral("Type")));
 
-    QStandardItem* item;
-    item = model->horizontalHeaderItem(0);
-    item->setToolTip(QStringLiteral("Type of employees") );
+    QStandardItem* itemHeader;
+    itemHeader = model->horizontalHeaderItem(0);
+    itemHeader->setToolTip(QStringLiteral("ID of employees"));
 
+    itemHeader = model->horizontalHeaderItem(1);
+    itemHeader->setToolTip(QStringLiteral("Last name of employees"));
 
-    item = model->horizontalHeaderItem(1);
-    item->setToolTip(QStringLiteral("Name of employees"));
+    itemHeader = model->horizontalHeaderItem(2);
+    itemHeader->setToolTip(QStringLiteral("First name of employees"));
+
+    itemHeader = model->horizontalHeaderItem(3);
+    itemHeader->setToolTip(QStringLiteral("Type of employees"));
+
+    vector<vector<QString>> v_records = controllerEmployee.getAllEmployees();
+    for(int i = 0; i < v_records.size(); i ++){
+        for(int j = 0; j < v_records[i].size(); j ++){
+             model->setItem(i, j, new QStandardItem(v_records[i][j]));
+        }
+    }
+
+    // The items cannot be modified
+    ui->treeView_Ressource->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     ui->treeView_Ressource->setModel(model);
 }
+
+void MainWindow::showEmpolyees()
+{
+}
+
+
+void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
+{
+    ui->pushBtn_Delete->setEnabled(true);
+    ui->pushBtn_Modify->setEnabled(true);
+
+    QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+    // Get content of the 1st column of selected line
+    QModelIndex modelIndex = itemModel->index(index.row(), 0);
+    int id = modelIndex.data().toInt();
+    // Set selectedID
+    Controller_employee::selectedID = id;
+}
+
+void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
+{
+    QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+    // Get content of the 1st column of selected line
+    QModelIndex modelIndex = itemModel->index(index.row(), 0);
+    int id = modelIndex.data().toInt();
+    // Set selectedID
+    Controller_employee::selectedID = id;
+
+    // Open the dialog
+    DialogModifyEmployee dme;
+    dme.exec();
+}
+
+void MainWindow::on_pushBtn_Modify_clicked()
+{
+    // Open the dialog
+    DialogModifyEmployee dme;
+    dme.exec();
+}
+
+void MainWindow::on_pushBtn_Delete_clicked()
+{
+    if(controllerEmployee.deleteEmployee(Controller_employee::selectedID))
+    {
+        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully deleted the employee !"));
+    }
+    else
+    {
+        QMessageBox::critical(this, tr("Error"), tr("Fail to delete the employee !"));
+    }
+
+    initTreeViewRessources();
+}
+
+void MainWindow::on_pushBtn_SearchByIDName_clicked()
+{
+    QString strIDName = ui->lineEdit_SearchByIDName->text();
+    //Controller_client controller_client;
+    //controller_client.searchClient()
+}
+
+void MainWindow::on_pushBtn_SearchByDate_clicked()
+{
+    QString dateAppointment = ui->dateEdit->text();
+    //Controller_client controller_client;
+    //controller_client.searchClient()
+}
+
+void MainWindow::on_pushBtn_Refresh_clicked()
+{
+    initTreeViewRessources();
+}
+
+

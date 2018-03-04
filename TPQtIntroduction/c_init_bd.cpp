@@ -30,7 +30,7 @@ bool C_INIT_BD::Creation_BD()
         }
 
         b_test=query.exec("create table TCompte "
-                          "(Id integer primary key, "
+                          "(Id integer primary key AUTOINCREMENT, "
                           "IdRessource integer, "
                           "Login varchar(50), "
                           "MdP varchar(50))");
@@ -42,7 +42,7 @@ bool C_INIT_BD::Creation_BD()
         }
 
         b_test=query.exec("create table TRdv "
-                          "(Id integer primary key, "
+                          "(Id integer primary key AUTOINCREMENT, "
                           "IdClient integer, "
                           "IdRessource integer)");
         if(!b_test)
@@ -53,7 +53,7 @@ bool C_INIT_BD::Creation_BD()
         }
 
         b_test=query.exec("create table TClient "
-                          "(Id integer primary key, "
+                          "(Id integer primary key AUTOINCREMENT, "
                           "Nom varchar(50), "
                           "Prenom varchar(50), "
                           "Adresse varchar(50), "
@@ -72,7 +72,7 @@ bool C_INIT_BD::Creation_BD()
         }
 
         b_test=query.exec("create table TRessource "
-                          "(Id integer primary key, "
+                          "(Id integer primary key AUTOINCREMENT, "
                           "Nom varchar(50), "
                           "Prenom varchar(50), "
                           "IdType integer)");
@@ -84,7 +84,7 @@ bool C_INIT_BD::Creation_BD()
         }
 
         b_test=query.exec("create table TType "
-                          "(Id integer primary key, "
+                          "(Id integer primary key AUTOINCREMENT, "
                           "Label varchar(50))");
         if(!b_test)
         {
@@ -170,8 +170,8 @@ bool C_INIT_BD::Creation_BD()
             return false;
         }
 
-        db.close();
-        db.removeDatabase("QSQLITE");
+        //db.close();
+        //db.removeDatabase("QSQLITE");
         return true;
 
     }

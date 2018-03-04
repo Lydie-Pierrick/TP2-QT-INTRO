@@ -36,7 +36,9 @@ SOURCES += \
     controller_employee.cpp \
     controller_client.cpp \
     c_init_bd.cpp \
-    accesdb.cpp
+    dao_client.cpp \
+    dao_employee.cpp \
+    dialogmodifyemployee.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,14 +52,17 @@ HEADERS += \
     controller_employee.h \
     controller_client.h \
     c_init_bd.h \
-    accesdb.h
+    dao_client.h \
+    dao_employee.h \
+    dialogmodifyemployee.h
 
 FORMS += \
         mainwindow.ui \
     dialogidentification.ui \
     dialogaddclient.ui \
     dialogabout.ui \
-    dialogaddemployee.ui
+    dialogaddemployee.ui \
+    dialogmodifyemployee.ui
 
 RESOURCES += \
     pictures.qrc

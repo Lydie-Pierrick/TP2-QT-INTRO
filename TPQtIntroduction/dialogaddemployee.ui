@@ -24,34 +24,34 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="0">
-     <widget class="QLabel" name="label_lastName">
+     <widget class="QLabel" name="label_Lastname">
       <property name="text">
        <string>Last Name :</string>
       </property>
      </widget>
     </item>
     <item row="2" column="0">
-     <widget class="QLabel" name="label_type">
+     <widget class="QLabel" name="label_Type">
       <property name="text">
        <string>Type:</string>
       </property>
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit_firstName"/>
+     <widget class="QLineEdit" name="lineEdit_Firstname"/>
     </item>
     <item row="0" column="0">
-     <widget class="QLabel" name="label_firstName">
+     <widget class="QLabel" name="label_Firstname">
       <property name="text">
        <string>First Name : </string>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_lastName"/>
+     <widget class="QLineEdit" name="lineEdit_Lastname"/>
     </item>
     <item row="2" column="1">
-     <widget class="QComboBox" name="comboBoxType">
+     <widget class="QComboBox" name="comboBox_Type">
       <item>
        <property name="text">
         <string>Banker A</string>
@@ -79,12 +79,12 @@
       </item>
       <item>
        <property name="text">
-        <string>Computer Scientist</string>
+        <string>Other</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Other</string>
+        <string>Computer Scientist</string>
        </property>
       </item>
      </widget>
