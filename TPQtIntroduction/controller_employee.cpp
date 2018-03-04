@@ -19,6 +19,7 @@ bool Controller_employee::checkLogin(QString username, QString password)
     return false;
 }
 
+<<<<<<< HEAD
 bool Controller_employee::addEmployee(QString firstname, QString lastname, int idType)
 {
     return daoEmployee.addEmployee(firstname, lastname, idType);
@@ -32,6 +33,17 @@ vector<QString> Controller_employee::searchEmployee(int id)
 bool Controller_employee::deleteEmployee(int id){
     return daoEmployee.deleteEmployee(id);
 }
+=======
+bool Controller_employee::addEmployee(QString firstname, QString lastname, int type)
+{
+    cout << "Remove cout !!! Add employee Controller. Firstname: " << firstname.toStdString() << " and Name: " << lastname.toStdString() << " and Type: " << type << endl;
+
+    AccesDB& db = AccesDB::Instance();
+
+    bool test = db.addEmployee(firstname, lastname, type);
+    if(!test) // SQL QUERY if return false = already exist
+        return false;
+>>>>>>> master
 
 vector<vector<QString>> Controller_employee::getAllEmployees()
 {

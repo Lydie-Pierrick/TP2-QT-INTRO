@@ -1,29 +1,48 @@
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
 
-#include <string>
+#include <QString>
 
 using namespace std;
 
-enum typeEmployee{
-    bankerA = 1,
-    bankerB = 2,
-    housingInsurer = 3,
-    carInsurer = 4,
-    lifeInsurer = 5,
-    computerScientist = 6,
-    other = 7
-};
+//enum typeEmployee{
+//    bankerA = 0,
+//    bankerB = 1,
+//    housingInsurer = 2,
+//    carInsurer = 3,
+//    lifeInsurer = 4,
+//    computerScientist = 5,
+//    other = 6
+//};
 
 class Employee
 {
 public:
     Employee();
+    int getId() const;
+    void setId(int value);
+
+    QString getLastname() const;
+    void setLastname(const QString &value);
+
+    QString getFirstname() const;
+    void setFirstname(const QString &value);
+
+    int getType() const;
+    void setType(int value);
+
 private:
+<<<<<<< HEAD
     string lastname;
     string firstname;
     typeEmployee type;
 
+=======
+    int id;
+    QString lastname;
+    QString firstname;
+    int type;
+>>>>>>> master
 };
 
 #endif // EMPLOYEE_H
