@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <iostream>
 #include "ui_dialogaddemployee.h"
-#include "controller_employee.h"
+#include "controller/controller_employee.h"
 
 using namespace std;
 

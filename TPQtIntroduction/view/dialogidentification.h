@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QString>
-#include <mainwindow.h>
+#include <view/mainwindow.h>
 #include <ui_dialogidentification.h>
 
 using namespace std;

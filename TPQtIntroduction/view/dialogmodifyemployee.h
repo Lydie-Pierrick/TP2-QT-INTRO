@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include "controller_employee.h"
+#include "controller/controller_employee.h"
 
 namespace Ui {
 class DialogModifyEmployee;

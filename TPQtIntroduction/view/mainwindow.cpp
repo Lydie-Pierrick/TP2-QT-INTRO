@@ -80,22 +80,10 @@ void MainWindow::initTreeViewRessources()
     map<string,QStandardItem*> typeList;
     //for()
 
-    QStandardItem* bankerA = QStandardItem("bankerA");
-    QStandardItem* bankerB = QStandardItem("bankerA");
+    QStandardItem* bankerA = new QStandardItem("bankerA");
+    QStandardItem* bankerB = new QStandardItem("bankerA");
 //    model->setHorizontalHeaderLabels((QStringList() << QStringLiteral("ID")<<QStringLiteral("Last name")<<QStringLiteral("First name")<<QStringLiteral("Type")));
 
-//    QStandardItem* itemHeader;
-//    itemHeader = model->horizontalHeaderItem(0);
-//    itemHeader->setToolTip(QStringLiteral("ID of employees"));
-
-//    itemHeader = model->horizontalHeaderItem(1);
-//    itemHeader->setToolTip(QStringLiteral("Last name of employees"));
-
-//    itemHeader = model->horizontalHeaderItem(2);
-//    itemHeader->setToolTip(QStringLiteral("First name of employees"));
-
-//    itemHeader = model->horizontalHeaderItem(3);
-//    itemHeader->setToolTip(QStringLiteral("Type of employees"));
 
 
     // Get all Employee

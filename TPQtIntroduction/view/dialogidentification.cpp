@@ -1,5 +1,5 @@
 #include "dialogidentification.h"
-#include "controller_employee.h"
+#include "controller/controller_employee.h"
 
 DialogIdentification::DialogIdentification(QWidget *parent) :
     QDialog(parent),

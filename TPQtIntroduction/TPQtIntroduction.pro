@@ -24,40 +24,40 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    dialogidentification.cpp \
-    dialogaddclient.cpp \
-    dialogabout.cpp \
-    dialogaddemployee.cpp \
-    client.cpp \
-    appointment.cpp \
-    employee.cpp \
-    controller_employee.cpp \
-    controller_client.cpp \
+    main.cpp \
+    view/mainwindow.cpp \
+    view/dialogidentification.cpp \
+    view/dialogaddclient.cpp \
+    view/dialogabout.cpp \
+    view/dialogaddemployee.cpp \
+    view/dialogmodifyemployee.cpp \
+    model/client.cpp \
+    model/appointment.cpp \
+    model/employee.cpp \
+    controller/controller_employee.cpp \
+    controller/controller_client.cpp \
     c_init_bd.cpp \
-    dao_client.cpp \
-    dao_employee.cpp \
-    dialogmodifyemployee.cpp
+    dao/dao_client.cpp \
+    dao/dao_employee.cpp
 
 HEADERS += \
-        mainwindow.h \
-    dialogidentification.h \
-    dialogaddclient.h \
-    dialogabout.h \
-    dialogaddemployee.h \
-    client.h \
-    appointment.h \
-    employee.h \
-    controller_employee.h \
-    controller_client.h \
+        view/mainwindow.h \
+    view/dialogidentification.h \
+    view/dialogaddclient.h \
+    view/dialogabout.h \
+    view/dialogaddemployee.h \
+    view/dialogmodifyemployee.h \
+    model/client.h \
+    model/appointment.h \
+    model/employee.h \
+    controller/controller_employee.h \
+    controller/controller_client.h \
     c_init_bd.h \
-    dao_client.h \
-    dao_employee.h \
-    dialogmodifyemployee.h
+    dao/dao_client.h \
+    dao/dao_employee.h
 
 FORMS += \
-        mainwindow.ui \
+    mainwindow.ui \
     dialogidentification.ui \
     dialogaddclient.ui \
     dialogabout.ui \

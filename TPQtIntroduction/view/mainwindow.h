@@ -10,7 +10,7 @@
 #include "dialogaddclient.h"
 #include "dialogabout.h"
 #include "dialogaddemployee.h"
-#include "controller_employee.h"
+#include "controller/controller_employee.h"
 #include "dialogidentification.h"
 #include "dialogmodifyemployee.h"
 

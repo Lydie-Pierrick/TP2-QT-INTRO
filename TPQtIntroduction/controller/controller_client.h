@@ -2,7 +2,7 @@
 #define CONTROLLER_CLIENT_H
 
 #include <QString>
-#include "client.h"
+#include "model/client.h"
 
 class Controller_client
 {

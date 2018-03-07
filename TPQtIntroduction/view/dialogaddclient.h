@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <iostream>
 #include "ui_dialogaddclient.h"
-#include "controller_client.h"
+#include "controller/controller_client.h"
 
 using namespace std;
 

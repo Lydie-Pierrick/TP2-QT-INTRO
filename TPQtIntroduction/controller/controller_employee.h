@@ -2,8 +2,8 @@
 #define CONTROLLER_EMPLOYEE_H
 
 #include <QString>
-#include "employee.h"
-#include "dao_employee.h"
+#include "model/employee.h"
+#include "dao/dao_employee.h"
 #include <iostream>
 #include <map>
 #include <iterator>
