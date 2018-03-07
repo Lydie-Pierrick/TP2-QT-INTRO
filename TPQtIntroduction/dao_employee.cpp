@@ -40,18 +40,6 @@ vector<map<QString, QString>> DAO_Employee::getAllEmployees()
     {
         while(sqlQuery.next())
         {
-//            vector<QString> v_record; // record a line
-//            QString id = sqlQuery.value(0).toString();
-//            QString lastName = sqlQuery.value(1).toString();
-//            QString firstName = sqlQuery.value(2).toString();
-//            int idType = sqlQuery.value(3).toInt();
-
-//            v_record.push_back(id);
-//            v_record.push_back(lastName);
-//            v_record.push_back(firstName);
-//            v_record.push_back(convertIntToType(idType));
-
-
             m_record.insert(pair<QString,QString>("id", sqlQuery.value(0).toString()));
             m_record.insert(pair<QString,QString>("lastname", sqlQuery.value(1).toString()));
             m_record.insert(pair<QString,QString>("firstname", sqlQuery.value(2).toString()));
@@ -86,28 +74,6 @@ map<QString, QString> DAO_Employee::searchEmployee(int id)
 
     return m_record;
 }
-
-//vector<QString> DAO_Employee::searchEmployee(int id)
-//{
-//    vector<QString> v_record;
-//    QSqlQuery sqlQuery;
-//    sqlQuery.prepare("SELECT * FROM TRessource WHERE Id = ?");
-//    sqlQuery.addBindValue(id);
-
-//    if(!sqlQuery.exec())
-//    {
-//        qDebug() << sqlQuery.lastError();
-//    }
-//    else {
-//        sqlQuery.next();
-//        v_record.push_back(sqlQuery.value(0).toString());
-//        v_record.push_back(sqlQuery.value(1).toString());
-//        v_record.push_back(sqlQuery.value(2).toString());
-//        v_record.push_back(convertIntToType(sqlQuery.value(3).toInt()));
-//    }
-
-//    return v_record;
-//}
 
 bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, int idType)
 {
