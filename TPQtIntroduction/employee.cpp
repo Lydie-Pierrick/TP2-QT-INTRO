@@ -5,12 +5,12 @@ Employee::Employee()
 
 }
 
-Employee::Employee(vector<QString> elementEmployee)
+Employee::Employee(int id, QString lastname, QString firstname, QString type)
 {
-    id = elementEmployee[0].toInt();
-    lastname = elementEmployee[1];
-    firstname = elementEmployee[2];
-    type = elementEmployee[3];
+    this->id = id;
+    this->firstname = firstname;
+    this->lastname = lastname;
+    this->type = type;
 }
 
 int Employee::getId() const

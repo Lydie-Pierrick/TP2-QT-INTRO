@@ -19,7 +19,7 @@ class Employee
 {
 public:
     Employee();
-    Employee(vector<QString> elementEmployee);
+    Employee(int id, QString lastname, QString fisrtname, QString type);
     int getId() const;
     void setId(int value);
 
