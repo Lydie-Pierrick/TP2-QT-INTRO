@@ -143,13 +143,15 @@ vector<QString> DAO_Employee::getAllTypes()
     // faire
 }
 
-bool DAO_Employee::checkLogin(QString login, QString password)
+bool DAO_Employee::checkLogin(QString username, QString password)
 {
     QSqlQuery sqlQuery;
+    QString idRessource;
+    QString idType;
 
-    // ici à demander
-    sqlQuery.prepare("SELECT * FROM TCompte WHERE Login = ? AND MdP = ?");
-    sqlQuery.addBindValue(login);
+    // To get employee if username and password matched
+    sqlQuery.prepare("SELECT IdRessource FROM TCompte WHERE Login = ? AND MdP = ?");
+    sqlQuery.addBindValue(username);
     sqlQuery.addBindValue(password);
 
     if(!sqlQuery.exec())
@@ -157,7 +159,36 @@ bool DAO_Employee::checkLogin(QString login, QString password)
         qDebug() << sqlQuery.lastError();
     }
     else{
-        sqlQuery.next();
-//        type = sqlQuery.value(0).toString();
+        // If employee username and password matched
+        if(sqlQuery.next())
+        {
+            QSqlQuery sqlQuery2;
+            idRessource = sqlQuery.value(0).toString();
+
+            // Get id type of the employee
+            sqlQuery2.prepare("SELECT IdType FROM TRessource WHERE Id = ?");
+            sqlQuery2.addBindValue(idRessource);
+
+            if(!sqlQuery2.exec())
+            {
+                qDebug() << sqlQuery2.lastError();
+            }
+            else{
+                // If the employee had id type exist
+                if(sqlQuery2.next())
+                    idType = sqlQuery2.value(0).toString();
+                else
+                    return false;
+
+                // Check if the type of employee for authentification is only IT
+                if(!(convertIntToType(idType.toInt()) == "Computer Scientist"))
+                    return false;
+            }
+
+            return true;
+        }
+
     }
+
+    return false;
 }

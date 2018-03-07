@@ -19,7 +19,7 @@ public:
     bool deleteEmployee(int id);
     QString convertIntToType(int idType);
     vector<QString> getAllTypes();
-    bool checkLogin(QString login, QString password);
+    bool checkLogin(QString username, QString password);
 };
 
 #endif // DAO_EMPLOYEE_H
