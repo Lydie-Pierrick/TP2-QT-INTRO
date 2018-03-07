@@ -31,8 +31,6 @@ private slots:
     void addClient();
     void addEmployee();
     void initTreeViewRessources();
-    void showEmpolyees();
-
     void on_actionAbout_triggered();
     void on_actionQuit_triggered();
     void on_actionClient_triggered();

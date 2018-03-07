@@ -16,10 +16,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionAbout_triggered()
 {
+    ui->statusBar->showMessage("You have consulted \"about us\" !");
     DialogAbout da;
     da.exec();
-
-    ui->statusBar->showMessage("You have consulted \"about us\" !");
 }
 
 void MainWindow::on_actionQuit_triggered()
@@ -41,11 +40,10 @@ void MainWindow::on_actionClient_2_triggered()
 
 void MainWindow::addClient()
 {
-    DialogAddClient dc;
-    dc.exec();
-
     /*if(ClientBD::addClientBD())
         ui->statusBar->showMessage("You have added a client !");*/
+    DialogAddClient dc;
+    dc.exec();
 }
 
 // ADD EMPLOYEE
@@ -66,6 +64,7 @@ void MainWindow::addEmployee()
 
     if(dae.exec() == QDialog::Accepted)
     {
+        ui->statusBar->showMessage("You have added an employee !");
         initTreeViewRessources();
     }
 }
@@ -101,11 +100,6 @@ void MainWindow::initTreeViewRessources()
     ui->treeView_Ressource->setModel(model);
 }
 
-void MainWindow::showEmpolyees()
-{
-}
-
-
 void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
 {
     ui->pushBtn_Delete->setEnabled(true);
@@ -133,6 +127,7 @@ void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
 
     if(dme.exec() == QDialog::Accepted)
     {
+        ui->statusBar->showMessage("You have modified an employee !");
         initTreeViewRessources();
     }
 }
@@ -144,6 +139,7 @@ void MainWindow::on_pushBtn_Modify_clicked()
 
     if(dme.exec() == QDialog::Accepted)
     {
+        ui->statusBar->showMessage("You have modified an employee !");
         initTreeViewRessources();
     }
 }
@@ -152,6 +148,7 @@ void MainWindow::on_pushBtn_Delete_clicked()
 {
     if(controllerEmployee.deleteEmployee(Controller_employee::selectedID))
     {
+        ui->statusBar->showMessage("You have removed an employee !");
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully deleted the employee !"));
     }
     else
@@ -165,6 +162,7 @@ void MainWindow::on_pushBtn_Delete_clicked()
 void MainWindow::on_pushBtn_SearchByIDName_clicked()
 {
     QString strIDName = ui->lineEdit_SearchByIDName->text();
+    ui->statusBar->showMessage("You have searched clients.");
     //Controller_client controller_client;
     //controller_client.searchClient()
 }
@@ -172,12 +170,14 @@ void MainWindow::on_pushBtn_SearchByIDName_clicked()
 void MainWindow::on_pushBtn_SearchByDate_clicked()
 {
     QString dateAppointment = ui->dateEdit->text();
+    ui->statusBar->showMessage("You have searched clients by date.");
     //Controller_client controller_client;
     //controller_client.searchClient()
 }
 
 void MainWindow::on_pushBtn_Refresh_clicked()
 {
+    ui->statusBar->showMessage("You have refreshed the list of employee !");
     initTreeViewRessources();
 }
 
