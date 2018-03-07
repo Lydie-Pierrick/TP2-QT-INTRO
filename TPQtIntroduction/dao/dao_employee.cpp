@@ -21,6 +21,12 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType)
     }
     else
     {
+        if(convertIntToType(idType) == "Computer Scientist")
+        {
+            QSqlQuery sqlQuery2;
+            sqlQuery2.prepare("INSERT INTO TCompte (IdRessource, Login, MdP) VALUES (last_insert_rowid(), '" + firstname + "', 'Password')");
+        }
+
         return true;
     }
 }
@@ -114,19 +120,19 @@ bool DAO_Employee::deleteEmployee(int id)
 QString DAO_Employee::convertIntToType(int idType)
 {
     // Get type of employee by label
-    QSqlQuery sqlQuery2;
+    QSqlQuery sqlQuery;
     QString type;
 
-    sqlQuery2.prepare("SELECT Label FROM TType WHERE Id = ?");
-    sqlQuery2.addBindValue(idType);
+    sqlQuery.prepare("SELECT Label FROM TType WHERE Id = ?");
+    sqlQuery.addBindValue(idType);
 
-    if(!sqlQuery2.exec())
+    if(!sqlQuery.exec())
     {
-        qDebug() << sqlQuery2.lastError();
+        qDebug() << sqlQuery.lastError();
     }
     else{
-        sqlQuery2.next();
-        type = sqlQuery2.value(0).toString();
+        sqlQuery.next();
+        type = sqlQuery.value(0).toString();
     }
 
     return type;
@@ -135,4 +141,23 @@ QString DAO_Employee::convertIntToType(int idType)
 vector<QString> DAO_Employee::getAllTypes()
 {
     // faire
+}
+
+bool DAO_Employee::checkLogin(QString login, QString password)
+{
+    QSqlQuery sqlQuery;
+
+    // ici à demander
+    sqlQuery.prepare("SELECT * FROM TCompte WHERE Login = ? AND MdP = ?");
+    sqlQuery.addBindValue(login);
+    sqlQuery.addBindValue(password);
+
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+    }
+    else{
+        sqlQuery.next();
+//        type = sqlQuery.value(0).toString();
+    }
 }
