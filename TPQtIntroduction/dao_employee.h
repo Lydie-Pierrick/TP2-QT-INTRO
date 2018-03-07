@@ -16,6 +16,7 @@ public:
     bool modifyEmployee(int id, QString lastname, QString firstname, int idType);
     bool deleteEmployee(int id);
     QString convertIntToType(int idType);
+    vector<QString> getAllTypes();
 };
 
 #endif // DAO_EMPLOYEE_H

@@ -5,13 +5,13 @@
 #include <QStandardItemModel>
 #include <QStringList>
 #include <QApplication>
+#include <map>
 #include "ui_mainwindow.h"
 #include "dialogaddclient.h"
 #include "dialogabout.h"
 #include "dialogaddemployee.h"
 #include "controller_employee.h"
 #include "dialogidentification.h"
-//#include "accesdb.h"
 #include "dialogmodifyemployee.h"
 
 namespace Ui {

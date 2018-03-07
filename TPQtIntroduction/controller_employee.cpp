@@ -57,3 +57,7 @@ bool Controller_employee::modifyEmployee(int id, QString lastname, QString first
     return daoEmployee.modifyEmployee(id, lastname, firstname, idType);
 }
 
+vector<QString> Controller_employee::getAllTypes()
+{
+    return daoEmployee.getAllTypes();
+}

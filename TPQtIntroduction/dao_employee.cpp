@@ -134,3 +134,8 @@ QString DAO_Employee::convertIntToType(int idType)
 
     return type;
 }
+
+vector<QString> DAO_Employee::getAllTypes()
+{
+    // faire
+}

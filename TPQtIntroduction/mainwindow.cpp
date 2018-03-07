@@ -72,22 +72,33 @@ void MainWindow::addEmployee()
 
 void MainWindow::initTreeViewRessources()
 {
-    QStandardItemModel* model = new QStandardItemModel(ui->treeView_Ressource);
-    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Last name")<<QStringLiteral("First name")<<QStringLiteral("Type")));
+//    QStandardItemModel* model = new QStandardItemModel(ui->treeView_Ressource);
+    QStandardItemModel* model = new QStandardItemModel();
 
-    QStandardItem* itemHeader;
-    itemHeader = model->horizontalHeaderItem(0);
-    itemHeader->setToolTip(QStringLiteral("ID of employees"));
+    QStandardItem* rootNode = model->invisibleRootItem();
 
-    itemHeader = model->horizontalHeaderItem(1);
-    itemHeader->setToolTip(QStringLiteral("Last name of employees"));
+    map<string,QStandardItem*> typeList;
+    //for()
 
-    itemHeader = model->horizontalHeaderItem(2);
-    itemHeader->setToolTip(QStringLiteral("First name of employees"));
+    QStandardItem* bankerA = QStandardItem("bankerA");
+    QStandardItem* bankerB = QStandardItem("bankerA");
+//    model->setHorizontalHeaderLabels((QStringList() << QStringLiteral("ID")<<QStringLiteral("Last name")<<QStringLiteral("First name")<<QStringLiteral("Type")));
 
-    itemHeader = model->horizontalHeaderItem(3);
-    itemHeader->setToolTip(QStringLiteral("Type of employees"));
+//    QStandardItem* itemHeader;
+//    itemHeader = model->horizontalHeaderItem(0);
+//    itemHeader->setToolTip(QStringLiteral("ID of employees"));
 
+//    itemHeader = model->horizontalHeaderItem(1);
+//    itemHeader->setToolTip(QStringLiteral("Last name of employees"));
+
+//    itemHeader = model->horizontalHeaderItem(2);
+//    itemHeader->setToolTip(QStringLiteral("First name of employees"));
+
+//    itemHeader = model->horizontalHeaderItem(3);
+//    itemHeader->setToolTip(QStringLiteral("Type of employees"));
+
+
+    // Get all Employee
     vector<Employee> v_records = controllerEmployee.getAllEmployees();
     for(unsigned int i = 0; i < v_records.size(); i ++) {
         model->setItem(i, 0, new QStandardItem(QString::number(v_records[i].getId(),10)));

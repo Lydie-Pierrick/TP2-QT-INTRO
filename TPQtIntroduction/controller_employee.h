@@ -22,6 +22,7 @@ public:
     bool modifyEmployee(int id, QString lastname, QString firstname, int idType);
     bool deleteEmployee(int id);
     vector<Employee> getAllEmployees();
+    vector<QString> getAllTypes();
 };
 
 
