@@ -71,27 +71,27 @@ void MainWindow::addEmployee()
 
 void MainWindow::initTreeViewRessources()
 {
-//    QStandardItemModel* model = new QStandardItemModel(ui->treeView_Ressource);
     QStandardItemModel* model = new QStandardItemModel();
 
-    QStandardItem* rootNode = model->invisibleRootItem();
+    // Set header label
+    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("Type and name of employees")));
 
-    map<string,QStandardItem*> typeList;
-    //for()
+    QStandardItem* itemType;
 
-    QStandardItem* bankerA = new QStandardItem("bankerA");
-    QStandardItem* bankerB = new QStandardItem("bankerA");
-//    model->setHorizontalHeaderLabels((QStringList() << QStringLiteral("ID")<<QStringLiteral("Last name")<<QStringLiteral("First name")<<QStringLiteral("Type")));
+    // Get all types of employees
+    vector<map<QString, QString>> v_types = controllerEmployee.getAllTypes();
 
+    for(unsigned int i = 0; i < v_types.size(); i ++) {
+        // Get lastname of employees
+        vector<Employee> v_employees = controllerEmployee.getEmployeesByType(v_types[i]["id"].toInt());
+        itemType = new QStandardItem(v_types[i]["label"]);
 
+        // Add the lastnames as the child of Type
+        for(Employee e : v_employees){
+            itemType->appendRow(new QStandardItem(e.getLastname()));
+        }
+        model->setItem(i, 0, itemType);
 
-    // Get all Employee
-    vector<Employee> v_records = controllerEmployee.getAllEmployees();
-    for(unsigned int i = 0; i < v_records.size(); i ++) {
-        model->setItem(i, 0, new QStandardItem(QString::number(v_records[i].getId(),10)));
-        model->setItem(i, 1, new QStandardItem(v_records[i].getFirstname()));
-        model->setItem(i, 2, new QStandardItem(v_records[i].getLastname()));
-        model->setItem(i, 3, new QStandardItem(v_records[i].getType()));
     }
 
     // The items cannot be modified
