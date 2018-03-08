@@ -46,9 +46,12 @@ private slots:
 
     void on_treeView_Ressource_doubleClicked(const QModelIndex &index);
 
+    void on_pushBtn_SearchByID_clicked();
+
 private:
     Ui::MainWindow *ui;
     Controller_employee controllerEmployee;
+    Controller_client controllerClient;
 };
 
 #endif // MAINWINDOW_H

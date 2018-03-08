@@ -183,12 +183,10 @@ void MainWindow::on_pushBtn_Delete_clicked()
     initTreeViewRessources();
 }
 
-void MainWindow::on_pushBtn_SearchByIDName_clicked()
+void MainWindow::on_pushBtn_Refresh_clicked()
 {
-    QString strIDName = ui->lineEdit_SearchByIDName->text();
-    ui->statusBar->showMessage("You have searched clients.");
-    //Controller_client controller_client;
-    //controller_client.searchClient()
+    ui->statusBar->showMessage("You have refreshed the list of employee !");
+    initTreeViewRessources();
 }
 
 void MainWindow::on_pushBtn_SearchByDate_clicked()
@@ -199,10 +197,14 @@ void MainWindow::on_pushBtn_SearchByDate_clicked()
     //controller_client.searchClient()
 }
 
-void MainWindow::on_pushBtn_Refresh_clicked()
+
+
+void MainWindow::on_pushBtn_SearchByID_clicked()
 {
-    ui->statusBar->showMessage("You have refreshed the list of employee !");
-    initTreeViewRessources();
+    int id = ui->lineEdit_SearchByID->text().toInt();
+
+    Client client = controllerClient.searchClientById(id);
+
+    //ui->tableView_SearchClient->set
+    cout<<client.getPostalCode()<<endl;
 }
-
-

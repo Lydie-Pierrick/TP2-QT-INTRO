@@ -5,21 +5,22 @@ Controller_client::Controller_client()
 
 }
 
-bool Controller_client::addClient(QString firstname, QString lastname, QString telephone,
-                                  QString address, QString city, QString postalCode, QString duration,
-                                  QString dateAppointment, QString priorityAppointment, QString comment)
+bool Controller_client::addClient(QString firstname, QString lastname, int telephone,
+                                  QString address, QString city, int postalCode, int duration,
+                                  QDate dateAppointment, int priorityAppointment, QString comment)
 {
-    string str_lastname = lastname.toStdString();
-    string str_firstname = firstname.toStdString();
-    string str_address = address.toStdString();
-    string str_city = city.toStdString();
-    unsigned int int_telephone = telephone.toInt();
-    unsigned int int_postalCode = postalCode.toInt();
-    unsigned int int_duration = duration.toInt();
-    //time_t time_dateApp = dateAppointment;
-    unsigned int int_priorityApp = priorityAppointment.toInt();
-    string str_comment = comment.toStdString();
-    cout << "test add Client" << endl;
+    return dao_Client.addClient(firstname, lastname, telephone, address, city, postalCode,
+                                duration, dateAppointment, priorityAppointment, comment);
+}
 
-    return true;
+Client Controller_client::searchClientById(int id)
+{
+    map<QString,QString> m_attributsClient = dao_Client.searchClientById(id);
+
+    Client client = Client(m_attributsClient["firstname"], m_attributsClient["lastname"],
+            m_attributsClient["telephone"].toInt(), m_attributsClient["address"], m_attributsClient["city"],
+            m_attributsClient["postalCode"].toInt(), m_attributsClient["duration"].toInt(),
+            m_attributsClient["date"], m_attributsClient["priority"].toInt(), m_attributsClient["comment"]);
+
+    return client;
 }

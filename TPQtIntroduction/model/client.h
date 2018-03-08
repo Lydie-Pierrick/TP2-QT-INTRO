@@ -5,6 +5,7 @@
 #include <ctime>
 #include <vector>
 #include <string>
+#include <QString>
 using namespace std;
 
 enum priority{
@@ -18,20 +19,42 @@ enum priority{
 class Client
 {
 public:
-    Client();
+    Client(QString firstname, QString lastname, int telephone,
+            QString address, QString city, int postalCode, int duration,
+            QString dateAppointment, int priorityAppointment, QString comment);
+
+    void setLastName(const QString &value);
+    QString getLastName() const;
+    void setFirstName(const QString &value);
+    QString getFirstName() const;
+    void setAddress(const QString &value);
+    QString getAddress() const;
+    void setCity(const QString &value);
+    int getTelephone() const;
+    void setPostalCode(int value);
+    int getPostalCode() const;
+    void setDuration(int value);
+    int getDuration() const;
+    void setDateAppointment(const QString &value);
+    QString getDateAppointment() const;
+    void setPriorityAppointment(int value);
+    int getPriorityAppointment() const;
+    void setComment(const QString &value);
+    QString getComment() const;
 
 private:
-    string lastName;
-    string firstName;
-    string address;
-    string city;
-    unsigned int telephone;
-    unsigned int postalCode;
-    unsigned int duration;
-    time_t dateAppointment;
-    priority priorityAppointment;
+    QString lastName;
+    QString firstName;
+    QString address;
+    QString city;
+    int telephone;
+    int postalCode;
+    int duration;
+    QString dateAppointment;
+    int priorityAppointment;
+    QString comment;
+
     vector<int> idRessources;
-    string comment;
 };
 
 #endif // CLIENT_H
