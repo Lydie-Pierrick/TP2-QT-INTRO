@@ -137,9 +137,58 @@ QString DAO_Employee::convertIntToType(int idType)
     return type;
 }
 
-vector<QString> DAO_Employee::getAllTypes()
+vector<map<QString, QString>> DAO_Employee::getAllTypes()
 {
-    // faire
+    vector<map<QString, QString>> v_records;
+    map<QString, QString> m_record;
+    QSqlQuery sqlQuery;
+    sqlQuery.prepare("SELECT * FROM TType");
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+    }
+    else
+    {
+        while(sqlQuery.next())
+        {
+            m_record.insert(pair<QString,QString>("id", sqlQuery.value(0).toString()));
+            m_record.insert(pair<QString,QString>("label", sqlQuery.value(1).toString()));
+
+            v_records.push_back(m_record);
+            m_record.clear();
+        }
+    }
+
+    return v_records;
+}
+
+vector<map<QString, QString> > DAO_Employee::getEmployeesByType(int idType)
+{
+    map<QString, QString> m_record;
+    vector<map<QString, QString>> v_records;
+    QSqlQuery sqlQuery;
+    sqlQuery.prepare("SELECT * FROM TRessource where idType = ?");
+    sqlQuery.addBindValue(idType);
+
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+    }
+    else
+    {
+        while(sqlQuery.next())
+        {
+            m_record.insert(pair<QString,QString>("id", sqlQuery.value(0).toString()));
+            m_record.insert(pair<QString,QString>("lastname", sqlQuery.value(1).toString()));
+            m_record.insert(pair<QString,QString>("firstname", sqlQuery.value(2).toString()));
+            m_record.insert(pair<QString,QString>("type", convertIntToType(sqlQuery.value(3).toInt())));
+
+            v_records.push_back(m_record);
+            m_record.clear();
+        }
+    }
+
+    return v_records;
 }
 
 bool DAO_Employee::checkLogin(QString username, QString password)

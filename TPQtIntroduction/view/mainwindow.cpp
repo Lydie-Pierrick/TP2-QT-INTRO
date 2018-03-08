@@ -72,27 +72,31 @@ void MainWindow::addEmployee()
 
 void MainWindow::initTreeViewRessources()
 {
-//    QStandardItemModel* model = new QStandardItemModel(ui->treeView_Ressource);
     QStandardItemModel* model = new QStandardItemModel();
 
-    QStandardItem* rootNode = model->invisibleRootItem();
+    // Set header label
+    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Name")));
 
-    map<string,QStandardItem*> typeList;
-    //for()
+    QStandardItem* itemType;
 
-    QStandardItem* bankerA = new QStandardItem("bankerA");
-    QStandardItem* bankerB = new QStandardItem("bankerA");
-//    model->setHorizontalHeaderLabels((QStringList() << QStringLiteral("ID")<<QStringLiteral("Last name")<<QStringLiteral("First name")<<QStringLiteral("Type")));
+    // Get all types of employees
+    vector<map<QString, QString>> v_types = controllerEmployee.getAllTypes();
 
+    for(unsigned int i = 0; i < v_types.size(); i ++) {
+        // Get lastname of employees
+        vector<Employee> v_employees = controllerEmployee.getEmployeesByType(v_types[i]["id"].toInt());
+        itemType = new QStandardItem(v_types[i]["label"]);
 
+        // Add the lastnames as the child of Type
+        for(unsigned int j = 0; j < v_employees.size(); j ++){
+            QStandardItem* itemId = new QStandardItem(QString::number(v_employees[j].getId()));
+            QStandardItem* itemName = new QStandardItem(v_employees[j].getLastname());
 
-    // Get all Employee
-    vector<Employee> v_records = controllerEmployee.getAllEmployees();
-    for(unsigned int i = 0; i < v_records.size(); i ++) {
-        model->setItem(i, 0, new QStandardItem(QString::number(v_records[i].getId(),10)));
-        model->setItem(i, 1, new QStandardItem(v_records[i].getFirstname()));
-        model->setItem(i, 2, new QStandardItem(v_records[i].getLastname()));
-        model->setItem(i, 3, new QStandardItem(v_records[i].getType()));
+            itemType->appendRow(itemId);
+            itemType->setChild(j, 1, itemName);
+        }
+        model->setItem(i, 0, itemType);
+
     }
 
     // The items cannot be modified
@@ -103,33 +107,52 @@ void MainWindow::initTreeViewRessources()
 
 void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
 {
-    ui->pushBtn_Delete->setEnabled(true);
-    ui->pushBtn_Modify->setEnabled(true);
 
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+    QModelIndex indexParent = index.parent();
+
+
+    if(indexParent.isValid())
+    {
+        ui->pushBtn_Delete->setEnabled(true);
+        ui->pushBtn_Modify->setEnabled(true);
+
+    }
+    else
+    {
+        ui->pushBtn_Delete->setEnabled(false);
+        ui->pushBtn_Modify->setEnabled(false);
+    }
     // Get content of the 1st column of selected line
-    QModelIndex modelIndex = itemModel->index(index.row(), 0);
-    int id = modelIndex.data().toInt();
+    QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
+
     // Set selectedID
+    int id = indexId.data().toInt();
     Controller_employee::selectedID = id;
 }
 
 void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
 {
-    QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
     // Get content of the 1st column of selected line
-    QModelIndex modelIndex = itemModel->index(index.row(), 0);
-    int id = modelIndex.data().toInt();
+    QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+    QModelIndex indexParent = index.parent();
+    // Get content of the 1st column of selected line
+    QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
+
     // Set selectedID
+    int id = indexId.data().toInt();
     Controller_employee::selectedID = id;
 
     // Open the dialog
     DialogModifyEmployee dme;
 
-    if(dme.exec() == QDialog::Accepted)
+    if(indexParent.isValid())
     {
-        ui->statusBar->showMessage("You have modified an employee !");
-        initTreeViewRessources();
+        if(dme.exec() == QDialog::Accepted)
+        {
+            ui->statusBar->showMessage("You have modified an employee !");
+            initTreeViewRessources();
+        }
     }
 }
 

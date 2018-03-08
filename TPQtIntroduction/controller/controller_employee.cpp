@@ -58,7 +58,25 @@ bool Controller_employee::modifyEmployee(int id, QString lastname, QString first
     return daoEmployee.modifyEmployee(id, lastname, firstname, idType);
 }
 
-vector<QString> Controller_employee::getAllTypes()
+vector<map<QString, QString>> Controller_employee::getAllTypes()
 {
     return daoEmployee.getAllTypes();
+}
+
+vector<Employee> Controller_employee::getEmployeesByType(int idType)
+{
+    vector<map<QString, QString>> listEmployeeString = daoEmployee.getEmployeesByType(idType);
+    map<QString, QString> m_record;
+    vector<Employee> v_employees;
+    Employee e;
+
+    for (unsigned int i = 0; i < listEmployeeString.size(); i++)
+    {
+        m_record = listEmployeeString[i];
+        e = Employee(m_record["id"].toInt(), m_record["lastname"], m_record["firstname"], m_record["type"]);
+
+        v_employees.push_back(e);
+    }
+
+    return v_employees;
 }
