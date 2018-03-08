@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>418</width>
-    <height>200</height>
+    <height>257</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,10 +19,34 @@
      <x>30</x>
      <y>20</y>
      <width>361</width>
-     <height>111</height>
+     <height>174</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="6" column="1">
+     <widget class="QLineEdit" name="lineEdit_Username">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="label_Username">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Username :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Type :</string>
+      </property>
+     </widget>
+    </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_Firstname">
       <property name="text">
@@ -30,23 +54,10 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEdit_Firstname"/>
-    </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_Lastname">
       <property name="text">
        <string>Lastname : </string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_Lastname"/>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Type :</string>
       </property>
      </widget>
     </item>
@@ -57,8 +68,11 @@
       </property>
      </widget>
     </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="lineEdit_Lastname"/>
+    </item>
     <item row="4" column="1">
-     <widget class="QComboBox" name="comboBox_Types">
+     <widget class="QComboBox" name="comboBox_Type">
       <item>
        <property name="text">
         <string>Banker A</string>
@@ -96,10 +110,37 @@
       </item>
      </widget>
     </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="lineEdit_Firstname"/>
+    </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label_ID">
       <property name="text">
        <string>ID : </string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLineEdit" name="lineEdit_Password">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="label_Password">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Password :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="label_OnlyIT">
+      <property name="text">
+       <string>Only for Computer Scientist :</string>
       </property>
      </widget>
     </item>
@@ -109,7 +150,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>150</y>
+     <y>210</y>
      <width>361</width>
      <height>31</height>
     </rect>

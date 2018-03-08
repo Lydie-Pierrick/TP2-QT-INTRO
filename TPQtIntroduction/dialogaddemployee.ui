@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>247</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,10 +19,20 @@
      <x>19</x>
      <y>19</y>
      <width>367</width>
-     <height>231</height>
+     <height>155</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_Username">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Username:</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_Lastname">
       <property name="text">
@@ -30,25 +40,12 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_Type">
-      <property name="text">
-       <string>Type:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit_Firstname"/>
-    </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label_Firstname">
       <property name="text">
        <string>First Name : </string>
       </property>
      </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_Lastname"/>
     </item>
     <item row="2" column="1">
      <widget class="QComboBox" name="comboBox_Type">
@@ -89,13 +86,60 @@
       </item>
      </widget>
     </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_Type">
+      <property name="text">
+       <string>Type:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="lineEdit_Lastname"/>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="lineEdit_Firstname"/>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_Password">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Password:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLineEdit" name="lineEdit_Password">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Normal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="label_OnlyIT">
+      <property name="text">
+       <string>Only for Computer Scientist :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="lineEdit_Username">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>260</y>
+     <y>190</y>
      <width>361</width>
      <height>31</height>
     </rect>

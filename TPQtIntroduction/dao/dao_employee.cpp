@@ -5,7 +5,7 @@ DAO_Employee::DAO_Employee()
 
 }
 
-bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType)
+bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, QString username, QString password)
 {
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("INSERT INTO TRessource (Nom, Prenom, IdType) VALUES (?, ?, ?)");
@@ -80,7 +80,7 @@ map<QString, QString> DAO_Employee::searchEmployee(int id)
     return m_record;
 }
 
-bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, int idType)
+bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, int idType, QString username, QString password)
 {
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("UPDATE TRessource SET Nom = ?, Prenom = ?, IdType = ? WHERE Id = ? ");
@@ -88,6 +88,23 @@ bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, i
     sqlQuery.addBindValue(firstname);
     sqlQuery.addBindValue(idType);
     sqlQuery.addBindValue(id);
+
+    // Modify the table TCompte to have an account of computer scientist
+    if(convertIntToType(idType) == "Computer Scientist" && !password.isEmpty())
+    {
+        QSqlQuery sqlQuery2(db);
+        sqlQuery2.prepare("INSERT OR REPLACE INTO TCompte(IdRessource, Login, MdP) VALUES (?, ?, ?) WHERE IdRessource = ?");
+        sqlQuery2.addBindValue(id);
+        sqlQuery2.addBindValue(username);
+        sqlQuery2.addBindValue(password);
+        sqlQuery2.addBindValue(id);
+//        sqlQuery2.addBindValue(username);
+
+        if(!sqlQuery2.exec())
+        {
+            qDebug() << sqlQuery2.lastError();
+        }
+    }
 
     if(!sqlQuery.exec())
     {
