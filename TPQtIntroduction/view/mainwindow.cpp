@@ -109,33 +109,26 @@ void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
     ui->pushBtn_Delete->setEnabled(true);
     ui->pushBtn_Modify->setEnabled(true);
 
-    QModelIndex temp = ui->treeView_Ressource->currentIndex();
-    temp = temp.sibling(temp.row(),0);
-    cout<<temp.data().toInt();
-
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
-
+    QModelIndex indexParent = index.parent();
     // Get content of the 1st column of selected line
-    QModelIndex modelIndex = itemModel->index(index.row(), 0);
-
-
-    //QModelIndex index0 = currentIndex();
-
-    //cout <<modelIndex.data().toInt()<<endl;
-    int id = index.data().toInt();
-
+    QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
 
     // Set selectedID
+    int id = indexId.data().toInt();
     Controller_employee::selectedID = id;
 }
 
 void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
 {
-    QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
     // Get content of the 1st column of selected line
-    QModelIndex modelIndex = itemModel->index(index.row(), 0);
-    int id = modelIndex.data().toInt();
+    QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+    QModelIndex indexParent = index.parent();
+    // Get content of the 1st column of selected line
+    QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
+
     // Set selectedID
+    int id = indexId.data().toInt();
     Controller_employee::selectedID = id;
 
     // Open the dialog
