@@ -1,6 +1,5 @@
 #ifndef CONTROLLER_EMPLOYEE_H
 #define CONTROLLER_EMPLOYEE_H
-
 #include <QString>
 #include "model/employee.h"
 #include "dao/dao_employee.h"
@@ -27,7 +26,5 @@ public:
     vector<map<QString, QString>> getAllTypes();
     vector<Employee> getEmployeesByType(int idType);
 };
-
-
 
 #endif // CONTROLLER_EMPLOYEE_H

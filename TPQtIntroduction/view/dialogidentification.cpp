@@ -7,8 +7,8 @@ DialogIdentification::DialogIdentification(QWidget *parent) :
 {
     ui->setupUi(this);
     setFixedSize(this->width(), this->height());
-    ui->lineEdit_Username->setText("lydie");
-    ui->lineEdit_Password->setText("ahah");
+    ui->lineEdit_Username->setText("Admin");
+    ui->lineEdit_Password->setText("Password");
 }
 
 DialogIdentification::~DialogIdentification()
@@ -26,7 +26,6 @@ void DialogIdentification::on_pushBtn_Login_clicked()
     checkLogin(ui->lineEdit_Username->text(), ui->lineEdit_Password->text());
 }
 
-// On doit mettre dans un autre Cpp pour séparer de la vue
 void DialogIdentification::checkLogin(QString username, QString password)
 {    
     if(controllerEmployee.checkLogin(username, password))
@@ -36,6 +35,6 @@ void DialogIdentification::checkLogin(QString username, QString password)
     else
     {
         ui->lineEdit_Password->clear();
-        QMessageBox::critical(this, tr("Error"), tr("The following input errors have occurred:") + " Login or password incorrect");;
+        QMessageBox::warning(this, tr("Error"), tr("The following input errors have occurred:") + " Login or password incorrect");;
     }
 }

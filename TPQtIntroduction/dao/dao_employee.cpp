@@ -7,7 +7,7 @@ DAO_Employee::DAO_Employee()
 
 bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType)
 {
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("INSERT INTO TRessource (Nom, Prenom, IdType) VALUES (?, ?, ?)");
     sqlQuery.addBindValue(lastname);
     sqlQuery.addBindValue(firstname);
@@ -21,6 +21,12 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType)
     }
     else
     {
+        if(convertIntToType(idType) == "Computer Scientist")
+        {
+            QSqlQuery sqlQuery2(db);
+            sqlQuery2.prepare("INSERT INTO TCompte (IdRessource, Login, MdP) VALUES (last_insert_rowid(), '" + firstname + "', 'Password')");
+        }
+
         return true;
     }
 }
@@ -29,7 +35,7 @@ vector<map<QString, QString>> DAO_Employee::getAllEmployees()
 {
     map<QString, QString> m_record;
     vector<map<QString, QString>> v_records;
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TRessource");
     if(!sqlQuery.exec())
     {
@@ -55,7 +61,7 @@ vector<map<QString, QString>> DAO_Employee::getAllEmployees()
 map<QString, QString> DAO_Employee::searchEmployee(int id)
 {
     map<QString, QString> m_record;
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TRessource WHERE Id = ?");
     sqlQuery.addBindValue(id);
 
@@ -76,7 +82,7 @@ map<QString, QString> DAO_Employee::searchEmployee(int id)
 
 bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, int idType)
 {
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("UPDATE TRessource SET Nom = ?, Prenom = ?, IdType = ? WHERE Id = ? ");
     sqlQuery.addBindValue(lastname);
     sqlQuery.addBindValue(firstname);
@@ -96,7 +102,7 @@ bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, i
 
 bool DAO_Employee::deleteEmployee(int id)
 {
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("DELETE FROM TRessource WHERE Id = ? ");
     sqlQuery.addBindValue(id);
 
@@ -113,19 +119,19 @@ bool DAO_Employee::deleteEmployee(int id)
 QString DAO_Employee::convertIntToType(int idType)
 {
     // Get type of employee by label
-    QSqlQuery sqlQuery2;
+    QSqlQuery sqlQuery(db);
     QString type;
 
-    sqlQuery2.prepare("SELECT Label FROM TType WHERE Id = ?");
-    sqlQuery2.addBindValue(idType);
+    sqlQuery.prepare("SELECT Label FROM TType WHERE Id = ?");
+    sqlQuery.addBindValue(idType);
 
-    if(!sqlQuery2.exec())
+    if(!sqlQuery.exec())
     {
-        qDebug() << sqlQuery2.lastError();
+        qDebug() << sqlQuery.lastError();
     }
     else{
-        sqlQuery2.next();
-        type = sqlQuery2.value(0).toString();
+        sqlQuery.next();
+        type = sqlQuery.value(0).toString();
     }
 
     return type;
@@ -183,4 +189,54 @@ vector<map<QString, QString> > DAO_Employee::getEmployeesByType(int idType)
     }
 
     return v_records;
+}
+
+bool DAO_Employee::checkLogin(QString username, QString password)
+{
+    QSqlQuery sqlQuery(db);
+    QString idRessource;
+    QString idType;
+
+    // To get employee if username and password matched
+    sqlQuery.prepare("SELECT IdRessource FROM TCompte WHERE Login = ? AND MdP = ?");
+    sqlQuery.addBindValue(username);
+    sqlQuery.addBindValue(password);
+
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+    }
+    else{
+        // If employee username and password matched
+        if(sqlQuery.next())
+        {
+            QSqlQuery sqlQuery2(db);
+            idRessource = sqlQuery.value(0).toString();
+
+            // Get id type of the employee
+            sqlQuery2.prepare("SELECT IdType FROM TRessource WHERE Id = ?");
+            sqlQuery2.addBindValue(idRessource);
+
+            if(!sqlQuery2.exec())
+            {
+                qDebug() << sqlQuery2.lastError();
+            }
+            else{
+                // If the employee had id type exist
+                if(sqlQuery2.next())
+                    idType = sqlQuery2.value(0).toString();
+                else
+                    return false;
+
+                // Check if the type of employee for authentification is only IT
+                if(!(convertIntToType(idType.toInt()) == "Computer Scientist"))
+                    return false;
+            }
+
+            return true;
+        }
+
+    }
+
+    return false;
 }
