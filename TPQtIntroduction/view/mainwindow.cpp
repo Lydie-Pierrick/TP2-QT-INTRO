@@ -117,37 +117,37 @@ void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
         ui->pushBtn_Delete->setEnabled(true);
         ui->pushBtn_Modify->setEnabled(true);
 
+        // Get content of the 1st column of selected line
+        QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
+
+        // Set selectedID
+        int id = indexId.data().toInt();
+        Controller_employee::selectedID = id;
     }
     else
     {
         ui->pushBtn_Delete->setEnabled(false);
         ui->pushBtn_Modify->setEnabled(false);
     }
-    // Get content of the 1st column of selected line
-    QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
-
-    // Set selectedID
-    int id = indexId.data().toInt();
-    Controller_employee::selectedID = id;
 }
 
 void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
 {
-    // Get content of the 1st column of selected line
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
     QModelIndex indexParent = index.parent();
-    // Get content of the 1st column of selected line
-    QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
-
-    // Set selectedID
-    int id = indexId.data().toInt();
-    Controller_employee::selectedID = id;
-
-    // Open the dialog
-    DialogModifyEmployee dme;
 
     if(indexParent.isValid())
     {
+        // Get content of the 1st column of selected line
+        QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
+
+        // Set selectedID
+        int id = indexId.data().toInt();
+        Controller_employee::selectedID = id;
+
+        // Open the dialog
+        DialogModifyEmployee dme;
+
         if(dme.exec() == QDialog::Accepted)
         {
             ui->statusBar->showMessage("You have modified an employee !");
