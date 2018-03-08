@@ -1,6 +1,5 @@
 #ifndef DIALOGIDENTIFICATION_H
 #define DIALOGIDENTIFICATION_H
-
 #include <QDialog>
 #include <QMessageBox>
 #include <QString>

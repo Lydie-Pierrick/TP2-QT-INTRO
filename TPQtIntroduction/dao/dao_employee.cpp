@@ -7,7 +7,7 @@ DAO_Employee::DAO_Employee()
 
 bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType)
 {
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("INSERT INTO TRessource (Nom, Prenom, IdType) VALUES (?, ?, ?)");
     sqlQuery.addBindValue(lastname);
     sqlQuery.addBindValue(firstname);
@@ -23,7 +23,7 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType)
     {
         if(convertIntToType(idType) == "Computer Scientist")
         {
-            QSqlQuery sqlQuery2;
+            QSqlQuery sqlQuery2(db);
             sqlQuery2.prepare("INSERT INTO TCompte (IdRessource, Login, MdP) VALUES (last_insert_rowid(), '" + firstname + "', 'Password')");
         }
 
@@ -33,10 +33,9 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType)
 
 vector<map<QString, QString>> DAO_Employee::getAllEmployees()
 {
-    //vector<vector<QString>> v_records;
     map<QString, QString> m_record;
     vector<map<QString, QString>> v_records;
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TRessource");
     if(!sqlQuery.exec())
     {
@@ -62,7 +61,7 @@ vector<map<QString, QString>> DAO_Employee::getAllEmployees()
 map<QString, QString> DAO_Employee::searchEmployee(int id)
 {
     map<QString, QString> m_record;
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TRessource WHERE Id = ?");
     sqlQuery.addBindValue(id);
 
@@ -83,7 +82,7 @@ map<QString, QString> DAO_Employee::searchEmployee(int id)
 
 bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, int idType)
 {
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("UPDATE TRessource SET Nom = ?, Prenom = ?, IdType = ? WHERE Id = ? ");
     sqlQuery.addBindValue(lastname);
     sqlQuery.addBindValue(firstname);
@@ -103,7 +102,7 @@ bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, i
 
 bool DAO_Employee::deleteEmployee(int id)
 {
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     sqlQuery.prepare("DELETE FROM TRessource WHERE Id = ? ");
     sqlQuery.addBindValue(id);
 
@@ -120,7 +119,7 @@ bool DAO_Employee::deleteEmployee(int id)
 QString DAO_Employee::convertIntToType(int idType)
 {
     // Get type of employee by label
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     QString type;
 
     sqlQuery.prepare("SELECT Label FROM TType WHERE Id = ?");
@@ -145,7 +144,7 @@ vector<QString> DAO_Employee::getAllTypes()
 
 bool DAO_Employee::checkLogin(QString username, QString password)
 {
-    QSqlQuery sqlQuery;
+    QSqlQuery sqlQuery(db);
     QString idRessource;
     QString idType;
 
@@ -162,7 +161,7 @@ bool DAO_Employee::checkLogin(QString username, QString password)
         // If employee username and password matched
         if(sqlQuery.next())
         {
-            QSqlQuery sqlQuery2;
+            QSqlQuery sqlQuery2(db);
             idRessource = sqlQuery.value(0).toString();
 
             // Get id type of the employee

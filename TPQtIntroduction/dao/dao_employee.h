@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <vector>
 #include <map>
+#include "singletondb.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ public:
     QString convertIntToType(int idType);
     vector<QString> getAllTypes();
     bool checkLogin(QString username, QString password);
+private:
+    QSqlDatabase db = SingletonDB::getInstance();
 };
 
 #endif // DAO_EMPLOYEE_H
