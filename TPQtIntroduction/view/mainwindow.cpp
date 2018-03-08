@@ -74,7 +74,7 @@ void MainWindow::initTreeViewRessources()
     QStandardItemModel* model = new QStandardItemModel();
 
     // Set header label
-    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("Type and name of employees")));
+    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Name")));
 
     QStandardItem* itemType;
 
@@ -87,8 +87,12 @@ void MainWindow::initTreeViewRessources()
         itemType = new QStandardItem(v_types[i]["label"]);
 
         // Add the lastnames as the child of Type
-        for(Employee e : v_employees){
-            itemType->appendRow(new QStandardItem(e.getLastname()));
+        for(unsigned int j = 0; j < v_employees.size(); j ++){
+            QStandardItem* itemId = new QStandardItem(QString::number(v_employees[j].getId()));
+            QStandardItem* itemName = new QStandardItem(v_employees[j].getLastname());
+
+            itemType->appendRow(itemId);
+            itemType->setChild(j, 1, itemName);
         }
         model->setItem(i, 0, itemType);
 
@@ -105,10 +109,22 @@ void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
     ui->pushBtn_Delete->setEnabled(true);
     ui->pushBtn_Modify->setEnabled(true);
 
+    QModelIndex temp = ui->treeView_Ressource->currentIndex();
+    temp = temp.sibling(temp.row(),0);
+    cout<<temp.data().toInt();
+
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+
     // Get content of the 1st column of selected line
     QModelIndex modelIndex = itemModel->index(index.row(), 0);
-    int id = modelIndex.data().toInt();
+
+
+    //QModelIndex index0 = currentIndex();
+
+    //cout <<modelIndex.data().toInt()<<endl;
+    int id = index.data().toInt();
+
+
     // Set selectedID
     Controller_employee::selectedID = id;
 }
