@@ -24,6 +24,7 @@ public:
     bool checkLogin(QString username, QString password);
 private:
     QSqlDatabase db = SingletonDB::getInstance();
+    void modify_TCompte_ITUser(int idType, QString username, QString password, int id);
 };
 
 #endif // DAO_EMPLOYEE_H

@@ -11,7 +11,7 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
 
     ui->text_ID->setText(QString::number(id, 10));
     ui->lineEdit_Lastname->setText(v_record.getLastname());
-    ui->lineEdit_Firstname->setText(v_record.getFirstname());
+    ui->lineEdit_Firstname->setText(v_record.getFirstname());;
 
     vector<map<QString, QString>> v_types = controllerEmployee.getAllTypes();
 
@@ -19,6 +19,8 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
     {
         ui->comboBox_Type->setItemText(i, v_types[i]["label"]);
     }
+
+    ui->comboBox_Type->setCurrentText(v_record.getType());
 }
 
 DialogModifyEmployee::~DialogModifyEmployee()
