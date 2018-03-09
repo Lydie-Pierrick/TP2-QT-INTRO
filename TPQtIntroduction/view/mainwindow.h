@@ -39,13 +39,9 @@ private slots:
     void on_treeView_Ressource_clicked(const QModelIndex &index);
     void on_pushBtn_Modify_clicked();
     void on_pushBtn_Delete_clicked();
-    void on_pushBtn_SearchByIDName_clicked();
     void on_pushBtn_SearchByDate_clicked();
-
     void on_pushBtn_Refresh_clicked();
-
     void on_treeView_Ressource_doubleClicked(const QModelIndex &index);
-
     void on_pushBtn_SearchByID_clicked();
 
 private:

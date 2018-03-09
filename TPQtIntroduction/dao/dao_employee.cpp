@@ -21,10 +21,18 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, 
     }
     else
     {
-        if(convertIntToType(idType) == "Computer Scientist")
+        if(convertIntToType(idType) == "Computer Scientist" && !username.isEmpty() && !password.isEmpty())
         {
             QSqlQuery sqlQuery2(db);
-            sqlQuery2.prepare("INSERT INTO TCompte (IdRessource, Login, MdP) VALUES (last_insert_rowid(), '" + firstname + "', 'Password')");
+            sqlQuery2.prepare("INSERT INTO TCompte (IdRessource, Login, MdP) VALUES (?, ?, ?)");
+            sqlQuery2.addBindValue(sqlQuery.lastInsertId());
+            sqlQuery2.addBindValue(username);
+            sqlQuery2.addBindValue(password);
+
+            if(!sqlQuery2.exec())
+            {
+                qDebug() << sqlQuery2.lastError();
+            }
         }
 
         return true;
@@ -80,6 +88,60 @@ map<QString, QString> DAO_Employee::searchEmployee(int id)
     return m_record;
 }
 
+void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString password, int id)
+{
+    // Check if an entry already existed in TCompte
+    bool alreadyExist = false;
+    QSqlQuery sqlQuery2(db);
+    sqlQuery2.prepare("SELECT * FROM TCompte where IdRessource = ?");
+    sqlQuery2.addBindValue(id);
+
+    if(!sqlQuery2.exec())
+    {
+        qDebug() << sqlQuery2.lastError();
+    }
+
+    alreadyExist = sqlQuery2.next();
+
+    // If it's a Computer Scientist Update if exist or insert new row account
+    if(convertIntToType(idType) == "Computer Scientist" && !username.isEmpty() && !password.isEmpty())
+    {
+        QSqlQuery sqlQuery3(db);
+
+        if(alreadyExist){
+            sqlQuery3.prepare("UPDATE INTO TCompte(Id, IdRessource, Login, MdP) VALUES (?, ?, '?', '?')");
+            sqlQuery3.addBindValue(sqlQuery2.value(0).toInt());
+        }
+        else{
+            sqlQuery3.prepare("INSERT INTO TCompte (IdRessource, Login, MdP) VALUES (?, ?, ?)");
+        }
+
+        sqlQuery3.addBindValue(id);
+        sqlQuery3.addBindValue(username);
+        sqlQuery3.addBindValue(password);
+
+        if(!sqlQuery3.exec())
+        {
+            qDebug() << sqlQuery3.lastError();
+        }
+    }
+    // Or delete row if employee is not Computer Scientist
+    else
+    {
+        if(alreadyExist)
+        {
+            QSqlQuery sqlQuery4(db);
+            sqlQuery4.prepare("DELETE FROM TCompte WHERE IdRessource = ?");
+            sqlQuery4.addBindValue(id);
+
+            if(!sqlQuery4.exec())
+            {
+                qDebug() << sqlQuery4.lastError();
+            }
+        }
+    }
+}
+
 bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, int idType, QString username, QString password)
 {
     QSqlQuery sqlQuery(db);
@@ -89,22 +151,8 @@ bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, i
     sqlQuery.addBindValue(idType);
     sqlQuery.addBindValue(id);
 
-    // Modify the table TCompte to have an account of computer scientist
-    if(convertIntToType(idType) == "Computer Scientist" && !password.isEmpty())
-    {
-        QSqlQuery sqlQuery2(db);
-        sqlQuery2.prepare("INSERT OR REPLACE INTO TCompte(IdRessource, Login, MdP) VALUES (?, ?, ?) WHERE IdRessource = ?");
-        sqlQuery2.addBindValue(id);
-        sqlQuery2.addBindValue(username);
-        sqlQuery2.addBindValue(password);
-        sqlQuery2.addBindValue(id);
-//        sqlQuery2.addBindValue(username);
-
-        if(!sqlQuery2.exec())
-        {
-            qDebug() << sqlQuery2.lastError();
-        }
-    }
+    // Modify the table TCompte to manage account
+    modify_TCompte_ITUser(idType, username, password, id);
 
     if(!sqlQuery.exec())
     {
@@ -119,13 +167,41 @@ bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, i
 
 bool DAO_Employee::deleteEmployee(int id)
 {
-    QSqlQuery sqlQuery(db);
-    sqlQuery.prepare("DELETE FROM TRessource WHERE Id = ? ");
-    sqlQuery.addBindValue(id);
-
-    if(!sqlQuery.exec())
+    // Remove account of Computer Scientist
+    map<QString,QString> m_employee = searchEmployee(id);
+    if(m_employee["type"] == "Computer Scientist")
     {
-        qDebug() << sqlQuery.lastError();
+        // Check if account exist to avoid error
+        QSqlQuery sqlQuery(db);
+        sqlQuery.prepare("SELECT * FROM TCompte where IdRessource = ?");
+        sqlQuery.addBindValue(id);
+
+        if(!sqlQuery.exec())
+        {
+            qDebug() << sqlQuery.lastError();
+        }
+
+        // Delete account if an account exist
+        if(sqlQuery.next())
+        {
+            QSqlQuery sqlQuery1(db);
+            sqlQuery1.prepare("DELETE FROM TCompte WHERE IdRessource = ?");
+            sqlQuery1.addBindValue(id);
+
+            if(!sqlQuery1.exec())
+            {
+                qDebug() << sqlQuery1.lastError();
+            }
+        }
+    }
+
+    QSqlQuery sqlQuery2(db);
+    sqlQuery2.prepare("DELETE FROM TRessource WHERE Id = ? ");
+    sqlQuery2.addBindValue(id);
+
+    if(!sqlQuery2.exec())
+    {
+        qDebug() << sqlQuery2.lastError();
         return false;
     }
     else{
