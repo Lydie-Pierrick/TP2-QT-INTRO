@@ -19,6 +19,8 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
     {
         ui->comboBox_Type->setItemText(i, v_types[i]["label"]);
     }
+
+    ui->comboBox_Type->setCurrentText(v_record.getType());
 }
 
 DialogModifyEmployee::~DialogModifyEmployee()
