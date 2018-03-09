@@ -13,10 +13,10 @@ class DAO_Employee
 {
 public:
     DAO_Employee();
-    bool addEmployee(QString firstname, QString lastname, int idType);
+    bool addEmployee(QString firstname, QString lastname, int idType, QString username, QString password);
     vector<map<QString, QString>> getAllEmployees();
     map<QString,QString> searchEmployee(int id);
-    bool modifyEmployee(int id, QString lastname, QString firstname, int idType);
+    bool modifyEmployee(int id, QString lastname, QString firstname, int idType, QString username, QString password);
     bool deleteEmployee(int id);
     QString convertIntToType(int idType);
     vector<map<QString, QString>> getAllTypes();

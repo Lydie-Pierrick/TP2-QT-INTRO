@@ -13,9 +13,9 @@ bool Controller_employee::checkLogin(QString username, QString password)
     return false;
 }
 
-bool Controller_employee::addEmployee(QString firstname, QString lastname, int idType)
+bool Controller_employee::addEmployee(QString firstname, QString lastname, int idType, QString username, QString password)
 {
-    return daoEmployee.addEmployee(firstname, lastname, idType);
+    return daoEmployee.addEmployee(firstname, lastname, idType, username, password);
 }
 
 Employee Controller_employee::searchEmployee(int id)
@@ -53,9 +53,9 @@ vector<Employee> Controller_employee::getAllEmployees()
     return v_employees;
 }
 
-bool Controller_employee::modifyEmployee(int id, QString lastname, QString firstname, int idType)
+bool Controller_employee::modifyEmployee(int id, QString lastname, QString firstname, int idType, QString username, QString password)
 {
-    return daoEmployee.modifyEmployee(id, lastname, firstname, idType);
+    return daoEmployee.modifyEmployee(id, lastname, firstname, idType, username, password);
 }
 
 vector<map<QString, QString>> Controller_employee::getAllTypes()
