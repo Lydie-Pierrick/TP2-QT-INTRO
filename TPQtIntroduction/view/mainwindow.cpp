@@ -105,6 +105,11 @@ void MainWindow::initTreeViewRessources()
     ui->treeView_Ressource->setModel(model);
 }
 
+void MainWindow::initTableViewClientss()
+{
+
+}
+
 void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
 {
 
@@ -191,10 +196,16 @@ void MainWindow::on_pushBtn_Refresh_clicked()
 
 void MainWindow::on_pushBtn_SearchByDate_clicked()
 {
-    QString dateAppointment = ui->dateEdit->text();
-    ui->statusBar->showMessage("You have searched clients by date.");
-    //Controller_client controller_client;
-    //controller_client.searchClient()
+    //QString date = ui->dateEdit->date().toString("yyyy-MM-dd");
+    QDate date = ui->dateEdit->date();
+    qDebug()<<date;
+
+    vector<Client> v_clients = controllerClient.searchClientsByDate(date);
+
+    for(int i = 0; i < v_clients.size(); i++){
+        cout<<v_clients[i].getPostalCode()<<endl;
+    }
+     ui->statusBar->showMessage("You have searched clients by date.");
 }
 
 
@@ -207,4 +218,16 @@ void MainWindow::on_pushBtn_SearchByID_clicked()
 
     //ui->tableView_SearchClient->set
     cout<<client.getPostalCode()<<endl;
+    ui->statusBar->showMessage("You have searched clients by ID.");
+}
+
+void MainWindow::on_pushBtn_SearchByName_clicked()
+{
+     QString name = ui->lineEdit_SearchByName->text();
+     vector<Client> v_clients = controllerClient.searchClientsByName(name);
+
+     for(int i = 0; i < v_clients.size(); i++){
+         cout<<v_clients[i].getPostalCode()<<endl;
+     }
+      ui->statusBar->showMessage("You have searched clients by name.");
 }

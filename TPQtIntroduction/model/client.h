@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 #include <QString>
+#include <QDate>
+
 using namespace std;
 
 enum priority{
@@ -21,7 +23,7 @@ class Client
 public:
     Client(QString firstname, QString lastname, int telephone,
             QString address, QString city, int postalCode, int duration,
-            QString dateAppointment, int priorityAppointment, QString comment);
+            QDate dateAppointment, int priorityAppointment, QString comment);
 
     void setLastName(const QString &value);
     QString getLastName() const;
@@ -35,8 +37,8 @@ public:
     int getPostalCode() const;
     void setDuration(int value);
     int getDuration() const;
-    void setDateAppointment(const QString &value);
-    QString getDateAppointment() const;
+    void setDateAppointment(const QDate &value);
+    QDate getDateAppointment() const;
     void setPriorityAppointment(int value);
     int getPriorityAppointment() const;
     void setComment(const QString &value);
@@ -50,7 +52,7 @@ private:
     int telephone;
     int postalCode;
     int duration;
-    QString dateAppointment;
+    QDate dateAppointment;
     int priorityAppointment;
     QString comment;
 

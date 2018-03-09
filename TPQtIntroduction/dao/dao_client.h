@@ -11,8 +11,11 @@ public:
                    QString address, QString city, int postalCode, int duration,
                    QDate dateAppointment, int priorityAppointment, QString comment);
     map<QString, QString> searchClientById(int id);
+    vector<map<QString, QString>> searchClientsByName(QString name);
+    vector<map<QString, QString>> searchClientsByDate(QDate date);
 private:
     QSqlDatabase db = SingletonDB::getInstance();
+    map<QString, QString> collectInfosClient(QSqlQuery sqlQuery);
 };
 
 #endif // DAO_CLIENT_H
