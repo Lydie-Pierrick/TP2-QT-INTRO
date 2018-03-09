@@ -29,6 +29,7 @@ private slots:
 private:
     Ui::DialogAddEmployee *ui;
     Controller_employee controllerEmployee;
+    bool colorBoderFail();
 };
 
 #endif // DIALOGADDEMPLOYEE_H

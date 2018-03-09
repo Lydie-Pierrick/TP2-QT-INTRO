@@ -30,10 +30,45 @@ void DialogAddEmployee::on_pushButton_cancel_clicked()
     reject();
 }
 
+bool DialogAddEmployee::colorBoderFail()
+{
+    bool noEmptyField = true;
+    if(ui->lineEdit_Firstname->text().isEmpty())
+    {
+        ui->lineEdit_Firstname->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_Firstname->setStyleSheet("");
+    if(ui->lineEdit_Lastname->text().isEmpty())
+    {
+        ui->lineEdit_Lastname->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_Lastname->setStyleSheet("");
+    if(ui->lineEdit_Username->text().isEmpty() && ui->lineEdit_Username->isEnabled())
+    {
+        ui->lineEdit_Username->setStyleSheet("border: 1px solid red" );
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_Username->setStyleSheet("");
+    if(ui->lineEdit_Password->text().isEmpty() && ui->lineEdit_Password->isEnabled())
+    {
+        ui->lineEdit_Password->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_Password->setStyleSheet("");
+
+    return noEmptyField;
+}
+
 void DialogAddEmployee::on_pushButton_ok_clicked()
 {
     // Call the controller employee and add employee
-    if(controllerEmployee.addEmployee(ui->lineEdit_Firstname->text(), ui->lineEdit_Lastname->text(), ui->comboBox_Type->currentIndex()+1, ui->lineEdit_Username->text(), ui->lineEdit_Password->text()))
+    if(colorBoderFail() && controllerEmployee.addEmployee(ui->lineEdit_Firstname->text(), ui->lineEdit_Lastname->text(), ui->comboBox_Type->currentIndex()+1, ui->lineEdit_Username->text(), ui->lineEdit_Password->text()))
     {
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully added the employee !"));
         accept();

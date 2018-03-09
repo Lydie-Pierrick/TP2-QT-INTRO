@@ -37,7 +37,7 @@ void DialogModifyEmployee::on_pushButton_ok_clicked()
     QString username = ui->lineEdit_Username->text();
     QString password = ui->lineEdit_Password->text();
 
-    if(controllerEmployee.modifyEmployee(id, lastname, firstname, idType, username, password))
+    if(colorBoderFail() && controllerEmployee.modifyEmployee(id, lastname, firstname, idType, username, password))
     {
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the employee !"));
         accept();
@@ -69,4 +69,39 @@ void DialogModifyEmployee::on_comboBox_Type_activated(const QString &arg1)
         ui->label_Password->setEnabled(false);
         ui->lineEdit_Password->setEnabled(false);
     }
+}
+
+bool DialogModifyEmployee::colorBoderFail()
+{
+    bool noEmptyField = true;
+    if(ui->lineEdit_Firstname->text().isEmpty())
+    {
+        ui->lineEdit_Firstname->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_Firstname->setStyleSheet("");
+    if(ui->lineEdit_Lastname->text().isEmpty())
+    {
+        ui->lineEdit_Lastname->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_Lastname->setStyleSheet("");
+    if(ui->lineEdit_Username->text().isEmpty() && ui->lineEdit_Username->isEnabled())
+    {
+        ui->lineEdit_Username->setStyleSheet("border: 1px solid red" );
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_Username->setStyleSheet("");
+    if(ui->lineEdit_Password->text().isEmpty() && ui->lineEdit_Password->isEnabled())
+    {
+        ui->lineEdit_Password->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_Password->setStyleSheet("");
+
+    return noEmptyField;
 }
