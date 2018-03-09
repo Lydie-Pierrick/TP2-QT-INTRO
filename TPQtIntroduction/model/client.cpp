@@ -1,9 +1,10 @@
 #include "client.h"
 
-Client::Client(QString firstname, QString lastname, int telephone,
+Client::Client(int id, QString firstname, QString lastname, int telephone,
                QString address, QString city, int postalCode, int duration,
                QDate dateAppointment, int priorityAppointment, QString comment)
 {
+    this->id = id;
     this->firstName = firstname;
     this->lastName = lastname;
     this->telephone = telephone;
@@ -104,4 +105,24 @@ void Client::setComment(const QString &value)
 QString Client::getComment() const
 {
     return comment;
+}
+
+void Client::setId(int value)
+{
+    id = value;
+}
+
+int Client::getId() const
+{
+    return id;
+}
+
+void Client::setTelephone(int value)
+{
+    telephone = value;
+}
+
+QString Client::getCity() const
+{
+    return city;
 }

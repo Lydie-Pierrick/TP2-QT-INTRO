@@ -21,7 +21,7 @@ enum priority{
 class Client
 {
 public:
-    Client(QString firstname, QString lastname, int telephone,
+    Client(int id, QString firstname, QString lastname, int telephone,
             QString address, QString city, int postalCode, int duration,
             QDate dateAppointment, int priorityAppointment, QString comment);
 
@@ -32,6 +32,8 @@ public:
     void setAddress(const QString &value);
     QString getAddress() const;
     void setCity(const QString &value);
+    QString getCity() const;
+    void setTelephone(int value);
     int getTelephone() const;
     void setPostalCode(int value);
     int getPostalCode() const;
@@ -43,8 +45,11 @@ public:
     int getPriorityAppointment() const;
     void setComment(const QString &value);
     QString getComment() const;
+    void setId(int value);
+    int getId() const;
 
 private:
+    int id;
     QString lastName;
     QString firstName;
     QString address;

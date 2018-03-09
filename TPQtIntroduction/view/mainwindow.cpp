@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->statusBar->showMessage("You logged in!");
     initTreeViewRessources();
+    initTableViewClients();
 }
 
 MainWindow::~MainWindow()
@@ -105,17 +106,78 @@ void MainWindow::initTreeViewRessources()
     ui->treeView_Ressource->setModel(model);
 }
 
-void MainWindow::initTableViewClientss()
+void MainWindow::initTableViewClients()
 {
+    QStandardItemModel * model = new QStandardItemModel();
 
+    // We cannot edit this TableView
+    ui->tableView_SearchClient->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    model->setHorizontalHeaderItem(0, new QStandardItem(QObject::tr("ID")));
+    model->setHorizontalHeaderItem(1, new QStandardItem(QObject::tr("Firstname")));
+    model->setHorizontalHeaderItem(2, new QStandardItem(QObject::tr("Lastname")));
+    model->setHorizontalHeaderItem(3, new QStandardItem(QObject::tr("Address")));
+    model->setHorizontalHeaderItem(4, new QStandardItem(QObject::tr("City")));
+    model->setHorizontalHeaderItem(5, new QStandardItem(QObject::tr("Telephone")));
+    model->setHorizontalHeaderItem(6, new QStandardItem(QObject::tr("Postal Code")));
+    model->setHorizontalHeaderItem(7, new QStandardItem(QObject::tr("Duration")));
+    model->setHorizontalHeaderItem(8, new QStandardItem(QObject::tr("Date")));
+    model->setHorizontalHeaderItem(9, new QStandardItem(QObject::tr("Priority")));
+    model->setHorizontalHeaderItem(10, new QStandardItem(QObject::tr("Comment")));
+
+    //ui->tableView_SearchClient->setColumnWidth(0, 10);
+
+    vector<Client> v_clients = controllerClient.getAllClients();
+    showClients(model, v_clients);
+
+    ui->tableView_SearchClient->setModel(model);
+}
+
+void MainWindow::refreshTableViewClients()
+{
+//    QStandardItemModel * model = new QStandardItemModel();
+
+//    // We cannot edit this TableView
+//    ui->tableView_SearchClient->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+//    model->setHorizontalHeaderItem(0, new QStandardItem(QObject::tr("ID")));
+//    model->setHorizontalHeaderItem(1, new QStandardItem(QObject::tr("Firstname")));
+//    model->setHorizontalHeaderItem(2, new QStandardItem(QObject::tr("Lastname")));
+//    model->setHorizontalHeaderItem(3, new QStandardItem(QObject::tr("Address")));
+//    model->setHorizontalHeaderItem(4, new QStandardItem(QObject::tr("City")));
+//    model->setHorizontalHeaderItem(5, new QStandardItem(QObject::tr("Telephone")));
+//    model->setHorizontalHeaderItem(6, new QStandardItem(QObject::tr("Postal Code")));
+//    model->setHorizontalHeaderItem(7, new QStandardItem(QObject::tr("Duration")));
+//    model->setHorizontalHeaderItem(8, new QStandardItem(QObject::tr("Date")));
+//    model->setHorizontalHeaderItem(9, new QStandardItem(QObject::tr("Priority")));
+//    model->setHorizontalHeaderItem(10, new QStandardItem(QObject::tr("Comment")));
+
+//    ui->tableView_SearchClient->setModel(model);
+}
+
+void MainWindow::showClients(QStandardItemModel * model, vector<Client> v_clients)
+{
+    for(unsigned int i = 0; i < v_clients.size(); i ++)
+    {
+        model->setItem(i, 0, new QStandardItem(QString::number(v_clients[i].getId())));
+        model->setItem(i, 1, new QStandardItem(v_clients[i].getFirstName()));
+        model->setItem(i, 2, new QStandardItem(v_clients[i].getLastName()));
+        model->setItem(i, 3, new QStandardItem(v_clients[i].getAddress()));
+        model->setItem(i, 4, new QStandardItem(v_clients[i].getCity()));
+        model->setItem(i, 5, new QStandardItem(QString::number(v_clients[i].getTelephone())));
+        model->setItem(i, 6, new QStandardItem(QString::number(v_clients[i].getPostalCode())));
+        model->setItem(i, 7, new QStandardItem(QString::number(v_clients[i].getDuration())));
+        model->setItem(i, 8, new QStandardItem(v_clients[i].getDateAppointment().toString()));
+        model->setItem(i, 9, new QStandardItem(QString::number(v_clients[i].getPriorityAppointment())));
+        model->setItem(i, 10, new QStandardItem(v_clients[i].getComment()));
+    }
+    ui->tableView_SearchClient->setModel(model);
 }
 
 void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
 {
-
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
     QModelIndex indexParent = index.parent();
-
 
     if(indexParent.isValid())
     {
@@ -196,16 +258,15 @@ void MainWindow::on_pushBtn_Refresh_clicked()
 
 void MainWindow::on_pushBtn_SearchByDate_clicked()
 {
-    //QString date = ui->dateEdit->date().toString("yyyy-MM-dd");
     QDate date = ui->dateEdit->date();
     qDebug()<<date;
 
     vector<Client> v_clients = controllerClient.searchClientsByDate(date);
 
-    for(int i = 0; i < v_clients.size(); i++){
-        cout<<v_clients[i].getPostalCode()<<endl;
-    }
-     ui->statusBar->showMessage("You have searched clients by date.");
+    //ui->tableView_SearchClient->setColumnWidth(0, 10);
+
+    refreshTableViewClients();
+    //showClients(QStandardItemModel * model, v_clients);
 }
 
 

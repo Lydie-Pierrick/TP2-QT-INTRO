@@ -30,7 +30,9 @@ private slots:
     void addClient();
     void addEmployee();
     void initTreeViewRessources();
-    void initTableViewClientss();
+    void initTableViewClients();
+    void refreshTableViewClients();
+    void showClients(QStandardItemModel * model, vector<Client> v_clients);
 
     void on_actionAbout_triggered();
     void on_actionQuit_triggered();

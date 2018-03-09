@@ -21,7 +21,6 @@ bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
     sqlQuery.addBindValue(postalCode);
     sqlQuery.addBindValue(comment);
     sqlQuery.addBindValue(telephone);
-    // QDate->date
     sqlQuery.addBindValue(dateAppointment);
     sqlQuery.addBindValue(duration);
     sqlQuery.addBindValue(priorityAppointment);
@@ -107,9 +106,33 @@ vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate date)
     return v_records;
 }
 
+vector<map<QString, QString> > DAO_Client::getAllClients()
+{
+    vector<map<QString, QString>> v_records;
+    map<QString, QString> m_record;
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("SELECT * FROM TClient");
+
+    if(!sqlQuery.exec())
+    {
+       qDebug() << sqlQuery.lastError();
+    }
+    else {
+        while(sqlQuery.next())
+        {
+            m_record = collectInfosClient(sqlQuery);
+            v_records.push_back(m_record);
+
+            m_record.clear();
+        }
+    }
+    return v_records;
+}
+
 map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)
 {
     map<QString, QString> m_record;
+
     m_record.insert(pair<QString,QString>("id", sqlQuery.value(0).toString()));
     m_record.insert(pair<QString,QString>("lastname", sqlQuery.value(1).toString()));
     m_record.insert(pair<QString,QString>("firstname", sqlQuery.value(2).toString()));
@@ -121,5 +144,6 @@ map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)
     m_record.insert(pair<QString,QString>("date", sqlQuery.value(8).toString()));
     m_record.insert(pair<QString,QString>("duration", sqlQuery.value(9).toString()));
     m_record.insert(pair<QString,QString>("priority", sqlQuery.value(10).toString()));
+
     return m_record;
 }
