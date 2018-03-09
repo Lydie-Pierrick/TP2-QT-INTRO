@@ -9,16 +9,16 @@
 class Controller_client
 {
 private:
-    DAO_Client dao_Client;
+    DAO_Client daoClient;
 public:
     Controller_client();
     bool addClient(QString firstname, QString lastname, int telephone,
                    QString address, QString city, int postalCode, int duration,
                    QDate dateAppointment, int priorityAppointment, QString comment);
     Client searchClientById(int id);
-    //bool searchClient(QString firstname);
-    //bool searchClient(QString lastname);
-    //bool searchClient(QString dateAppointment);
+    vector<Client> searchClientsByName(QString name);
+    vector<Client> searchClientsByDate(QDate date);
+
 };
 
 #endif // CONTROLLER_CLIENT_H

@@ -30,6 +30,8 @@ private slots:
     void addClient();
     void addEmployee();
     void initTreeViewRessources();
+    void initTableViewClientss();
+
     void on_actionAbout_triggered();
     void on_actionQuit_triggered();
     void on_actionClient_triggered();
@@ -43,6 +45,7 @@ private slots:
     void on_pushBtn_Refresh_clicked();
     void on_treeView_Ressource_doubleClicked(const QModelIndex &index);
     void on_pushBtn_SearchByID_clicked();
+    void on_pushBtn_SearchByName_clicked();
 
 private:
     Ui::MainWindow *ui;

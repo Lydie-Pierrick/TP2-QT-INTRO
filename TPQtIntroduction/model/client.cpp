@@ -2,7 +2,7 @@
 
 Client::Client(QString firstname, QString lastname, int telephone,
                QString address, QString city, int postalCode, int duration,
-               QString dateAppointment, int priorityAppointment, QString comment)
+               QDate dateAppointment, int priorityAppointment, QString comment)
 {
     this->firstName = firstname;
     this->lastName = lastname;
@@ -76,12 +76,12 @@ int Client::getDuration() const
     return duration;
 }
 
-void Client::setDateAppointment(const QString &value)
+void Client::setDateAppointment(const QDate &value)
 {
     dateAppointment = value;
 }
 
-QString Client::getDateAppointment() const
+QDate Client::getDateAppointment() const
 {
     return dateAppointment;
 }
