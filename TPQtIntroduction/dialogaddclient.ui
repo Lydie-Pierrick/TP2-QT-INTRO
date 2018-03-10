@@ -19,7 +19,7 @@
      <x>40</x>
      <y>10</y>
      <width>351</width>
-     <height>307</height>
+     <height>325</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -209,6 +209,21 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_firstName</tabstop>
+  <tabstop>lineEdit_lastName</tabstop>
+  <tabstop>lineEdit_telephone</tabstop>
+  <tabstop>lineEdit_address</tabstop>
+  <tabstop>lineEdit_city</tabstop>
+  <tabstop>lineEdit_postalCode</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>lineEdit_duration</tabstop>
+  <tabstop>comboBox_priority</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>pushButton_ok</tabstop>
+  <tabstop>pushButton_reset</tabstop>
+  <tabstop>pushButton_cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

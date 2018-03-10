@@ -188,6 +188,14 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_Firstname</tabstop>
+  <tabstop>lineEdit_Lastname</tabstop>
+  <tabstop>comboBox_Type</tabstop>
+  <tabstop>lineEdit_Username</tabstop>
+  <tabstop>lineEdit_Password</tabstop>
+  <tabstop>pushButton_ok</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -351,6 +351,20 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>pushBtn_SearchByDate</tabstop>
+  <tabstop>lineEdit_SearchByID</tabstop>
+  <tabstop>pushBtn_SearchByID</tabstop>
+  <tabstop>lineEdit_SearchByName</tabstop>
+  <tabstop>pushBtn_SearchByName</tabstop>
+  <tabstop>tableView_SearchClient</tabstop>
+  <tabstop>pushBtn_Modify</tabstop>
+  <tabstop>pushBtn_Delete</tabstop>
+  <tabstop>pushBtn_Refresh</tabstop>
+  <tabstop>treeView_Ressource</tabstop>
+ </tabstops>
  <resources>
   <include location="pictures.qrc"/>
  </resources>
