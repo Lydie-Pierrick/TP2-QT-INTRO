@@ -6,13 +6,21 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->statusBar->showMessage("You logged in!");
+
+    modelTreeView = new QStandardItemModel();
+    modelTableView = new QStandardItemModel();
+
     initTreeViewRessources();
-    initTableViewClients();
+    initTableViewClients();  
 }
 
 MainWindow::~MainWindow()
 {
     SingletonDB::closeDB();
+    if(modelTreeView != nullptr_t())
+        delete modelTreeView;
+    if(modelTableView != nullptr_t())
+        delete modelTableView;
     delete ui;
 }
 
@@ -73,22 +81,26 @@ void MainWindow::addEmployee()
 
 void MainWindow::initTreeViewRessources()
 {
-    QStandardItemModel* model = new QStandardItemModel();
+    // Set model for treeView
+    ui->treeView_Ressource->setModel(modelTreeView);
+    // The items cannot be edited
+    ui->treeView_Ressource->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // Set header label
-    model->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Name")));
-
+    modelTreeView->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Name")));
+    // FUITES !!!!!!!!!!!!!!
     QStandardItem* itemType;
 
     // Get all types of employees
     vector<map<QString, QString>> v_types = controllerEmployee.getAllTypes();
 
     for(unsigned int i = 0; i < v_types.size(); i ++) {
-        // Get lastname of employees
+        // Get employees by type
         vector<Employee> v_employees = controllerEmployee.getEmployeesByType(v_types[i]["id"].toInt());
+        // Get the name of this type and initialize a new item
         itemType = new QStandardItem(v_types[i]["label"]);
 
-        // Add the lastnames as the child of Type
+        // Add the lastnames and ID as the child of Type
         for(unsigned int j = 0; j < v_employees.size(); j ++){
             QStandardItem* itemId = new QStandardItem(QString::number(v_employees[j].getId()));
             QStandardItem* itemName = new QStandardItem(v_employees[j].getLastname());
@@ -96,82 +108,57 @@ void MainWindow::initTreeViewRessources()
             itemType->appendRow(itemId);
             itemType->setChild(j, 1, itemName);
         }
-        model->setItem(i, 0, itemType);
-
+        modelTreeView->setItem(i, 0, itemType);
     }
-
-    // The items cannot be modified
-    ui->treeView_Ressource->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    ui->treeView_Ressource->setModel(model);
 }
 
 void MainWindow::initTableViewClients()
 {
-    QStandardItemModel * model = new QStandardItemModel();
-
-    // We cannot edit this TableView
+    // Set model for tableView
+    ui->tableView_SearchClient->setModel(modelTableView);
+    // Hide the vertical header
+    ui->tableView_SearchClient->verticalHeader()->setVisible(false);
+    // The items cannot be edited
     ui->tableView_SearchClient->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    model->setHorizontalHeaderItem(0, new QStandardItem(QObject::tr("ID")));
-    model->setHorizontalHeaderItem(1, new QStandardItem(QObject::tr("Firstname")));
-    model->setHorizontalHeaderItem(2, new QStandardItem(QObject::tr("Lastname")));
-    model->setHorizontalHeaderItem(3, new QStandardItem(QObject::tr("Address")));
-    model->setHorizontalHeaderItem(4, new QStandardItem(QObject::tr("City")));
-    model->setHorizontalHeaderItem(5, new QStandardItem(QObject::tr("Telephone")));
-    model->setHorizontalHeaderItem(6, new QStandardItem(QObject::tr("Postal Code")));
-    model->setHorizontalHeaderItem(7, new QStandardItem(QObject::tr("Duration")));
-    model->setHorizontalHeaderItem(8, new QStandardItem(QObject::tr("Date")));
-    model->setHorizontalHeaderItem(9, new QStandardItem(QObject::tr("Priority")));
-    model->setHorizontalHeaderItem(10, new QStandardItem(QObject::tr("Comment")));
+    // Set horizontal header items
+    modelTableView->setHorizontalHeaderItem(0, new QStandardItem(QObject::tr("ID")));
+    modelTableView->setHorizontalHeaderItem(1, new QStandardItem(QObject::tr("Firstname")));
+    modelTableView->setHorizontalHeaderItem(2, new QStandardItem(QObject::tr("Lastname")));
+    modelTableView->setHorizontalHeaderItem(3, new QStandardItem(QObject::tr("Address")));
+    modelTableView->setHorizontalHeaderItem(4, new QStandardItem(QObject::tr("City")));
+    modelTableView->setHorizontalHeaderItem(5, new QStandardItem(QObject::tr("Telephone")));
+    modelTableView->setHorizontalHeaderItem(6, new QStandardItem(QObject::tr("Postal Code")));
+    modelTableView->setHorizontalHeaderItem(7, new QStandardItem(QObject::tr("Duration")));
+    modelTableView->setHorizontalHeaderItem(8, new QStandardItem(QObject::tr("Date")));
+    modelTableView->setHorizontalHeaderItem(9, new QStandardItem(QObject::tr("Priority")));
+    modelTableView->setHorizontalHeaderItem(10, new QStandardItem(QObject::tr("Comment")));
 
-    //ui->tableView_SearchClient->setColumnWidth(0, 10);
-
+    // Get all clients
     vector<Client> v_clients = controllerClient.getAllClients();
-    showClients(model, v_clients);
-
-    ui->tableView_SearchClient->setModel(model);
+    // Refresh the tableView
+    refreshTableViewClients(v_clients);
 }
 
-void MainWindow::refreshTableViewClients()
+void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 {
-//    QStandardItemModel * model = new QStandardItemModel();
+    // Clear all the existing rows
+    modelTableView->removeRows(0,modelTableView->rowCount());
 
-//    // We cannot edit this TableView
-//    ui->tableView_SearchClient->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-//    model->setHorizontalHeaderItem(0, new QStandardItem(QObject::tr("ID")));
-//    model->setHorizontalHeaderItem(1, new QStandardItem(QObject::tr("Firstname")));
-//    model->setHorizontalHeaderItem(2, new QStandardItem(QObject::tr("Lastname")));
-//    model->setHorizontalHeaderItem(3, new QStandardItem(QObject::tr("Address")));
-//    model->setHorizontalHeaderItem(4, new QStandardItem(QObject::tr("City")));
-//    model->setHorizontalHeaderItem(5, new QStandardItem(QObject::tr("Telephone")));
-//    model->setHorizontalHeaderItem(6, new QStandardItem(QObject::tr("Postal Code")));
-//    model->setHorizontalHeaderItem(7, new QStandardItem(QObject::tr("Duration")));
-//    model->setHorizontalHeaderItem(8, new QStandardItem(QObject::tr("Date")));
-//    model->setHorizontalHeaderItem(9, new QStandardItem(QObject::tr("Priority")));
-//    model->setHorizontalHeaderItem(10, new QStandardItem(QObject::tr("Comment")));
-
-//    ui->tableView_SearchClient->setModel(model);
-}
-
-void MainWindow::showClients(QStandardItemModel * model, vector<Client> v_clients)
-{
     for(unsigned int i = 0; i < v_clients.size(); i ++)
     {
-        model->setItem(i, 0, new QStandardItem(QString::number(v_clients[i].getId())));
-        model->setItem(i, 1, new QStandardItem(v_clients[i].getFirstName()));
-        model->setItem(i, 2, new QStandardItem(v_clients[i].getLastName()));
-        model->setItem(i, 3, new QStandardItem(v_clients[i].getAddress()));
-        model->setItem(i, 4, new QStandardItem(v_clients[i].getCity()));
-        model->setItem(i, 5, new QStandardItem(QString::number(v_clients[i].getTelephone())));
-        model->setItem(i, 6, new QStandardItem(QString::number(v_clients[i].getPostalCode())));
-        model->setItem(i, 7, new QStandardItem(QString::number(v_clients[i].getDuration())));
-        model->setItem(i, 8, new QStandardItem(v_clients[i].getDateAppointment().toString()));
-        model->setItem(i, 9, new QStandardItem(QString::number(v_clients[i].getPriorityAppointment())));
-        model->setItem(i, 10, new QStandardItem(v_clients[i].getComment()));
+        modelTableView->setItem(i, 0, new QStandardItem(QString::number(v_clients[i].getId())));
+        modelTableView->setItem(i, 1, new QStandardItem(v_clients[i].getFirstName()));
+        modelTableView->setItem(i, 2, new QStandardItem(v_clients[i].getLastName()));
+        modelTableView->setItem(i, 3, new QStandardItem(v_clients[i].getAddress()));
+        modelTableView->setItem(i, 4, new QStandardItem(v_clients[i].getCity()));
+        modelTableView->setItem(i, 5, new QStandardItem(QString::number(v_clients[i].getTelephone())));
+        modelTableView->setItem(i, 6, new QStandardItem(QString::number(v_clients[i].getPostalCode())));
+        modelTableView->setItem(i, 7, new QStandardItem(QString::number(v_clients[i].getDuration())));
+        modelTableView->setItem(i, 8, new QStandardItem(v_clients[i].getDateAppointment().toString()));
+        modelTableView->setItem(i, 9, new QStandardItem(QString::number(v_clients[i].getPriorityAppointment())));
+        modelTableView->setItem(i, 10, new QStandardItem(v_clients[i].getComment()));
     }
-    ui->tableView_SearchClient->setModel(model);
 }
 
 void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
@@ -246,7 +233,6 @@ void MainWindow::on_pushBtn_Delete_clicked()
     {
         QMessageBox::critical(this, tr("Error"), tr("Fail to delete the employee !"));
     }
-
     initTreeViewRessources();
 }
 
@@ -259,14 +245,12 @@ void MainWindow::on_pushBtn_Refresh_clicked()
 void MainWindow::on_pushBtn_SearchByDate_clicked()
 {
     QDate date = ui->dateEdit->date();
-    qDebug()<<date;
 
     vector<Client> v_clients = controllerClient.searchClientsByDate(date);
 
-    //ui->tableView_SearchClient->setColumnWidth(0, 10);
+    refreshTableViewClients(v_clients);
 
-    refreshTableViewClients();
-    //showClients(QStandardItemModel * model, v_clients);
+    ui->statusBar->showMessage("You have searched clients by date.");
 }
 
 
@@ -276,9 +260,10 @@ void MainWindow::on_pushBtn_SearchByID_clicked()
     int id = ui->lineEdit_SearchByID->text().toInt();
 
     Client client = controllerClient.searchClientById(id);
+    vector<Client> v_clients;
+    v_clients.push_back(client);
+    refreshTableViewClients(v_clients);
 
-    //ui->tableView_SearchClient->set
-    cout<<client.getPostalCode()<<endl;
     ui->statusBar->showMessage("You have searched clients by ID.");
 }
 
@@ -287,8 +272,6 @@ void MainWindow::on_pushBtn_SearchByName_clicked()
      QString name = ui->lineEdit_SearchByName->text();
      vector<Client> v_clients = controllerClient.searchClientsByName(name);
 
-     for(int i = 0; i < v_clients.size(); i++){
-         cout<<v_clients[i].getPostalCode()<<endl;
-     }
+     refreshTableViewClients(v_clients);
       ui->statusBar->showMessage("You have searched clients by name.");
 }

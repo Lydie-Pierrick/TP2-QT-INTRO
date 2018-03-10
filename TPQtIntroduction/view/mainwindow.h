@@ -31,8 +31,7 @@ private slots:
     void addEmployee();
     void initTreeViewRessources();
     void initTableViewClients();
-    void refreshTableViewClients();
-    void showClients(QStandardItemModel * model, vector<Client> v_clients);
+    void refreshTableViewClients(vector<Client> v_clients);
 
     void on_actionAbout_triggered();
     void on_actionQuit_triggered();
@@ -53,6 +52,8 @@ private:
     Ui::MainWindow *ui;
     Controller_employee controllerEmployee;
     Controller_client controllerClient;
+    QStandardItemModel* modelTreeView;
+    QStandardItemModel* modelTableView;
 };
 
 #endif // MAINWINDOW_H
