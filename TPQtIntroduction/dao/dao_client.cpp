@@ -145,5 +145,8 @@ map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)
     m_record.insert(pair<QString,QString>("duration", sqlQuery.value(9).toString()));
     m_record.insert(pair<QString,QString>("priority", sqlQuery.value(10).toString()));
 
+    qDebug()<<sqlQuery.value(8).toString();
+    qDebug()<<QDate::fromString(sqlQuery.value(8).toString(),"yyyy-MM-dd").toString("yyyy-MM-dd");
+
     return m_record;
 }

@@ -12,6 +12,7 @@ private:
     DAO_Client daoClient;
 public:
     Controller_client();
+    Client getClient(map<QString, QString> m_attributesClient);
     bool addClient(QString firstname, QString lastname, int telephone,
                    QString address, QString city, int postalCode, int duration,
                    QDate dateAppointment, int priorityAppointment, QString comment);

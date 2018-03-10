@@ -120,6 +120,8 @@ void MainWindow::initTableViewClients()
     ui->tableView_SearchClient->verticalHeader()->setVisible(false);
     // The items cannot be edited
     ui->tableView_SearchClient->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    // One case chosen, one row chosen
+    ui->tableView_SearchClient->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     // Set horizontal header items
     modelTableView->setHorizontalHeaderItem(0, new QStandardItem(QObject::tr("ID")));
@@ -155,7 +157,7 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
         modelTableView->setItem(i, 5, new QStandardItem(QString::number(v_clients[i].getTelephone())));
         modelTableView->setItem(i, 6, new QStandardItem(QString::number(v_clients[i].getPostalCode())));
         modelTableView->setItem(i, 7, new QStandardItem(QString::number(v_clients[i].getDuration())));
-        modelTableView->setItem(i, 8, new QStandardItem(v_clients[i].getDateAppointment().toString()));
+        modelTableView->setItem(i, 8, new QStandardItem(v_clients[i].getDateAppointment().toString("yyyy-MM-dd")));
         modelTableView->setItem(i, 9, new QStandardItem(QString::number(v_clients[i].getPriorityAppointment())));
         modelTableView->setItem(i, 10, new QStandardItem(v_clients[i].getComment()));
     }
