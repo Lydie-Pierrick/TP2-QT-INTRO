@@ -80,3 +80,8 @@ vector<Client> Controller_client::getAllClients()
 
     return v_clients;
 }
+
+bool Controller_client::deleteClient(int id)
+{
+    return daoClient.deleteClient(id);
+}

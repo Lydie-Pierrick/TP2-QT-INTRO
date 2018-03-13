@@ -14,6 +14,7 @@ public:
     vector<map<QString, QString>> searchClientsByName(QString name);
     vector<map<QString, QString>> searchClientsByDate(QDate date);
     vector<map<QString, QString>> getAllClients();
+    bool deleteClient(int id);
 private:
     QSqlDatabase db = SingletonDB::getInstance();
     map<QString, QString> collectInfosClient(QSqlQuery sqlQuery);

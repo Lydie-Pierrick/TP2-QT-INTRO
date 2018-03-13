@@ -50,10 +50,13 @@ void MainWindow::on_actionClient_2_triggered()
 
 void MainWindow::addClient()
 {
-    /*if(ClientBD::addClientBD())
-        ui->statusBar->showMessage("You have added a client !");*/
-    DialogAddClient dc;
-    dc.exec();
+    DialogAddClient dac;
+
+    if(dac.exec() == QDialog::Accepted)
+    {
+        ui->statusBar->showMessage("You have added a client !");
+        refreshTableViewClients(controllerClient.getAllClients());
+    }
 }
 
 // ADD EMPLOYEE
@@ -255,8 +258,6 @@ void MainWindow::on_pushBtn_SearchByDate_clicked()
     ui->statusBar->showMessage("You have searched clients by date.");
 }
 
-
-
 void MainWindow::on_pushBtn_SearchByID_clicked()
 {
     int id = ui->lineEdit_SearchByID->text().toInt();
@@ -276,4 +277,14 @@ void MainWindow::on_pushBtn_SearchByName_clicked()
 
      refreshTableViewClients(v_clients);
       ui->statusBar->showMessage("You have searched clients by name.");
+}
+
+void MainWindow::on_pushBtn_DeleteClient_clicked()
+{
+
+}
+
+void MainWindow::on_tableView_SearchClient_clicked(const QModelIndex &index)
+{
+
 }

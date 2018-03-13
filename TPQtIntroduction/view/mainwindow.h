@@ -47,6 +47,9 @@ private slots:
     void on_treeView_Ressource_doubleClicked(const QModelIndex &index);
     void on_pushBtn_SearchByID_clicked();
     void on_pushBtn_SearchByName_clicked();
+    void on_pushBtn_DeleteClient_clicked();
+
+    void on_tableView_SearchClient_clicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;

@@ -129,6 +129,22 @@ vector<map<QString, QString> > DAO_Client::getAllClients()
     return v_records;
 }
 
+bool DAO_Client::deleteClient(int id)
+{
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("DELETE FROM TClient WHERE Id = ? ");
+    sqlQuery.addBindValue(id);
+
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
 map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)
 {
     map<QString, QString> m_record;
@@ -144,9 +160,5 @@ map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)
     m_record.insert(pair<QString,QString>("date", sqlQuery.value(8).toString()));
     m_record.insert(pair<QString,QString>("duration", sqlQuery.value(9).toString()));
     m_record.insert(pair<QString,QString>("priority", sqlQuery.value(10).toString()));
-
-    qDebug()<<sqlQuery.value(8).toString();
-    qDebug()<<QDate::fromString(sqlQuery.value(8).toString(),"yyyy-MM-dd").toString("yyyy-MM-dd");
-
     return m_record;
 }

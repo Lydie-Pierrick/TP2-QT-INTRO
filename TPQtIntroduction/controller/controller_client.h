@@ -20,6 +20,7 @@ public:
     vector<Client> searchClientsByName(QString name);
     vector<Client> searchClientsByDate(QDate date);
     vector<Client> getAllClients();
+    bool deleteClient(int id);
 
 };
 
