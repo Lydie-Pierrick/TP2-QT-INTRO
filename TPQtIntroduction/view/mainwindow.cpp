@@ -260,25 +260,20 @@ void MainWindow::on_pushBtn_SearchByDate_clicked()
 
 void MainWindow::on_pushBtn_SearchByID_clicked()
 {
-    vector<Client> v_clients;
+   int id = ui->lineEdit_SearchByID->text().toInt();
+   vector<Client> v_clients = controllerClient.searchClientById(id);
 
-    int id = ui->lineEdit_SearchByID->text().toInt();
+   if(!v_clients.size() == 0)
+   {
+      ui->statusBar->showMessage("You have searched clients by id.");
+   }
+   else
+   {
+      ui->statusBar->showMessage("You have searched clients by id. No record was found !");
+      QMessageBox::critical(this, tr("Error"), tr("No record was found !"));
+   }
 
-    // Check if id client exist
-    if(ui->lineEdit_SearchByID->text().isEmpty() || !controllerClient.searchClientExistById(id))
-    {
-        refreshTableViewClients(v_clients);
-        QMessageBox::critical(this, tr("Error"), tr("No record was found !"));
-        ui->statusBar->showMessage("You have searched clients by ID. No record was found !");
-    }
-    else
-    {
-        Client client = controllerClient.searchClientById(id);
-
-        v_clients.push_back(client);
-        refreshTableViewClients(v_clients);
-        ui->statusBar->showMessage("You have searched clients by ID.");
-    }
+  refreshTableViewClients(v_clients);
 }
 
 void MainWindow::on_pushBtn_SearchByName_clicked()
@@ -286,8 +281,17 @@ void MainWindow::on_pushBtn_SearchByName_clicked()
      QString name = ui->lineEdit_SearchByName->text();
      vector<Client> v_clients = controllerClient.searchClientsByName(name);
 
-     refreshTableViewClients(v_clients);
-      ui->statusBar->showMessage("You have searched clients by name.");
+     if(v_clients.size() != 0)
+     {
+        ui->statusBar->showMessage("You have searched clients by name.");
+     }
+     else
+     {
+        ui->statusBar->showMessage("You have searched clients by name. No record was found !");
+        QMessageBox::critical(this, tr("Error"), tr("No record was found !"));
+     }
+
+    refreshTableViewClients(v_clients);
 }
 
 void MainWindow::on_pushBtn_DeleteClient_clicked()

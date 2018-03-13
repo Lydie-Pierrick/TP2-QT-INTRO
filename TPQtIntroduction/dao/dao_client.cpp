@@ -38,40 +38,29 @@ bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
     }
 }
 
-map<QString, QString> DAO_Client::searchClientById(int id)
+vector<map<QString, QString> > DAO_Client::searchClientById(int id)
 {
+    vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
+
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TClient WHERE Id = ?");
     sqlQuery.addBindValue(id);
 
-    if(sqlQuery.exec())
+    if(!sqlQuery.exec())
     {
-       sqlQuery.next();
-       m_record = collectInfosClient(sqlQuery);
+       qDebug() << sqlQuery.lastError();
     }
-    else
-        qDebug() << sqlQuery.lastError();
+    else {
+        while(sqlQuery.next())
+        {
+            m_record = collectInfosClient(sqlQuery);
+            v_records.push_back(m_record);
 
-    return m_record;
-}
-
-bool DAO_Client::searchClientExistById(int id)
-{
-    map<QString, QString> m_record;
-    QSqlQuery sqlQuery(db);
-    sqlQuery.prepare("SELECT * FROM TClient WHERE Id = ?");
-    sqlQuery.addBindValue(id);
-
-    if(sqlQuery.exec())
-    {
-       if(sqlQuery.next())
-           return true;
+            m_record.clear();
+        }
     }
-    else
-        qDebug() << sqlQuery.lastError();
-
-    return false;
+    return v_records;
 }
 
 vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)

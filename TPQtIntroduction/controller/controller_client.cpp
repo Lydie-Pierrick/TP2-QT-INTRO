@@ -23,21 +23,21 @@ bool Controller_client::addClient(QString firstname, QString lastname, int telep
                                 duration, dateAppointment, priorityAppointment, comment);
 }
 
-Client Controller_client::searchClientById(int id)
+vector<Client> Controller_client::searchClientById(int id)
 {
-    map<QString,QString> m_attributesClient = daoClient.searchClientById(id);
+    vector<map<QString, QString> > v_m_attributesClients = daoClient.searchClientById(id);
+    map<QString, QString> m_attributesClient;
+    vector<Client> v_clients;
 
-    return getClient(m_attributesClient);
-}
-
-bool Controller_client::searchClientExistById(int id)
-{
-    if(daoClient.searchClientExistById(id))
+    for (unsigned int i = 0; i < v_m_attributesClients.size(); i++)
     {
-        return true;
+        m_attributesClient = v_m_attributesClients[i];
+        Client client = getClient(m_attributesClient);
+
+        v_clients.push_back(client);
     }
 
-    return false;
+    return v_clients;
 }
 
 vector<Client> Controller_client::searchClientsByName(QString name)

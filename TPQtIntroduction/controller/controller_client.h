@@ -19,8 +19,7 @@ public:
     bool addClient(QString firstname, QString lastname, int telephone,
                    QString address, QString city, int postalCode, int duration,
                    QDate dateAppointment, int priorityAppointment, QString comment);
-    Client searchClientById(int id);
-    bool searchClientExistById(int id);
+    vector<Client> searchClientById(int id);
     vector<Client> searchClientsByName(QString name);
     vector<Client> searchClientsByDate(QDate date);
     vector<Client> getAllClients();
