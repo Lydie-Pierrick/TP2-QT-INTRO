@@ -36,7 +36,7 @@ bool Controller_employee::deleteEmployee(int id){
 
 vector<Employee> Controller_employee::getAllEmployees()
 {
-    vector<map<QString, QString>> listEmployeeString = daoEmployee.getAllEmployees();
+    vector<map<QString, QString> > listEmployeeString = daoEmployee.getAllEmployees();
     map<QString, QString> m_record;
     vector<Employee> v_employees;
     Employee e;
@@ -58,14 +58,14 @@ bool Controller_employee::modifyEmployee(int id, QString lastname, QString first
     return daoEmployee.modifyEmployee(id, lastname, firstname, idType, username, password);
 }
 
-vector<map<QString, QString>> Controller_employee::getAllTypes()
+vector<map<QString, QString> > Controller_employee::getAllTypes()
 {
     return daoEmployee.getAllTypes();
 }
 
 vector<Employee> Controller_employee::getEmployeesByType(int idType)
 {
-    vector<map<QString, QString>> listEmployeeString = daoEmployee.getEmployeesByType(idType);
+    vector<map<QString, QString> > listEmployeeString = daoEmployee.getEmployeesByType(idType);
     map<QString, QString> m_record;
     vector<Employee> v_employees;
     Employee e;

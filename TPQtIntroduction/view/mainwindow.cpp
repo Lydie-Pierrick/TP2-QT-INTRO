@@ -17,9 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     SingletonDB::closeDB();
-    if(modelTreeView != nullptr_t())
+    if(modelTreeView != NULL)
         delete modelTreeView;
-    if(modelTableView != nullptr_t())
+    if(modelTableView != NULL)
         delete modelTableView;
     delete ui;
 }
@@ -95,7 +95,7 @@ void MainWindow::initTreeViewRessources()
     QStandardItem* itemType;
 
     // Get all types of employees
-    vector<map<QString, QString>> v_types = controllerEmployee.getAllTypes();
+    vector<map<QString, QString> > v_types = controllerEmployee.getAllTypes();
 
     for(unsigned int i = 0; i < v_types.size(); i ++) {
         // Get employees by type

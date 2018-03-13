@@ -6,9 +6,9 @@ DialogAddEmployee::DialogAddEmployee(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    vector<map<QString, QString>> v_types = controllerEmployee.getAllTypes();
+    vector<map<QString, QString> > v_types = controllerEmployee.getAllTypes();
 
-    for(int i = 0; i < v_types.size(); i++)
+    for(unsigned int i = 0; i < v_types.size(); i++)
     {
         ui->comboBox_Type->setItemText(i, v_types[i]["label"]);
     }

@@ -2,7 +2,7 @@
 
 DAO_Client::DAO_Client()
 {
-
+    db = SingletonDB::getInstance();
 }
 
 bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
@@ -59,7 +59,7 @@ map<QString, QString> DAO_Client::searchClientById(int id)
 
 vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
 {
-    vector<map<QString, QString>> v_records;
+    vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TClient WHERE Nom LIKE ? or Prenom LIKE ?");
@@ -84,7 +84,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
 
 vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate date)
 {
-    vector<map<QString, QString>> v_records;
+    vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TClient WHERE DateRdv = ?");
@@ -108,7 +108,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate date)
 
 vector<map<QString, QString> > DAO_Client::getAllClients()
 {
-    vector<map<QString, QString>> v_records;
+    vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TClient");

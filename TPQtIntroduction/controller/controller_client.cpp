@@ -32,7 +32,7 @@ Client Controller_client::searchClientById(int id)
 
 vector<Client> Controller_client::searchClientsByName(QString name)
 {
-    vector<map<QString, QString>> v_m_attributesClients = daoClient.searchClientsByName(name);
+    vector<map<QString, QString> > v_m_attributesClients = daoClient.searchClientsByName(name);
     map<QString, QString> m_attributesClient;
     vector<Client> v_clients;
 
@@ -49,7 +49,7 @@ vector<Client> Controller_client::searchClientsByName(QString name)
 
 vector<Client> Controller_client::searchClientsByDate(QDate date)
 {
-    vector<map<QString, QString>> v_m_attributesClients = daoClient.searchClientsByDate(date);
+    vector<map<QString, QString> > v_m_attributesClients = daoClient.searchClientsByDate(date);
     map<QString, QString> m_attributesClient;
     vector<Client> v_clients;
 
@@ -66,7 +66,7 @@ vector<Client> Controller_client::searchClientsByDate(QDate date)
 
 vector<Client> Controller_client::getAllClients()
 {
-    vector<map<QString, QString>> v_m_attributesClients = daoClient.getAllClients();
+    vector<map<QString, QString> > v_m_attributesClients = daoClient.getAllClients();
     map<QString, QString> m_attributesClient;
     vector<Client> v_clients;
 

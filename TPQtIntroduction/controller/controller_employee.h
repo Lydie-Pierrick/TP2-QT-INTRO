@@ -23,7 +23,7 @@ public:
     bool modifyEmployee(int id, QString lastname, QString firstname, int idType, QString username, QString password);
     bool deleteEmployee(int id);
     vector<Employee> getAllEmployees();
-    vector<map<QString, QString>> getAllTypes();
+    vector<map<QString, QString> > getAllTypes();
     vector<Employee> getEmployeesByType(int idType);
 };
 
