@@ -1,4 +1,4 @@
-#ifndef DIALOGADDEMPLOYEE_H
+ #ifndef DIALOGADDEMPLOYEE_H
 #define DIALOGADDEMPLOYEE_H
 #include <QDialog>
 #include <QMessageBox>

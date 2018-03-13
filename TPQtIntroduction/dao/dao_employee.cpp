@@ -88,6 +88,28 @@ map<QString, QString> DAO_Employee::searchEmployee(int id)
     return m_record;
 }
 
+map<QString, QString> DAO_Employee::getEmployeeAccount(int id)
+{
+    map<QString, QString> m_record;
+
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("SELECT * FROM TCompte where IdRessource = ?");
+    sqlQuery.addBindValue(id);
+
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+    }
+    else
+    {
+        sqlQuery.next();
+        m_record.insert(pair<QString,QString>("username", sqlQuery.value(0).toString()));
+        m_record.insert(pair<QString,QString>("password", sqlQuery.value(1).toString()));
+    }
+
+    return m_record;
+}
+
 void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString password, int id)
 {
     // Check if an entry already existed in TCompte

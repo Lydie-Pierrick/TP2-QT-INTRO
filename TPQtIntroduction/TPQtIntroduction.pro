@@ -63,10 +63,12 @@ FORMS += \
     dialogidentification.ui \
     dialogaddclient.ui \
     dialogabout.ui \
-    dialogaddemployee.ui \
-    dialogmodifyemployee.ui
+    dialogaddemployee.ui
 
 RESOURCES += \
     pictures.qrc
 
 QT += sql
+
+DISTFILES += \
+    dialogmodifyemployee.ui
