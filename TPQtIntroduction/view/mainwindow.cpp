@@ -171,10 +171,10 @@ void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
     QModelIndex indexParent = index.parent();
 
-    if(indexParent.isValid())
+    if(index.isValid())
     {
-        ui->pushBtn_Delete->setEnabled(true);
-        ui->pushBtn_Modify->setEnabled(true);
+        ui->pushBtn_DeleteEmployee->setEnabled(true);
+        ui->pushBtn_ModifyEmployee->setEnabled(true);
 
         // Get content of the 1st column of selected line
         QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
@@ -185,8 +185,8 @@ void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
     }
     else
     {
-        ui->pushBtn_Delete->setEnabled(false);
-        ui->pushBtn_Modify->setEnabled(false);
+        ui->pushBtn_DeleteEmployee->setEnabled(false);
+        ui->pushBtn_ModifyEmployee->setEnabled(false);
     }
 }
 
@@ -215,7 +215,7 @@ void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
     }
 }
 
-void MainWindow::on_pushBtn_Modify_clicked()
+void MainWindow::on_pushBtn_ModifyEmployee_clicked()
 {
     // Open the dialog
     DialogModifyEmployee dme;
@@ -227,21 +227,21 @@ void MainWindow::on_pushBtn_Modify_clicked()
     }
 }
 
-void MainWindow::on_pushBtn_Delete_clicked()
+void MainWindow::on_pushBtn_DeleteEmployee_clicked()
 {
     if(controllerEmployee.deleteEmployee(Controller_employee::selectedID))
     {
         ui->statusBar->showMessage("You have removed an employee !");
+        initTreeViewRessources();
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully deleted the employee !"));
     }
     else
     {
         QMessageBox::critical(this, tr("Error"), tr("Fail to delete the employee !"));
     }
-    initTreeViewRessources();
 }
 
-void MainWindow::on_pushBtn_Refresh_clicked()
+void MainWindow::on_pushBtn_RefreshEmployee_clicked()
 {
     ui->statusBar->showMessage("You have refreshed the list of employee !");
     initTreeViewRessources();
@@ -260,14 +260,25 @@ void MainWindow::on_pushBtn_SearchByDate_clicked()
 
 void MainWindow::on_pushBtn_SearchByID_clicked()
 {
+    vector<Client> v_clients;
+
     int id = ui->lineEdit_SearchByID->text().toInt();
 
-    Client client = controllerClient.searchClientById(id);
-    vector<Client> v_clients;
-    v_clients.push_back(client);
-    refreshTableViewClients(v_clients);
+    // Check if id client exist
+    if(ui->lineEdit_SearchByID->text().isEmpty() || !controllerClient.searchClientExistById(id))
+    {
+        refreshTableViewClients(v_clients);
+        QMessageBox::critical(this, tr("Error"), tr("No record was found !"));
+        ui->statusBar->showMessage("You have searched clients by ID. No record was found !");
+    }
+    else
+    {
+        Client client = controllerClient.searchClientById(id);
 
-    ui->statusBar->showMessage("You have searched clients by ID.");
+        v_clients.push_back(client);
+        refreshTableViewClients(v_clients);
+        ui->statusBar->showMessage("You have searched clients by ID.");
+    }
 }
 
 void MainWindow::on_pushBtn_SearchByName_clicked()
@@ -281,10 +292,36 @@ void MainWindow::on_pushBtn_SearchByName_clicked()
 
 void MainWindow::on_pushBtn_DeleteClient_clicked()
 {
-
+    if(controllerClient.deleteClient(Controller_client::selectedID))
+    {
+        ui->statusBar->showMessage("You have removed a client !");
+        initTableViewClients();
+        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully deleted the client !"));
+    }
+    else
+    {
+        QMessageBox::critical(this, tr("Error"), tr("Fail to delete the client !"));
+    }
 }
 
 void MainWindow::on_tableView_SearchClient_clicked(const QModelIndex &index)
 {
+    QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+    QModelIndex indexParent = index.parent();
 
+    if(index.isValid())
+    {
+        ui->pushBtn_DeleteClient->setEnabled(true);
+
+        // Get content of the 1st column of selected line
+        QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
+
+        // Set selectedID
+        int id = indexId.data().toInt();
+        Controller_client::selectedID = id;
+    }
+    else
+    {
+        ui->pushBtn_DeleteClient->setEnabled(false);
+    }
 }

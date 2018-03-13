@@ -94,6 +94,9 @@
       <layout class="QGridLayout" name="gridLayout_SearchClient">
        <item row="1" column="0">
         <widget class="QPushButton" name="pushBtn_DeleteClient">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Delete</string>
          </property>
@@ -245,7 +248,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushBtn_Modify">
+          <widget class="QPushButton" name="pushBtn_ModifyEmployee">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -255,7 +258,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushBtn_Delete">
+          <widget class="QPushButton" name="pushBtn_DeleteEmployee">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -265,7 +268,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushBtn_Refresh">
+          <widget class="QPushButton" name="pushBtn_RefreshEmployee">
            <property name="text">
             <string>Refresh</string>
            </property>
@@ -385,9 +388,9 @@
   <tabstop>lineEdit_SearchByName</tabstop>
   <tabstop>pushBtn_SearchByName</tabstop>
   <tabstop>tableView_SearchClient</tabstop>
-  <tabstop>pushBtn_Modify</tabstop>
-  <tabstop>pushBtn_Delete</tabstop>
-  <tabstop>pushBtn_Refresh</tabstop>
+  <tabstop>pushBtn_ModifyEmployee</tabstop>
+  <tabstop>pushBtn_DeleteEmployee</tabstop>
+  <tabstop>pushBtn_RefreshEmployee</tabstop>
   <tabstop>treeView_Ressource</tabstop>
  </tabstops>
  <resources>

@@ -30,6 +30,16 @@ Client Controller_client::searchClientById(int id)
     return getClient(m_attributesClient);
 }
 
+bool Controller_client::searchClientExistById(int id)
+{
+    if(daoClient.searchClientExistById(id))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 vector<Client> Controller_client::searchClientsByName(QString name)
 {
     vector<map<QString, QString> > v_m_attributesClients = daoClient.searchClientsByName(name);

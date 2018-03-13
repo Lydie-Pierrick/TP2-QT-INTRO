@@ -2,6 +2,7 @@
 #include "c_init_bd.h"
 
 int Controller_employee::selectedID = 0;
+int Controller_client::selectedID = 0;
 
 int main(int argc, char *argv[])
 {

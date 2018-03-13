@@ -45,16 +45,33 @@ map<QString, QString> DAO_Client::searchClientById(int id)
     sqlQuery.prepare("SELECT * FROM TClient WHERE Id = ?");
     sqlQuery.addBindValue(id);
 
-    if(!sqlQuery.exec())
+    if(sqlQuery.exec())
     {
-       qDebug() << sqlQuery.lastError();
-    }
-    else {
        sqlQuery.next();
        m_record = collectInfosClient(sqlQuery);
     }
+    else
+        qDebug() << sqlQuery.lastError();
 
     return m_record;
+}
+
+bool DAO_Client::searchClientExistById(int id)
+{
+    map<QString, QString> m_record;
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("SELECT * FROM TClient WHERE Id = ?");
+    sqlQuery.addBindValue(id);
+
+    if(sqlQuery.exec())
+    {
+       if(sqlQuery.next())
+           return true;
+    }
+    else
+        qDebug() << sqlQuery.lastError();
+
+    return false;
 }
 
 vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
