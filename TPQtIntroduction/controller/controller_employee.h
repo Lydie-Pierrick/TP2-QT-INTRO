@@ -19,6 +19,7 @@ public:
     bool checkLogin(QString username, QString password);
     bool addEmployee(QString firstname, QString lastname, int idType, QString username, QString password);
     Employee searchEmployee(int id);
+    map<QString, QString> getEmployeeAccount(int id);
     bool searchEmployee(QString name);
     bool modifyEmployee(int id, QString lastname, QString firstname, int idType, QString username, QString password);
     bool deleteEmployee(int id);

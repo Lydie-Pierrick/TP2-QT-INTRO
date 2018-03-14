@@ -5,12 +5,14 @@ Employee::Employee()
 
 }
 
-Employee::Employee(int id, QString lastname, QString firstname, QString type)
+Employee::Employee(int id, QString lastname, QString firstname, QString type, QString username, QString password)
 {
     this->id = id;
     this->firstname = firstname;
     this->lastname = lastname;
     this->type = type;
+    this->username = username;
+    this->password = password;
 }
 
 int Employee::getId() const
@@ -51,4 +53,24 @@ QString Employee::getType() const
 void Employee::setType(QString value)
 {
     type = value;
+}
+
+QString Employee::getUsername() const
+{
+    return username;
+}
+
+void Employee::setUsername(const QString &value)
+{
+    username = value;
+}
+
+QString Employee::getPassword() const
+{
+    return password;
+}
+
+void Employee::setPassword(const QString &value)
+{
+    password = value;
 }

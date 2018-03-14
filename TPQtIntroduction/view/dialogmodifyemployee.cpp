@@ -9,11 +9,11 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
     int id = Controller_employee::selectedID;
     Employee e = controllerEmployee.searchEmployee(id);
 
+    ui->text_ID->setText(QString::number(id, 10));
     ui->lineEdit_Lastname->setText(e.getLastname());
     ui->lineEdit_Firstname->setText(e.getFirstname());;
 
     // All types
-
     vector<map<QString, QString> > v_types = controllerEmployee.getAllTypes();
 
     for(unsigned int i = 0; i < v_types.size(); i++)
@@ -25,12 +25,12 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
 
     if(e.getType() == "Computer Scientist")
     {
-        ui->label_OnlyIT->setVisible(true);
-        ui->lineEdit_Username->setVisible(true);
-        ui->lineEdit_Password->setVisible(true);
+        ui->label_OnlyIT->setEnabled(true);
+        ui->lineEdit_Username->setEnabled(true);
+        ui->lineEdit_Password->setEnabled(true);
 
-//        ui->lineEdit_Username->setText(e.getUsername());
-//        ui->lineEdit_Password->setText(e.getPassword());
+        ui->lineEdit_Username->setText(e.getUsername());
+        ui->lineEdit_Password->setText(e.getPassword());
     }
 }
 

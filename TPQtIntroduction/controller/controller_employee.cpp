@@ -25,9 +25,26 @@ Employee Controller_employee::searchEmployee(int id)
     QString lastname = m_attributsEmployee["lastname"];
     QString firstname = m_attributsEmployee["firstname"];
     QString type = m_attributsEmployee["type"];
-    Employee e = Employee(id, lastname, firstname, type);
+    Employee e;
+
+    map<QString,QString> m_accountEmployee;
+
+    if(type == "Computer Scientist")
+    {
+        m_accountEmployee = getEmployeeAccount(id);
+        e = Employee(id, lastname, firstname, type, m_accountEmployee["username"], m_accountEmployee["password"]);
+    }
+    else
+    {
+        e = Employee(id, lastname, firstname, type, NULL, NULL);
+    }
 
     return e;
+}
+
+map<QString, QString> Controller_employee::getEmployeeAccount(int id)
+{
+    return daoEmployee.getEmployeeAccount(id);
 }
 
 bool Controller_employee::deleteEmployee(int id){
@@ -45,7 +62,7 @@ vector<Employee> Controller_employee::getAllEmployees()
     for (unsigned int i = 0; i < listEmployeeString.size(); i++)
     {
         m_record = listEmployeeString[i];
-        e = Employee(m_record["id"].toInt(), m_record["lastname"], m_record["firstname"], m_record["type"]);
+        e = Employee(m_record["id"].toInt(), m_record["lastname"], m_record["firstname"], m_record["type"], NULL, NULL);
 
         v_employees.push_back(e);
     }
@@ -73,7 +90,7 @@ vector<Employee> Controller_employee::getEmployeesByType(int idType)
     for (unsigned int i = 0; i < listEmployeeString.size(); i++)
     {
         m_record = listEmployeeString[i];
-        e = Employee(m_record["id"].toInt(), m_record["lastname"], m_record["firstname"], m_record["type"]);
+        e = Employee(m_record["id"].toInt(), m_record["lastname"], m_record["firstname"], m_record["type"], NULL, NULL);
 
         v_employees.push_back(e);
     }
