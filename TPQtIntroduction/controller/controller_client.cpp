@@ -23,16 +23,26 @@ bool Controller_client::addClient(QString firstname, QString lastname, int telep
                                 duration, dateAppointment, priorityAppointment, comment);
 }
 
-Client Controller_client::searchClientById(int id)
+vector<Client> Controller_client::searchClientById(int id)
 {
-    map<QString,QString> m_attributesClient = daoClient.searchClientById(id);
+    vector<map<QString, QString> > v_m_attributesClients = daoClient.searchClientById(id);
+    map<QString, QString> m_attributesClient;
+    vector<Client> v_clients;
 
-    return getClient(m_attributesClient);
+    for (unsigned int i = 0; i < v_m_attributesClients.size(); i++)
+    {
+        m_attributesClient = v_m_attributesClients[i];
+        Client client = getClient(m_attributesClient);
+
+        v_clients.push_back(client);
+    }
+
+    return v_clients;
 }
 
 vector<Client> Controller_client::searchClientsByName(QString name)
 {
-    vector<map<QString, QString>> v_m_attributesClients = daoClient.searchClientsByName(name);
+    vector<map<QString, QString> > v_m_attributesClients = daoClient.searchClientsByName(name);
     map<QString, QString> m_attributesClient;
     vector<Client> v_clients;
 
@@ -49,7 +59,7 @@ vector<Client> Controller_client::searchClientsByName(QString name)
 
 vector<Client> Controller_client::searchClientsByDate(QDate date)
 {
-    vector<map<QString, QString>> v_m_attributesClients = daoClient.searchClientsByDate(date);
+    vector<map<QString, QString> > v_m_attributesClients = daoClient.searchClientsByDate(date);
     map<QString, QString> m_attributesClient;
     vector<Client> v_clients;
 
@@ -66,7 +76,7 @@ vector<Client> Controller_client::searchClientsByDate(QDate date)
 
 vector<Client> Controller_client::getAllClients()
 {
-    vector<map<QString, QString>> v_m_attributesClients = daoClient.getAllClients();
+    vector<map<QString, QString> > v_m_attributesClients = daoClient.getAllClients();
     map<QString, QString> m_attributesClient;
     vector<Client> v_clients;
 
@@ -84,4 +94,12 @@ vector<Client> Controller_client::getAllClients()
 bool Controller_client::deleteClient(int id)
 {
     return daoClient.deleteClient(id);
+}
+
+bool Controller_client::modifyClient(int id, QString firstname, QString lastname, int telephone,
+                                     QString address, QString city, int postalCode, int duration,
+                                     QDate dateAppointment, int priorityAppointment, QString comment)
+{
+    return daoClient.modifyClient(id, firstname, lastname, telephone, address, city,  postalCode,
+                                  duration, dateAppointment, priorityAppointment, comment);
 }

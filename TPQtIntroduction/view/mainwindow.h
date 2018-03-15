@@ -10,8 +10,10 @@
 #include "dialogabout.h"
 #include "dialogaddemployee.h"
 #include "controller/controller_employee.h"
+#include "controller/controller_client.h"
 #include "dialogidentification.h"
 #include "dialogmodifyemployee.h"
+#include "dialogmodifyclient.h"
 
 namespace Ui {
 class MainWindow;
@@ -42,15 +44,17 @@ private slots:
     void on_actionEmployee_triggered();
     void on_actionEmployee_2_triggered();
     void on_treeView_Ressource_clicked(const QModelIndex &index);
-    void on_pushBtn_Modify_clicked();
-    void on_pushBtn_Delete_clicked();
+    void on_pushBtn_ModifyEmployee_clicked();
+    void on_pushBtn_DeleteEmployee_clicked();
     void on_pushBtn_SearchByDate_clicked();
-    void on_pushBtn_Refresh_clicked();
+    void on_pushBtn_RefreshEmployee_clicked();
     void on_treeView_Ressource_doubleClicked(const QModelIndex &index);
     void on_pushBtn_SearchByID_clicked();
     void on_pushBtn_SearchByName_clicked();
     void on_pushBtn_DeleteClient_clicked();
     void on_tableView_SearchClient_clicked(const QModelIndex &index);
+
+    void on_pushBtn_ModifyClient_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -2,7 +2,7 @@
 
 DAO_Client::DAO_Client()
 {
-
+    db = SingletonDB::getInstance();
 }
 
 bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
@@ -38,9 +38,11 @@ bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
     }
 }
 
-map<QString, QString> DAO_Client::searchClientById(int id)
+vector<map<QString, QString> > DAO_Client::searchClientById(int id)
 {
+    vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
+
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TClient WHERE Id = ?");
     sqlQuery.addBindValue(id);
@@ -50,16 +52,20 @@ map<QString, QString> DAO_Client::searchClientById(int id)
        qDebug() << sqlQuery.lastError();
     }
     else {
-       sqlQuery.next();
-       m_record = collectInfosClient(sqlQuery);
-    }
+        while(sqlQuery.next())
+        {
+            m_record = collectInfosClient(sqlQuery);
+            v_records.push_back(m_record);
 
-    return m_record;
+            m_record.clear();
+        }
+    }
+    return v_records;
 }
 
 vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
 {
-    vector<map<QString, QString>> v_records;
+    vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TClient WHERE Nom LIKE ? or Prenom LIKE ?");
@@ -84,7 +90,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
 
 vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate date)
 {
-    vector<map<QString, QString>> v_records;
+    vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TClient WHERE DateRdv = ?");
@@ -108,7 +114,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate date)
 
 vector<map<QString, QString> > DAO_Client::getAllClients()
 {
-    vector<map<QString, QString>> v_records;
+    vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TClient");
@@ -138,6 +144,37 @@ bool DAO_Client::deleteClient(int id)
     if(!sqlQuery.exec())
     {
         qDebug() << sqlQuery.lastError();
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int telephone,
+                              QString address, QString city, int postalCode, int duration,
+                              QDate dateAppointment, int priorityAppointment, QString comment)
+{
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("UPDATE TClient SET Nom = ?, Prenom = ?, Adresse = ?, Ville = ?, CP = ?, "
+                     "Commentaire = ?, Tel = ?, DateRdv = ?, DureeRdv = ?, Priorite = ? "
+                     "WHERE Id = ?");
+    sqlQuery.addBindValue(lastname);
+    sqlQuery.addBindValue(firstname);
+    sqlQuery.addBindValue(address);
+    sqlQuery.addBindValue(city);
+    sqlQuery.addBindValue(postalCode);
+    sqlQuery.addBindValue(comment);
+    sqlQuery.addBindValue(telephone);
+    sqlQuery.addBindValue(dateAppointment);
+    sqlQuery.addBindValue(duration);
+    sqlQuery.addBindValue(priorityAppointment);
+    sqlQuery.addBindValue(id);
+
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+
         return false;
     }
     else{

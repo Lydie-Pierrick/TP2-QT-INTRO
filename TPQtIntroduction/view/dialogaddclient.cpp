@@ -20,6 +20,9 @@ void DialogAddClient::on_pushButton_reset_clicked()
     ui->lineEdit_address->clear();
     ui->lineEdit_city->clear();
     ui->lineEdit_postalCode->clear();
+    ui->lineEdit_duration->clear();
+    ui->comboBox_priority->setCurrentIndex(0);
+    ui->textEdit->clear();
 }
 
 void DialogAddClient::on_pushButton_ok_clicked()

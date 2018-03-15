@@ -2,7 +2,7 @@
 
 DAO_Employee::DAO_Employee()
 {
-
+    db = SingletonDB::getInstance();
 }
 
 bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, QString username, QString password)
@@ -39,10 +39,10 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, 
     }
 }
 
-vector<map<QString, QString>> DAO_Employee::getAllEmployees()
+vector<map<QString, QString> > DAO_Employee::getAllEmployees()
 {
     map<QString, QString> m_record;
-    vector<map<QString, QString>> v_records;
+    vector<map<QString, QString> > v_records;
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("SELECT * FROM TRessource");
     if(!sqlQuery.exec())
@@ -230,9 +230,9 @@ QString DAO_Employee::convertIntToType(int idType)
     return type;
 }
 
-vector<map<QString, QString>> DAO_Employee::getAllTypes()
+vector<map<QString, QString> > DAO_Employee::getAllTypes()
 {
-    vector<map<QString, QString>> v_records;
+    vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
     QSqlQuery sqlQuery;
     sqlQuery.prepare("SELECT * FROM TType");
@@ -258,7 +258,7 @@ vector<map<QString, QString>> DAO_Employee::getAllTypes()
 vector<map<QString, QString> > DAO_Employee::getEmployeesByType(int idType)
 {
     map<QString, QString> m_record;
-    vector<map<QString, QString>> v_records;
+    vector<map<QString, QString> > v_records;
     QSqlQuery sqlQuery;
     sqlQuery.prepare("SELECT * FROM TRessource where idType = ?");
     sqlQuery.addBindValue(idType);
