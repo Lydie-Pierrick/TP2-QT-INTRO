@@ -6,6 +6,7 @@
 #include <iostream>
 #include "ui_dialogaddclient.h"
 #include "controller/controller_client.h"
+#include "view/dialogchooseressource.h"
 
 using namespace std;
 

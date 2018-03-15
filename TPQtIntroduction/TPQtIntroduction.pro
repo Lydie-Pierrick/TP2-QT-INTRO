@@ -32,6 +32,7 @@ SOURCES += \
     view/dialogaddemployee.cpp \
     view/dialogmodifyemployee.cpp \
     view/dialogmodifyclient.cpp \
+    view/dialogchooseressource.cpp \
     model/client.cpp \
     model/appointment.cpp \
     model/employee.cpp \
@@ -50,6 +51,7 @@ HEADERS += \
     view/dialogaddemployee.h \
     view/dialogmodifyemployee.h \
     view/dialogmodifyclient.h \
+    view/dialogchooseressource.h \
     model/client.h \
     model/appointment.h \
     model/employee.h \
@@ -67,10 +69,10 @@ FORMS += \
     dialogabout.ui \
     dialogaddemployee.ui \
     dialogmodifyemployee.ui \
+    dialogchooseressource.ui \
     dialogmodifyclient.ui
 
 RESOURCES += \
     pictures.qrc
 
 QT += sql
-
