@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>436</width>
-    <height>443</height>
+    <height>463</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>40</x>
      <y>10</y>
-     <width>351</width>
-     <height>344</height>
+     <width>376</width>
+     <height>371</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -44,9 +44,6 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="1">
-     <widget class="QLineEdit" name="lineEdit_duration"/>
-    </item>
     <item row="6" column="0">
      <widget class="QLabel" name="label_date">
       <property name="text">
@@ -54,38 +51,38 @@
       </property>
      </widget>
     </item>
-    <item row="9" column="1">
-     <widget class="QTextEdit" name="textEdit"/>
+    <item row="7" column="2">
+     <widget class="QLineEdit" name="lineEdit_duration"/>
     </item>
-    <item row="1" column="1">
+    <item row="1" column="2">
      <widget class="QLineEdit" name="lineEdit_lastName"/>
     </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEdit_city"/>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_telephone"/>
-    </item>
-    <item row="0" column="1">
+    <item row="0" column="2">
      <widget class="QLineEdit" name="lineEdit_firstName"/>
     </item>
-    <item row="5" column="1">
-     <widget class="QLineEdit" name="lineEdit_postalCode"/>
+    <item row="4" column="2">
+     <widget class="QLineEdit" name="lineEdit_city"/>
     </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEdit_address"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_lastName">
-      <property name="text">
-       <string>* Last Name :</string>
-      </property>
-     </widget>
+    <item row="2" column="2">
+     <widget class="QLineEdit" name="lineEdit_telephone"/>
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_address">
       <property name="text">
        <string>* Address :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QLineEdit" name="lineEdit_address"/>
+    </item>
+    <item row="5" column="2">
+     <widget class="QLineEdit" name="lineEdit_postalCode"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_lastName">
+      <property name="text">
+       <string>* Last Name :</string>
       </property>
      </widget>
     </item>
@@ -110,7 +107,7 @@
       </property>
      </widget>
     </item>
-    <item row="8" column="1">
+    <item row="8" column="2">
      <widget class="QComboBox" name="comboBox_priority">
       <item>
        <property name="text">
@@ -146,7 +143,7 @@
       </property>
      </widget>
     </item>
-    <item row="6" column="1">
+    <item row="6" column="2">
      <widget class="QDateEdit" name="dateEdit">
       <property name="dateTime">
        <datetime>
@@ -160,7 +157,35 @@
       </property>
      </widget>
     </item>
-    <item row="10" column="1">
+    <item row="12" column="0">
+     <widget class="QLabel" name="label_staus">
+      <property name="text">
+       <string>* Choose ressources :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_chooseRes">
+        <property name="text">
+         <string>status</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushBtn_choose">
+        <property name="text">
+         <string>Choose ...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="9" column="2">
+     <widget class="QPlainTextEdit" name="textEdit"/>
+    </item>
+    <item row="14" column="0">
      <widget class="QLabel" name="label_required">
       <property name="text">
        <string>* Required</string>
@@ -172,8 +197,8 @@
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>380</y>
+     <x>50</x>
+     <y>400</y>
      <width>351</width>
      <height>41</height>
     </rect>
@@ -226,7 +251,6 @@
   <tabstop>dateEdit</tabstop>
   <tabstop>lineEdit_duration</tabstop>
   <tabstop>comboBox_priority</tabstop>
-  <tabstop>textEdit</tabstop>
   <tabstop>pushButton_ok</tabstop>
   <tabstop>pushButton_cancel</tabstop>
  </tabstops>

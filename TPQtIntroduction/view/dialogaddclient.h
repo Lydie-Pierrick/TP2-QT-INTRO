@@ -6,7 +6,7 @@
 #include <iostream>
 #include "ui_dialogaddclient.h"
 #include "controller/controller_client.h"
-#include "view/dialogchooseressource.h"
+#include "dialogchooseressource.h"
 
 using namespace std;
 
@@ -27,6 +27,8 @@ private slots:
     void on_pushButton_ok_clicked();
     void on_pushButton_cancel_clicked();
     bool colorBoderFail();
+
+    void on_pushBtn_choose_clicked();
 
 private:
     Ui::DialogAddClient *ui;

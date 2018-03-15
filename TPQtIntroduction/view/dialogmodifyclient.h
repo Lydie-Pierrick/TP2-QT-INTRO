@@ -4,6 +4,7 @@
 #include "controller/controller_client.h"
 #include <QMessageBox>
 #include "ui_dialogmodifyclient.h"
+#include "dialogchooseressource.h"
 
 namespace Ui {
 class DialogModifyClient;
@@ -22,6 +23,8 @@ private slots:
     void on_pushButton_cancel_clicked();
     void on_pushButton_reset_clicked();
     bool colorBoderFail();
+
+    void on_pushBtn_choose_clicked();
 
 private:
     Ui::DialogModifyClient *ui;

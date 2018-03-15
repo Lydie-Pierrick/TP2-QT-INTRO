@@ -24,7 +24,7 @@ DialogModifyClient::DialogModifyClient(QWidget *parent) :
         ui->lineEdit_postalCode->setText(QString::number(client.getPostalCode()));
         ui->lineEdit_duration->setText(QString::number(client.getDuration()));
         ui->comboBox_priority->setCurrentText(QString::number(client.getPriorityAppointment()));
-        ui->textEdit->setText(client.getComment());
+        ui->textEdit->setPlainText(client.getComment());
     }
 }
 
@@ -128,4 +128,11 @@ bool DialogModifyClient::colorBoderFail()
         ui->lineEdit_duration->setStyleSheet("");
 
     return noEmptyField;
+}
+
+
+void DialogModifyClient::on_pushBtn_choose_clicked()
+{
+    DialogChooseRessource dcr;
+    dcr.exec();
 }

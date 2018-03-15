@@ -111,3 +111,9 @@ bool DialogAddClient::colorBoderFail()
 
     return noEmptyField;
 }
+
+void DialogAddClient::on_pushBtn_choose_clicked()
+{
+    DialogChooseRessource dcr;
+    dcr.exec();
+}

@@ -6,11 +6,18 @@ DialogChooseRessource::DialogChooseRessource(QWidget *parent) :
     ui(new Ui::DialogChooseRessource)
 {
     ui->setupUi(this);
+
+    modelTreeView = new QStandardItemModel();
+    initTreeViewRessources();
 }
 
 DialogChooseRessource::~DialogChooseRessource()
 {
     delete ui;
+
+    // Delete the pointer
+    if(modelTreeView != nullptr_t())
+        delete modelTreeView;
 }
 
 void DialogChooseRessource::initTreeViewRessources()
