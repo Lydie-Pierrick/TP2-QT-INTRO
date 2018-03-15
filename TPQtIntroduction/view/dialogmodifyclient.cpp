@@ -12,7 +12,7 @@ DialogModifyClient::DialogModifyClient(QWidget *parent) :
 
     vector<Client> v_clients = controllerClient.searchClientById(id);
 
-    if(!v_clients.size())
+    if(v_clients.size())
     {
         Client client = v_clients[0];
         qDebug()<<client.getLastName();
