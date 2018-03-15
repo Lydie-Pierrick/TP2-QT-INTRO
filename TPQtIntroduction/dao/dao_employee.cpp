@@ -88,20 +88,46 @@ map<QString, QString> DAO_Employee::searchEmployee(int id)
     return m_record;
 }
 
+map<QString, QString> DAO_Employee::getEmployeeAccount(int id)
+{
+    map<QString, QString> m_record;
+
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("SELECT Login, MdP FROM TCompte where IdRessource = ?");
+    sqlQuery.addBindValue(id);
+
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+    }
+    else
+    {
+        sqlQuery.next();
+        m_record.insert(pair<QString,QString>("username", sqlQuery.value(0).toString()));
+        m_record.insert(pair<QString,QString>("password", sqlQuery.value(1).toString()));
+    }
+
+    return m_record;
+}
+
 void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString password, int id)
 {
     // Check if an entry already existed in TCompte
     bool alreadyExist = false;
-    QSqlQuery sqlQuery2(db);
-    sqlQuery2.prepare("SELECT * FROM TCompte where IdRessource = ?");
-    sqlQuery2.addBindValue(id);
+    int idRessourceDB;
 
-    if(!sqlQuery2.exec())
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("SELECT IdRessource FROM TCompte where IdRessource = ?");
+    sqlQuery.addBindValue(id);
+
+    if(!sqlQuery.exec())
     {
-        qDebug() << sqlQuery2.lastError();
+        qDebug() << sqlQuery.lastError();
     }
 
-    alreadyExist = sqlQuery2.next();
+    alreadyExist = sqlQuery.next();
+
+    idRessourceDB = sqlQuery.value(0).toInt();
 
     // If it's a Computer Scientist Update if exist or insert new row account
     if(convertIntToType(idType) == "Computer Scientist" && !username.isEmpty() && !password.isEmpty())
@@ -109,16 +135,17 @@ void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString p
         QSqlQuery sqlQuery3(db);
 
         if(alreadyExist){
-            sqlQuery3.prepare("UPDATE INTO TCompte(Id, IdRessource, Login, MdP) VALUES (?, ?, '?', '?')");
-            sqlQuery3.addBindValue(sqlQuery2.value(0).toInt());
+            sqlQuery3.prepare("UPDATE TCompte SET Login = ?, MdP = ? WHERE IdRessource = ?");
+            sqlQuery3.addBindValue(username);
+            sqlQuery3.addBindValue(password);
+            sqlQuery3.addBindValue(idRessourceDB);
         }
         else{
             sqlQuery3.prepare("INSERT INTO TCompte (IdRessource, Login, MdP) VALUES (?, ?, ?)");
+            sqlQuery3.addBindValue(id);
+            sqlQuery3.addBindValue(username);
+            sqlQuery3.addBindValue(password);
         }
-
-        sqlQuery3.addBindValue(id);
-        sqlQuery3.addBindValue(username);
-        sqlQuery3.addBindValue(password);
 
         if(!sqlQuery3.exec())
         {

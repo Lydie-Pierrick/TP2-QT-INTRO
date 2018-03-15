@@ -1,10 +1,9 @@
 #ifndef DIALOGMODIFYCLIENT_H
 #define DIALOGMODIFYCLIENT_H
-
 #include <QDialog>
 #include "controller/controller_client.h"
 #include <QMessageBox>
-
+#include "ui_dialogmodifyclient.h"
 
 namespace Ui {
 class DialogModifyClient;

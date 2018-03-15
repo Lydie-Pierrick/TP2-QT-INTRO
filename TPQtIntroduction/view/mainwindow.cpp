@@ -200,7 +200,7 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 // Problems
 void MainWindow::deletePointersTreeView()
 {
-    for(int i = 0; i < v_pointersTreeView.size(); i ++)
+    for(unsigned int i = 0; i < v_pointersTreeView.size(); i ++)
     {
         if(v_pointersTreeView[i] != nullptr_t())
             delete v_pointersTreeView[i];
@@ -210,7 +210,7 @@ void MainWindow::deletePointersTreeView()
 
 void MainWindow::deletePointersTableView()
 {
-    for(int i = 0; i < v_pointersTableView.size(); i ++)
+    for(unsigned int i = 0; i < v_pointersTableView.size(); i ++)
     {
         if(v_pointersTableView[i] != nullptr_t())
             delete v_pointersTableView[i];

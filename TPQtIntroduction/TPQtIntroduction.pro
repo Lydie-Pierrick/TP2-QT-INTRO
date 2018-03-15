@@ -73,3 +73,4 @@ RESOURCES += \
     pictures.qrc
 
 QT += sql
+

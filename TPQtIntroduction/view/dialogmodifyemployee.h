@@ -17,7 +17,6 @@ public:
     explicit DialogModifyEmployee(QWidget *parent = 0);
     ~DialogModifyEmployee();
 
-
 private slots:
     void on_pushButton_ok_clicked();
     void on_pushButton_cancel_clicked();

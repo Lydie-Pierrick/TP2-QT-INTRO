@@ -19,7 +19,7 @@ class Employee
 {
 public:
     Employee();
-    Employee(int id, QString lastname, QString fisrtname, QString type);
+    Employee(int id, QString lastname, QString fisrtname, QString type, QString username, QString password);
     int getId() const;
     void setId(int value);
 
@@ -32,11 +32,19 @@ public:
     QString getType() const;
     void setType(QString value);
 
+    QString getUsername() const;
+    void setUsername(const QString &value);
+
+    QString getPassword() const;
+    void setPassword(const QString &value);
+
 private:
     int id;
     QString lastname;
     QString firstname;
     QString type;
+    QString username;
+    QString password;
 };
 
 #endif // EMPLOYEE_H

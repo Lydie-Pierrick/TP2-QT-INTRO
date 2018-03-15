@@ -16,6 +16,7 @@ public:
     bool addEmployee(QString firstname, QString lastname, int idType, QString username, QString password);
     vector<map<QString, QString> > getAllEmployees();
     map<QString,QString> searchEmployee(int id);
+    map<QString, QString> getEmployeeAccount(int id);
     bool modifyEmployee(int id, QString lastname, QString firstname, int idType, QString username, QString password);
     bool deleteEmployee(int id);
     QString convertIntToType(int idType);
