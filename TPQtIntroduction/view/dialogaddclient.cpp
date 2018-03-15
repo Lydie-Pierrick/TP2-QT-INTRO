@@ -40,7 +40,7 @@ void DialogAddClient::on_pushButton_ok_clicked()
     QString comment = ui->textEdit->toPlainText();
 
     // Call the controller employee and add employee
-    if(controller_client.addClient(firstName, lastName, telephone, address, city, postalCode,
+    if(colorBoderFail() && controller_client.addClient(firstName, lastName, telephone, address, city, postalCode,
                                    duration, dateAppointment, priorityAppointment, comment))
     {
         accept();
@@ -54,4 +54,60 @@ void DialogAddClient::on_pushButton_ok_clicked()
 void DialogAddClient::on_pushButton_cancel_clicked()
 {
     reject();
+}
+
+bool DialogAddClient::colorBoderFail()
+{
+    bool noEmptyField = true;
+    if(ui->lineEdit_firstName->text().isEmpty())
+    {
+        ui->lineEdit_firstName->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_firstName->setStyleSheet("");
+    if(ui->lineEdit_lastName->text().isEmpty())
+    {
+        ui->lineEdit_lastName->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_lastName->setStyleSheet("");
+    if(ui->lineEdit_address->text().isEmpty())
+    {
+        ui->lineEdit_address->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_address->setStyleSheet("");
+    if(ui->lineEdit_address->text().isEmpty())
+    {
+        ui->lineEdit_address->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_address->setStyleSheet("");
+    if(ui->lineEdit_city->text().isEmpty())
+    {
+        ui->lineEdit_city->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_city->setStyleSheet("");
+    if(ui->lineEdit_postalCode->text().isEmpty())
+    {
+        ui->lineEdit_postalCode->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_postalCode->setStyleSheet("");
+    if(ui->lineEdit_duration->text().isEmpty())
+    {
+        ui->lineEdit_duration->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_duration->setStyleSheet("");
+
+    return noEmptyField;
 }

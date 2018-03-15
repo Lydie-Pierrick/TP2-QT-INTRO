@@ -15,7 +15,6 @@ DialogModifyClient::DialogModifyClient(QWidget *parent) :
     if(v_clients.size())
     {
         Client client = v_clients[0];
-        qDebug()<<client.getLastName();
         ui->text_ID->setText(QString::number(id));
         ui->lineEdit_lastname->setText(client.getLastName());
         ui->lineEdit_firstname->setText(client.getFirstName());
@@ -36,7 +35,7 @@ DialogModifyClient::~DialogModifyClient()
 
 void DialogModifyClient::on_pushButton_ok_clicked()
 {
-    if(controllerClient.modifyClient(Controller_client::selectedID,
+    if(colorBoderFail() && controllerClient.modifyClient(Controller_client::selectedID,
                                      ui->lineEdit_firstname->text(),
                                      ui->lineEdit_lastname->text(),
                                      ui->lineEdit_telephone->text().toInt(),
@@ -73,4 +72,60 @@ void DialogModifyClient::on_pushButton_reset_clicked()
     ui->lineEdit_duration->clear();
     ui->comboBox_priority->setCurrentIndex(0);
     ui->textEdit->clear();
+}
+
+bool DialogModifyClient::colorBoderFail()
+{
+    bool noEmptyField = true;
+    if(ui->lineEdit_firstname->text().isEmpty())
+    {
+        ui->lineEdit_firstname->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_firstname->setStyleSheet("");
+    if(ui->lineEdit_lastname->text().isEmpty())
+    {
+        ui->lineEdit_lastname->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_lastname->setStyleSheet("");
+    if(ui->lineEdit_address->text().isEmpty())
+    {
+        ui->lineEdit_address->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_address->setStyleSheet("");
+    if(ui->lineEdit_address->text().isEmpty())
+    {
+        ui->lineEdit_address->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_address->setStyleSheet("");
+    if(ui->lineEdit_city->text().isEmpty())
+    {
+        ui->lineEdit_city->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_city->setStyleSheet("");
+    if(ui->lineEdit_postalCode->text().isEmpty())
+    {
+        ui->lineEdit_postalCode->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_postalCode->setStyleSheet("");
+    if(ui->lineEdit_duration->text().isEmpty())
+    {
+        ui->lineEdit_duration->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_duration->setStyleSheet("");
+
+    return noEmptyField;
 }
