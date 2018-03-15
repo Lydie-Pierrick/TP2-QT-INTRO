@@ -19,10 +19,9 @@ public:
 
 private slots:
     void on_pushButton_ok_clicked();
-
     void on_pushButton_cancel_clicked();
-
     void on_pushButton_reset_clicked();
+    bool colorBoderFail();
 
 private:
     Ui::DialogModifyClient *ui;
