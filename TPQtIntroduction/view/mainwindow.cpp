@@ -119,7 +119,7 @@ void MainWindow::initTreeViewRessources()
             itemId = new QStandardItem(QString::number(v_employees[j].getId()));
             itemName = new QStandardItem(v_employees[j].getLastname());
 
-            itemType->appendRow(itemId);
+            itemType->setChild(j, 0, itemId);
             itemType->setChild(j, 1, itemName);
 
             // Store the pointers
@@ -224,7 +224,7 @@ void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
     QModelIndex indexParent = index.parent();
 
-    if(index.isValid())
+    if(indexParent.isValid())
     {
         ui->pushBtn_DeleteEmployee->setEnabled(true);
         ui->pushBtn_ModifyEmployee->setEnabled(true);
