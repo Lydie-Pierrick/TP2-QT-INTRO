@@ -24,6 +24,9 @@ public:
     vector<Client> searchClientsByDate(QDate date);
     vector<Client> getAllClients();
     bool deleteClient(int id);
+    bool modifyClient(int id, QString firstname, QString lastname, int telephone,
+                      QString address, QString city, int postalCode, int duration,
+                      QDate dateAppointment, int priorityAppointment, QString comment);
 };
 
 #endif // CONTROLLER_CLIENT_H

@@ -151,6 +151,37 @@ bool DAO_Client::deleteClient(int id)
     }
 }
 
+bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int telephone,
+                              QString address, QString city, int postalCode, int duration,
+                              QDate dateAppointment, int priorityAppointment, QString comment)
+{
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("UPDATE TClient SET Nom = ?, Prenom = ?, Adresse = ?, Ville = ?, CP = ?, "
+                     "Commentaire = ?, Tel = ?, DateRdv = ?, DureeRdv = ?, Priorite = ? "
+                     "WHERE Id = ?");
+    sqlQuery.addBindValue(lastname);
+    sqlQuery.addBindValue(firstname);
+    sqlQuery.addBindValue(address);
+    sqlQuery.addBindValue(city);
+    sqlQuery.addBindValue(postalCode);
+    sqlQuery.addBindValue(comment);
+    sqlQuery.addBindValue(telephone);
+    sqlQuery.addBindValue(dateAppointment);
+    sqlQuery.addBindValue(duration);
+    sqlQuery.addBindValue(priorityAppointment);
+    sqlQuery.addBindValue(id);
+
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
 map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)
 {
     map<QString, QString> m_record;

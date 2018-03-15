@@ -15,6 +15,9 @@ public:
     vector<map<QString, QString> > searchClientsByDate(QDate date);
     vector<map<QString, QString> > getAllClients();
     bool deleteClient(int id);
+    bool modifyClient(int id, QString firstname, QString lastname, int telephone,
+                      QString address, QString city, int postalCode, int duration,
+                      QDate dateAppointment, int priorityAppointment, QString comment);
 private:
     QSqlDatabase db;
     map<QString, QString> collectInfosClient(QSqlQuery sqlQuery);

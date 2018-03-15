@@ -95,3 +95,11 @@ bool Controller_client::deleteClient(int id)
 {
     return daoClient.deleteClient(id);
 }
+
+bool Controller_client::modifyClient(int id, QString firstname, QString lastname, int telephone,
+                                     QString address, QString city, int postalCode, int duration,
+                                     QDate dateAppointment, int priorityAppointment, QString comment)
+{
+    return daoClient.modifyClient(id, firstname, lastname, telephone, address, city,  postalCode,
+                                  duration, dateAppointment, priorityAppointment, comment);
+}

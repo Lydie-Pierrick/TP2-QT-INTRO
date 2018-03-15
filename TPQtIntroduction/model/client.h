@@ -10,14 +10,6 @@
 
 using namespace std;
 
-enum priority{
-    priority1=1,
-    priority2=2,
-    priority3=3,
-    priority4=4,
-    priority5=5
-};
-
 class Client
 {
 public:
