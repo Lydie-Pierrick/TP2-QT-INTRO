@@ -49,7 +49,38 @@ void DialogChooseRessource::initTreeViewRessources()
 
             itemType->setChild(j, 0, itemId);
             itemType->setChild(j, 1, itemName);
+
+            // Set checkbox
+            itemId->setCheckable(true);
         }
         modelTreeView->setItem(i, 0, itemType);
     }
+}
+
+
+
+void DialogChooseRessource::on_pushBtn_Cancel_clicked()
+{
+    reject();
+}
+
+void DialogChooseRessource::on_pushBtn_OK_clicked()
+{
+    int counter = 0;
+    int id;
+    for(int i = 0; i < modelTreeView->rowCount(); i ++)
+    {
+        for(int j= 0; j < modelTreeView->item(i, 0)->rowCount(); j ++)
+        {
+            if(modelTreeView->item(i, 0)->child(j, 0)->checkState() == Qt::Checked)
+            {
+
+                counter ++;
+                // Get selected ID
+                id = modelTreeView->item(i, 0)->child(j, 0)->data(j).toInt();
+            }
+        }
+    }
+    qDebug()<<counter;
+    accept();
 }

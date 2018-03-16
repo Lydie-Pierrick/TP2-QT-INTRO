@@ -13,9 +13,11 @@ using namespace std;
 class Client
 {
 public:
+    Client();
     Client(int id, QString firstname, QString lastname, int telephone,
             QString address, QString city, int postalCode, int duration,
             QDate dateAppointment, int priorityAppointment, QString comment);
+
 
     void setLastName(const QString &value);
     QString getLastName() const;

@@ -1,5 +1,10 @@
 #include "client.h"
 
+Client::Client()
+{
+
+}
+
 Client::Client(int id, QString firstname, QString lastname, int telephone,
                QString address, QString city, int postalCode, int duration,
                QDate dateAppointment, int priorityAppointment, QString comment)

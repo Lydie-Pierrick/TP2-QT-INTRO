@@ -115,5 +115,8 @@ bool DialogAddClient::colorBoderFail()
 void DialogAddClient::on_pushBtn_choose_clicked()
 {
     DialogChooseRessource dcr;
-    dcr.exec();
+    if(dcr.exec() == QDialog::Accepted)
+    {
+
+    }
 }

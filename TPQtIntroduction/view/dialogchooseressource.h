@@ -18,6 +18,10 @@ public:
 
     void initTreeViewRessources();
 
+private slots:
+
+    void on_pushBtn_Cancel_clicked();
+    void on_pushBtn_OK_clicked();
 private:
     Ui::DialogChooseRessource *ui;
     QStandardItemModel * modelTreeView;
