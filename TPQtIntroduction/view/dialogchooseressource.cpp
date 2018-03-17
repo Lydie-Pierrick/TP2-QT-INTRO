@@ -6,8 +6,6 @@ DialogChooseRessource::DialogChooseRessource(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    Controller_client::resNumber = 0;
-
     modelTreeView = new QStandardItemModel();
     initTreeViewRessources();
 }
@@ -61,8 +59,6 @@ void DialogChooseRessource::initTreeViewRessources()
             }
         }
         modelTreeView->setItem(i, 0, itemType);
-
-
     }
     // Expand all the nodes
     ui->treeView_Ressource->expandAll();
@@ -70,13 +66,14 @@ void DialogChooseRessource::initTreeViewRessources()
 
 void DialogChooseRessource::on_pushBtn_Cancel_clicked()
 {
-    Controller_client::windowChooseOpen = false;
-    close();
+    //Controller_client::windowChooseOpen = false;
+    //close();
+
+    reject();
 }
 
 void DialogChooseRessource::on_pushBtn_OK_clicked()
 {
-
     int counter = 0;
     int id;
     vector<int> idsRes;
@@ -90,7 +87,7 @@ void DialogChooseRessource::on_pushBtn_OK_clicked()
 
                 counter ++;
                 // Get selected ID
-                id = modelTreeView->item(i, 0)->child(j, 0)->data(j).toInt();
+                id = modelTreeView->item(i, 0)->child(j, 0)->text().toInt();
                 idsRes.push_back(id);
             }
         }
@@ -98,7 +95,7 @@ void DialogChooseRessource::on_pushBtn_OK_clicked()
 
     Controller_client::idsRes = idsRes;
     Controller_client::resNumber = counter;
-    //qDebug()<<counter;
-    hide();
-    //accept();
+
+    //hide();
+    accept();
 }

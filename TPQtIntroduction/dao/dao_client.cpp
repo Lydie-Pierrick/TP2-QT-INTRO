@@ -192,26 +192,23 @@ bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int t
         return true;
     }
 
-//    // Check if the sql was executed
-//    if(sqlQuery.exec())
-//    {
-//        QSqlQuery sqlQuery2(db);
-//        sqlQuery2.prepare("SELECT last_insert_rowid()");
-//        // Check if the sql 2 was executed
-//        if(sqlQuery2.exec())
-//        {
-//            sqlQuery2.next();
-//            int idClient = sqlQuery2.value(0).toInt();
-
-//            // Check if add ressources successfully
-//            if(addRessources(idClient, idsRes))
-//            {
-//                qDebug() <<"Successfully add client";
-//                return true;
-//            }
-//        }
-//    }
-
+    // Check if the sql was executed
+    if(sqlQuery.exec())
+    {
+        QSqlQuery sqlQuery2(db);
+        sqlQuery2.prepare("DELETE FROM TRdv WHERE IdClient = ?");
+        sqlQuery2.addBindValue(id);
+        // Check if the sql 2 was executed
+        if(sqlQuery2.exec())
+        {
+            // Check if add ressources successfully
+            if(addRessources(id, idsRes))
+            {
+                qDebug() <<"Successfully add client";
+                return true;
+            }
+        }
+    }
 }
 
 bool DAO_Client::addRessources(int idClient, vector<int> idRessources)

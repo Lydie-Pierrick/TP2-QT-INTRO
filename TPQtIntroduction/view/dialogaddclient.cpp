@@ -55,10 +55,11 @@ void DialogAddClient::on_pushButton_ok_clicked()
                                    duration, dateAppointment, priorityAppointment, comment, Controller_client::idsRes))
     {
         accept();
+        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully added the client !"));
     }
     else
     {
-        QMessageBox::critical(this, tr("Error"), tr("The following input errors have occurred:") + " add client");
+        QMessageBox::critical(this, tr("Error"), tr("Fail to add the client !"));
     }
 }
 
@@ -140,7 +141,9 @@ bool DialogAddClient::colorBoderFail()
 void DialogAddClient::on_pushBtn_choose_clicked()
 {
     DialogChooseRessource dcr;
-    dcr.show();
-    qDebug()<<Controller_client::resNumber;
-    ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
+    if(dcr.exec() == QDialog::Accepted)
+    {
+        qDebug()<<Controller_client::resNumber;
+        ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
+    }
 }

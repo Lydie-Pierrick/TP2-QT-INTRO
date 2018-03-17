@@ -56,10 +56,10 @@ void DialogModifyEmployee::on_pushButton_ok_clicked()
         username[0] = username[0].toUpper();
     QString password = ui->lineEdit_password->text();
 
-    if(colorBoderFail() && controllerEmployee.modifyEmployee(id, lastname, firstname, idType, username, password))
+    if(colorBoderFail() && controllerEmployee.modifyEmployee(id, lastname, firstname, idType, username, password))      
     {
-        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the employee !"));
         accept();
+        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the employee !"));
     }
     else
     {

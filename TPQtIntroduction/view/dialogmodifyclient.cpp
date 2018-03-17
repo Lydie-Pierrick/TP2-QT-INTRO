@@ -61,8 +61,8 @@ void DialogModifyClient::on_pushButton_ok_clicked()
                                      ui->textEdit->toPlainText(),
                                      Controller_client::idsRes))
     {
-        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the client !"));
         accept();
+        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the client !"));
     }
     else
     {
@@ -168,7 +168,6 @@ void DialogModifyClient::on_pushBtn_choose_clicked()
     Supprimer les statics Controller_client::firstChooseOpen et Controller_client::windowChooseOpen dans le main et dans dialogmodifyclient.h /!\
 
     if(Controller_client::firstChooseOpen)
->>>>>>> b67bf33d87b23da894ace71ef5686ccf91ea3cda
     {
         dcr = new DialogChooseRessource();
         Controller_client::firstChooseOpen = false;

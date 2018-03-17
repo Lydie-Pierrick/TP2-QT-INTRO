@@ -398,13 +398,4 @@ void MainWindow::on_pushBtn_ModifyClient_clicked()
         initTableViewClients();
     }
 
-//        ui->statusBar->showMessage("You have modified a client !");
-//        initTableViewClients();
-//        QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully deleted the client !"));
-//    }
-//    else
-//    {
-//        QMessageBox::critical(this, tr("Error"), tr("Fail to delete the client !"));
-//    }
-
 }
