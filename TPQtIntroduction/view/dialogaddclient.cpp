@@ -47,9 +47,10 @@ void DialogAddClient::on_pushButton_ok_clicked()
     int priorityAppointment = ui->comboBox_priority->currentText().toInt();
     QString comment = ui->textEdit->toPlainText();
 
-    // Call the controller employee and add employee
-    if(colorBoderFail() && controller_client.addClient(firstName, lastName, telephone, address, city, postalCode,
-                                   duration, dateAppointment, priorityAppointment, comment))
+    // Call the controller client and add client
+    if(colorBoderFail()
+            && controller_client.addClient(firstName, lastName, telephone, address, city, postalCode,
+                                   duration, dateAppointment, priorityAppointment, comment, Controller_client::idsRes))
     {
         accept();
     }
@@ -123,7 +124,7 @@ bool DialogAddClient::colorBoderFail()
     }
     else
         ui->dateEdit->setStyleSheet("");
-    if(ui->label_status->text() == "empty")
+    if(ui->label_status->text() == "0 ressources choosen.")
     {
         ui->label_status->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
@@ -139,6 +140,7 @@ void DialogAddClient::on_pushBtn_choose_clicked()
     DialogChooseRessource dcr;
     if(dcr.exec() == QDialog::Accepted)
     {
-
+        qDebug()<<Controller_client::resNumber;
+        ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
     }
 }

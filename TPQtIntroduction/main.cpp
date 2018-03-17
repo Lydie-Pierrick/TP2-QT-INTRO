@@ -3,6 +3,8 @@
 
 int Controller_employee::selectedID = 0;
 int Controller_client::selectedID = 0;
+int Controller_client::resNumber = 0;
+vector<int> Controller_client::idsRes;
 
 int main(int argc, char *argv[])
 {

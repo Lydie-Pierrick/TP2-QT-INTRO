@@ -9,7 +9,7 @@ public:
     DAO_Client();
     bool addClient(QString firstname, QString lastname, int telephone,
                    QString address, QString city, int postalCode, int duration,
-                   QDate dateAppointment, int priorityAppointment, QString comment);
+                   QDate dateAppointment, int priorityAppointment, QString comment, vector<int> idsRes);
     vector<map<QString, QString> > searchClientById(int id);
     vector<map<QString, QString> > searchClientsByName(QString name);
     vector<map<QString, QString> > searchClientsByDate(QDate date);
@@ -17,7 +17,9 @@ public:
     bool deleteClient(int id);
     bool modifyClient(int id, QString firstname, QString lastname, int telephone,
                       QString address, QString city, int postalCode, int duration,
-                      QDate dateAppointment, int priorityAppointment, QString comment);
+                      QDate dateAppointment, int priorityAppointment, QString comment, vector<int> idsRes);
+    bool addRessources(int idClient, vector<int> idRessources);
+    bool modifyRessources(int idClient, vector<int> idRessources);
 private:
     QSqlDatabase db;
     map<QString, QString> collectInfosClient(QSqlQuery sqlQuery);

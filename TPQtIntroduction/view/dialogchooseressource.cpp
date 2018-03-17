@@ -7,6 +7,9 @@ DialogChooseRessource::DialogChooseRessource(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    Controller_client::resNumber = 0;
+    Controller_client::idsRes.clear();
+
     modelTreeView = new QStandardItemModel();
     initTreeViewRessources();
 }
@@ -57,8 +60,6 @@ void DialogChooseRessource::initTreeViewRessources()
     }
 }
 
-
-
 void DialogChooseRessource::on_pushBtn_Cancel_clicked()
 {
     reject();
@@ -66,8 +67,11 @@ void DialogChooseRessource::on_pushBtn_Cancel_clicked()
 
 void DialogChooseRessource::on_pushBtn_OK_clicked()
 {
+
     int counter = 0;
     int id;
+    vector<int> idsRes;
+
     for(int i = 0; i < modelTreeView->rowCount(); i ++)
     {
         for(int j= 0; j < modelTreeView->item(i, 0)->rowCount(); j ++)
@@ -78,9 +82,13 @@ void DialogChooseRessource::on_pushBtn_OK_clicked()
                 counter ++;
                 // Get selected ID
                 id = modelTreeView->item(i, 0)->child(j, 0)->data(j).toInt();
+                idsRes.push_back(id);
             }
         }
     }
-    qDebug()<<counter;
+
+    Controller_client::idsRes = idsRes;
+    Controller_client::resNumber = counter;
+    //qDebug()<<counter;
     accept();
 }

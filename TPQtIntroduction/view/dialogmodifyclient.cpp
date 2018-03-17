@@ -56,7 +56,8 @@ void DialogModifyClient::on_pushButton_ok_clicked()
                                      ui->lineEdit_duration->text().toInt(),
                                       ui->dateEdit->date(),
                                      ui->comboBox_priority->currentText().toInt(),
-                                     ui->textEdit->toPlainText()))
+                                     ui->textEdit->toPlainText(),
+                                     Controller_client::idsRes))
     {
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the client !"));
         accept();
@@ -137,7 +138,7 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_duration->setStyleSheet("");
-    if(ui->label_status->text() == "empty")
+    if(ui->label_status->text() == "0 ressources choosen.")
     {
         ui->label_status->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
@@ -152,5 +153,9 @@ bool DialogModifyClient::colorBoderFail()
 void DialogModifyClient::on_pushBtn_choose_clicked()
 {
     DialogChooseRessource dcr;
-    dcr.exec();
+    if(dcr.exec() == QDialog::Accepted)
+    {
+        qDebug()<<Controller_client::resNumber;
+        ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
+    }
 }

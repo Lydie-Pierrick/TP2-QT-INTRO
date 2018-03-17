@@ -7,7 +7,8 @@ DAO_Client::DAO_Client()
 
 bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
                            QString address, QString city, int postalCode, int duration,
-                           QDate dateAppointment, int priorityAppointment, QString comment)
+                           QDate dateAppointment, int priorityAppointment, QString comment,
+                           vector<int> idsRes)
 {
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("INSERT INTO TClient "
@@ -25,17 +26,27 @@ bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
     sqlQuery.addBindValue(duration);
     sqlQuery.addBindValue(priorityAppointment);
 
-    if(!sqlQuery.exec())
+    // Check if the sql was executed
+    if(sqlQuery.exec())
     {
-        qDebug() << sqlQuery.lastError();
+        QSqlQuery sqlQuery2(db);
+        sqlQuery2.prepare("SELECT last_insert_rowid()");
+        // Check if the sql 2 was executed
+        if(sqlQuery2.exec())
+        {
+            sqlQuery2.next();
+            int idClient = sqlQuery2.value(0).toInt();
 
-        return false;
+            // Check if add ressources successfully
+            if(addRessources(idClient, idsRes))
+            {
+                qDebug() <<"Successfully add client";
+                return true;
+            }
+        }
     }
-    else
-    {
-        qDebug() <<"Successfully add client";
-        return true;
-    }
+
+    return false;
 }
 
 vector<map<QString, QString> > DAO_Client::searchClientById(int id)
@@ -153,7 +164,8 @@ bool DAO_Client::deleteClient(int id)
 
 bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int telephone,
                               QString address, QString city, int postalCode, int duration,
-                              QDate dateAppointment, int priorityAppointment, QString comment)
+                              QDate dateAppointment, int priorityAppointment, QString comment,
+                              vector<int> idsRes)
 {
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("UPDATE TClient SET Nom = ?, Prenom = ?, Adresse = ?, Ville = ?, CP = ?, "
@@ -174,12 +186,82 @@ bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int t
     if(!sqlQuery.exec())
     {
         qDebug() << sqlQuery.lastError();
-
         return false;
     }
     else{
         return true;
     }
+
+//    // Check if the sql was executed
+//    if(sqlQuery.exec())
+//    {
+//        QSqlQuery sqlQuery2(db);
+//        sqlQuery2.prepare("SELECT last_insert_rowid()");
+//        // Check if the sql 2 was executed
+//        if(sqlQuery2.exec())
+//        {
+//            sqlQuery2.next();
+//            int idClient = sqlQuery2.value(0).toInt();
+
+//            // Check if add ressources successfully
+//            if(addRessources(idClient, idsRes))
+//            {
+//                qDebug() <<"Successfully add client";
+//                return true;
+//            }
+//        }
+//    }
+
+}
+
+bool DAO_Client::addRessources(int idClient, vector<int> idRessources)
+{
+    QSqlQuery sqlQuery(db);
+
+    for(unsigned int i = 0; i < idRessources.size(); i++)
+    {
+        sqlQuery.prepare("INSERT INTO TRdv (IdClient, IdRessource) VALUES (?,?)");
+        sqlQuery.addBindValue(idClient);
+        sqlQuery.addBindValue(idRessources[i]);
+
+        if(!sqlQuery.exec())
+        {
+            qDebug() << sqlQuery.lastError();
+            return false;
+        }
+        else
+        {
+            qDebug() <<"Successfully added ressource to client " + idClient;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool DAO_Client::modifyRessources(int idClient, vector<int> idRessources)
+{
+    QSqlQuery sqlQuery(db);
+
+    for(unsigned int i = 0; i < idRessources.size(); i++)
+    {
+        sqlQuery.prepare("UPDATE TRdv SET IdClient = ?, IdRessource = ?");
+        sqlQuery.addBindValue(idClient);
+        sqlQuery.addBindValue(idRessources[i]);
+
+        if(!sqlQuery.exec())
+        {
+            qDebug() << sqlQuery.lastError();
+            return false;
+        }
+        else
+        {
+            qDebug() <<"Successfully modified ressource to client " + idClient;
+            return true;
+        }
+    }
+
+    return false;
 }
 
 map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)

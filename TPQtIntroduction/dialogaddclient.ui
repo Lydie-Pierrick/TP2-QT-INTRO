@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>436</width>
-    <height>463</height>
+    <width>447</width>
+    <height>456</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,13 +16,6 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="4" column="0">
-      <widget class="QLabel" name="labe_city">
-       <property name="text">
-        <string>* City :</string>
-       </property>
-      </widget>
-     </item>
      <item row="5" column="0">
       <widget class="QLabel" name="label_postalCode">
        <property name="text">
@@ -34,7 +27,14 @@
       <widget class="QLabel" name="label_duration">
        <property name="text">
         <string>* Duration of Appointment : 
-(Default = 60 min) </string>
+ (minutes) default : 60</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="labe_city">
+       <property name="text">
+        <string>* City :</string>
        </property>
       </widget>
      </item>
@@ -47,21 +47,40 @@
      </item>
      <item row="7" column="2">
       <widget class="QLineEdit" name="lineEdit_duration">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
        <property name="text">
         <string>60</string>
        </property>
       </widget>
      </item>
+     <item row="1" column="2">
+      <widget class="QLineEdit" name="lineEdit_lastName"/>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLineEdit" name="lineEdit_firstName"/>
+     </item>
+     <item row="4" column="2">
+      <widget class="QLineEdit" name="lineEdit_city"/>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLineEdit" name="lineEdit_telephone"/>
+     </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_address">
        <property name="text">
         <string>* Address :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="lineEdit_address"/>
+     </item>
+     <item row="5" column="2">
+      <widget class="QLineEdit" name="lineEdit_postalCode"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_lastName">
+       <property name="text">
+        <string>* Last Name :</string>
        </property>
       </widget>
      </item>
@@ -72,13 +91,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_lastName">
-       <property name="text">
-        <string>* Last Name :</string>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_telephone">
        <property name="text">
@@ -86,24 +98,10 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="2">
-      <widget class="QDateEdit" name="dateEdit">
-       <property name="dateTime">
-        <datetime>
-         <hour>0</hour>
-         <minute>0</minute>
-         <second>0</second>
-         <year>2018</year>
-         <month>1</month>
-         <day>1</day>
-        </datetime>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="label_priority">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_firstName">
        <property name="text">
-        <string>* Priority : </string>
+        <string>* First Name :</string>
        </property>
       </widget>
      </item>
@@ -136,10 +134,31 @@
        </item>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_firstName">
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_priority">
        <property name="text">
-        <string>* First Name :</string>
+        <string>* Priority : </string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QDateEdit" name="dateEdit">
+       <property name="dateTime">
+        <datetime>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+         <year>2018</year>
+         <month>1</month>
+         <day>1</day>
+        </datetime>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <widget class="QLabel" name="label_chooseRes">
+       <property name="text">
+        <string>* Choose ressources :</string>
        </property>
       </widget>
      </item>
@@ -148,7 +167,7 @@
        <item>
         <widget class="QLabel" name="label_status">
          <property name="text">
-          <string>empty</string>
+          <string>0 ressources choosen.</string>
          </property>
         </widget>
        </item>
@@ -161,12 +180,8 @@
        </item>
       </layout>
      </item>
-     <item row="12" column="0">
-      <widget class="QLabel" name="label_chooseRes">
-       <property name="text">
-        <string>* Choose ressources :</string>
-       </property>
-      </widget>
+     <item row="9" column="2">
+      <widget class="QPlainTextEdit" name="textEdit"/>
      </item>
      <item row="14" column="0">
       <widget class="QLabel" name="label_required">
@@ -174,34 +189,6 @@
         <string>* Required</string>
        </property>
       </widget>
-     </item>
-     <item row="7" column="3">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>minutes</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="2" colspan="2">
-      <widget class="QLineEdit" name="lineEdit_postalCode"/>
-     </item>
-     <item row="4" column="2" colspan="2">
-      <widget class="QLineEdit" name="lineEdit_city"/>
-     </item>
-     <item row="3" column="2" colspan="2">
-      <widget class="QLineEdit" name="lineEdit_address"/>
-     </item>
-     <item row="2" column="2" colspan="2">
-      <widget class="QLineEdit" name="lineEdit_telephone"/>
-     </item>
-     <item row="1" column="2" colspan="2">
-      <widget class="QLineEdit" name="lineEdit_lastName"/>
-     </item>
-     <item row="0" column="2" colspan="2">
-      <widget class="QLineEdit" name="lineEdit_firstName"/>
-     </item>
-     <item row="9" column="2" colspan="2">
-      <widget class="QPlainTextEdit" name="textEdit"/>
      </item>
     </layout>
    </item>
