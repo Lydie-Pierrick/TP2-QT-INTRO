@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QStandardItemModel>
+#include "ui_dialogchooseressource.h"
 #include "controller/controller_employee.h"
 #include "controller/controller_client.h"
 namespace Ui {

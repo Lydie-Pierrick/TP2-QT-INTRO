@@ -1,9 +1,9 @@
 #ifndef DIALOGMODIFYCLIENT_H
 #define DIALOGMODIFYCLIENT_H
 #include <QDialog>
+#include "ui_dialogmodifyclient.h"
 #include "controller/controller_client.h"
 #include <QMessageBox>
-#include "ui_dialogmodifyclient.h"
 #include "dialogchooseressource.h"
 
 namespace Ui {
@@ -29,6 +29,8 @@ private slots:
 private:
     Ui::DialogModifyClient *ui;
     Controller_client controllerClient;
+    DialogChooseRessource *dcr;
+    DialogChooseRessource *dcrsave;
 };
 
 #endif // DIALOGMODIFYCLIENT_H
