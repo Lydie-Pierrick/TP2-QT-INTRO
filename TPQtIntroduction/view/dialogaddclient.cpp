@@ -140,9 +140,7 @@ bool DialogAddClient::colorBoderFail()
 void DialogAddClient::on_pushBtn_choose_clicked()
 {
     DialogChooseRessource dcr;
-    if(dcr.exec() == QDialog::Accepted)
-    {
-        qDebug()<<Controller_client::resNumber;
-        ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
-    }
+    dcr.show();
+    qDebug()<<Controller_client::resNumber;
+    ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
 }

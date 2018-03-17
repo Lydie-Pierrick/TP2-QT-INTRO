@@ -13,6 +13,8 @@ class Controller_client
 private:
     DAO_Client daoClient;
 public:
+    static bool windowChooseOpen;
+    static bool firstChooseOpen;
     static int selectedID;
     static int resNumber;
     static vector<int> idsRes;

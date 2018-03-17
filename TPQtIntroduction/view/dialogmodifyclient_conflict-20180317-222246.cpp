@@ -24,10 +24,6 @@ DialogModifyClient::DialogModifyClient(QWidget *parent) :
         ui->comboBox_priority->setCurrentText(QString::number(client.getPriorityAppointment()));
         ui->textEdit->setPlainText(client.getComment());
     }
-
-    Controller_client::idsRes = controllerClient.searchRessourcesID(id);
-    Controller_client::resNumber = Controller_client::idsRes.size();
-    ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
 }
 
 DialogModifyClient::~DialogModifyClient()
@@ -154,35 +150,25 @@ bool DialogModifyClient::colorBoderFail()
 
 void DialogModifyClient::on_pushBtn_choose_clicked()
 {
-    DialogChooseRessource dcr;
-
-    if(dcr.exec() == QDialog::Accepted)
-            ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
-    /*
-    Idee de Pierrick non fonctionnel
-
-    A LIRE !!!!
-
-    En cas de modification : Supprimer l'attribut dcr et dcrsave dans dialogmodifyclient.h
-    Modifier le bouton cancel dans la vue dialogchooseressource.cpp
-    Supprimer les statics Controller_client::firstChooseOpen et Controller_client::windowChooseOpen dans le main et dans dialogmodifyclient.h /!\
-
-    if(Controller_client::firstChooseOpen)
->>>>>>> b67bf33d87b23da894ace71ef5686ccf91ea3cda
+    if(!Controller_client::windowChooseOpen)
     {
         dcr = new DialogChooseRessource();
-        Controller_client::firstChooseOpen = false;
+        controllerClient.windowChooseOpen = true;
         dcr->exec();
     }
     else
     {
-        dcrsave = new DialogChooseRessource(dcr);
+        Controller_client::windowChooseOpen = true;
+        dcr->show();
+        dcr->focusWidget();
+    }
 
-        if(!Controller_client::windowChooseOpen)
-        {
-            dcr = dcrsave;
-        }
+    if(!Controller_client::windowChooseOpen)
+    {
+        dcr->close();
+        delete(dcr);
+    }
 
-        dcr->exec();
-    }*/   
+    qDebug()<<Controller_client::resNumber;
+    ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
 }

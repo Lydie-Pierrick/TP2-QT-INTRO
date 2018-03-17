@@ -4,6 +4,8 @@
 int Controller_employee::selectedID = 0;
 int Controller_client::selectedID = 0;
 int Controller_client::resNumber = 0;
+bool Controller_client::windowChooseOpen = false;
+bool Controller_client::firstChooseOpen = true;
 vector<int> Controller_client::idsRes;
 
 int main(int argc, char *argv[])

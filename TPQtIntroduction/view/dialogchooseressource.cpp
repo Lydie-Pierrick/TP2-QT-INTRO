@@ -1,5 +1,4 @@
 #include "dialogchooseressource.h"
-#include "ui_dialogchooseressource.h"
 
 DialogChooseRessource::DialogChooseRessource(QWidget *parent) :
     QDialog(parent),
@@ -71,7 +70,8 @@ void DialogChooseRessource::initTreeViewRessources()
 
 void DialogChooseRessource::on_pushBtn_Cancel_clicked()
 {
-    reject();
+    Controller_client::windowChooseOpen = false;
+    close();
 }
 
 void DialogChooseRessource::on_pushBtn_OK_clicked()
@@ -99,5 +99,6 @@ void DialogChooseRessource::on_pushBtn_OK_clicked()
     Controller_client::idsRes = idsRes;
     Controller_client::resNumber = counter;
     //qDebug()<<counter;
-    accept();
+    hide();
+    //accept();
 }
