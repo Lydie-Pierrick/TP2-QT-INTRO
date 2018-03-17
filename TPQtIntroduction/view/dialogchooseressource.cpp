@@ -8,7 +8,6 @@ DialogChooseRessource::DialogChooseRessource(QWidget *parent) :
     ui->setupUi(this);
 
     Controller_client::resNumber = 0;
-    Controller_client::idsRes.clear();
 
     modelTreeView = new QStandardItemModel();
     initTreeViewRessources();
@@ -55,9 +54,19 @@ void DialogChooseRessource::initTreeViewRessources()
 
             // Set checkbox
             itemId->setCheckable(true);
+
+            for(int idRes : Controller_client::idsRes)
+            {
+                if(itemId->text().toInt() == idRes)
+                    itemId->setCheckState(Qt::Checked);
+            }
         }
         modelTreeView->setItem(i, 0, itemType);
+
+
     }
+    // Expand all the nodes
+    ui->treeView_Ressource->expandAll();
 }
 
 void DialogChooseRessource::on_pushBtn_Cancel_clicked()

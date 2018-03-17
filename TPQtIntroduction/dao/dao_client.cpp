@@ -229,14 +229,9 @@ bool DAO_Client::addRessources(int idClient, vector<int> idRessources)
             qDebug() << sqlQuery.lastError();
             return false;
         }
-        else
-        {
-            qDebug() <<"Successfully added ressource to client " + idClient;
-            return true;
-        }
     }
 
-    return false;
+    return true;
 }
 
 bool DAO_Client::modifyRessources(int idClient, vector<int> idRessources)
@@ -262,6 +257,29 @@ bool DAO_Client::modifyRessources(int idClient, vector<int> idRessources)
     }
 
     return false;
+}
+
+vector<int> DAO_Client::searchRessourcesID(int idClient)
+{
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("SELECT IdRessource FROM TRdv WHERE IdClient = ?");
+    sqlQuery.addBindValue(idClient);
+
+    int idRes;
+    vector<int> v_records;
+
+    if(!sqlQuery.exec())
+    {
+       qDebug() << sqlQuery.lastError();
+    }
+    else {
+        while(sqlQuery.next())
+        {
+            idRes = sqlQuery.value(0).toInt();
+            v_records.push_back(idRes);
+        }
+    }
+    return v_records;
 }
 
 map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)

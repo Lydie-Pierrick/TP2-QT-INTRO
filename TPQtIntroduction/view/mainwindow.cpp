@@ -133,9 +133,12 @@ void MainWindow::initTreeViewRessources()
         }
         modelTreeView->setItem(i, 0, itemType);
 
+
         //pointersTreeView.push_back(itemType);
         //itemType = nullptr_t();
     }
+    // Expand all the nodes
+    ui->treeView_Ressource->expandAll();
 }
 
 void MainWindow::initTableViewClients()

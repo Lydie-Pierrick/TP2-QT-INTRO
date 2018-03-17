@@ -26,6 +26,10 @@ DialogModifyClient::DialogModifyClient(QWidget *parent) :
         ui->comboBox_priority->setCurrentText(QString::number(client.getPriorityAppointment()));
         ui->textEdit->setPlainText(client.getComment());
     }
+
+    Controller_client::idsRes = controllerClient.searchRessourcesID(id);
+    Controller_client::resNumber = Controller_client::idsRes.size();
+    ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
 }
 
 DialogModifyClient::~DialogModifyClient()
@@ -153,6 +157,7 @@ bool DialogModifyClient::colorBoderFail()
 void DialogModifyClient::on_pushBtn_choose_clicked()
 {
     DialogChooseRessource dcr;
+
     if(dcr.exec() == QDialog::Accepted)
     {
         qDebug()<<Controller_client::resNumber;

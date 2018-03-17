@@ -30,6 +30,7 @@ public:
                       QString address, QString city, int postalCode, int duration,
                       QDate dateAppointment, int priorityAppointment, QString comment, vector<int> idsRes);
     bool addRessources(int idClient, vector<int> idsRessources);
+    vector<int> searchRessourcesID(int idClient);
 };
 
 #endif // CONTROLLER_CLIENT_H

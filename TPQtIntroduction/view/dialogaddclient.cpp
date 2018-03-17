@@ -6,6 +6,8 @@ DialogAddClient::DialogAddClient(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->dateEdit->setDate(QDate::currentDate());
+
+    Controller_client::idsRes.clear();
 }
 
 DialogAddClient::~DialogAddClient()

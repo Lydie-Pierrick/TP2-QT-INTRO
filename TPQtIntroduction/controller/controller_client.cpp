@@ -110,3 +110,8 @@ bool Controller_client::addRessources(int idClient, vector<int> idsRessources)
 {
     return daoClient.addRessources(idClient, idsRessources);
 }
+
+vector<int> Controller_client::searchRessourcesID(int idClient)
+{
+    return daoClient.searchRessourcesID(idClient);
+}
