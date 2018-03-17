@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>393</width>
+    <width>437</width>
     <height>480</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>50</x>
      <y>430</y>
      <width>351</width>
      <height>41</height>
@@ -64,7 +64,7 @@
     <rect>
      <x>20</x>
      <y>20</y>
-     <width>356</width>
+     <width>401</width>
      <height>407</height>
     </rect>
    </property>
@@ -74,7 +74,7 @@
       <item>
        <widget class="QLabel" name="label_chooseRes">
         <property name="text">
-         <string>status</string>
+         <string>0 ressources choosen.</string>
         </property>
        </widget>
       </item>

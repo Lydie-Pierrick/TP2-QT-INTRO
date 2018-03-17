@@ -39,9 +39,10 @@ void DialogAddClient::on_pushButton_ok_clicked()
     int priorityAppointment = ui->comboBox_priority->currentText().toInt();
     QString comment = ui->textEdit->toPlainText();
 
-    // Call the controller employee and add employee
-    if(colorBoderFail() && controller_client.addClient(firstName, lastName, telephone, address, city, postalCode,
-                                   duration, dateAppointment, priorityAppointment, comment))
+    // Call the controller client and add client
+    if(colorBoderFail()
+            && controller_client.addClient(firstName, lastName, telephone, address, city, postalCode,
+                                   duration, dateAppointment, priorityAppointment, comment, Controller_client::idsRes))
     {
         accept();
     }
@@ -117,6 +118,7 @@ void DialogAddClient::on_pushBtn_choose_clicked()
     DialogChooseRessource dcr;
     if(dcr.exec() == QDialog::Accepted)
     {
-
+        qDebug()<<Controller_client::resNumber;
+        ui->label_chooseRes->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
     }
 }

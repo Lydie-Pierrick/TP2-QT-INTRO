@@ -45,7 +45,8 @@ void DialogModifyClient::on_pushButton_ok_clicked()
                                      ui->lineEdit_duration->text().toInt(),
                                       ui->dateEdit->date(),
                                      ui->comboBox_priority->currentText().toInt(),
-                                     ui->textEdit->toPlainText()))
+                                     ui->textEdit->toPlainText(),
+                                     Controller_client::idsRes))
     {
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the client !"));
         accept();
@@ -134,5 +135,9 @@ bool DialogModifyClient::colorBoderFail()
 void DialogModifyClient::on_pushBtn_choose_clicked()
 {
     DialogChooseRessource dcr;
-    dcr.exec();
+    if(dcr.exec() == QDialog::Accepted)
+    {
+        qDebug()<<Controller_client::resNumber;
+        ui->label_chooseRes->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
+    }
 }

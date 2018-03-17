@@ -17,10 +17,11 @@ Client Controller_client::getClient(map<QString, QString> m_attributesClient)
 
 bool Controller_client::addClient(QString firstname, QString lastname, int telephone,
                                   QString address, QString city, int postalCode, int duration,
-                                  QDate dateAppointment, int priorityAppointment, QString comment)
+                                  QDate dateAppointment, int priorityAppointment, QString comment,
+                                  vector<int> idsRes)
 {
     return daoClient.addClient(firstname, lastname, telephone, address, city, postalCode,
-                                duration, dateAppointment, priorityAppointment, comment);
+                                duration, dateAppointment, priorityAppointment, comment, idsRes);
 }
 
 vector<Client> Controller_client::searchClientById(int id)
@@ -98,8 +99,14 @@ bool Controller_client::deleteClient(int id)
 
 bool Controller_client::modifyClient(int id, QString firstname, QString lastname, int telephone,
                                      QString address, QString city, int postalCode, int duration,
-                                     QDate dateAppointment, int priorityAppointment, QString comment)
+                                     QDate dateAppointment, int priorityAppointment, QString comment,
+                                     vector<int> idsRes)
 {
     return daoClient.modifyClient(id, firstname, lastname, telephone, address, city,  postalCode,
-                                  duration, dateAppointment, priorityAppointment, comment);
+                                  duration, dateAppointment, priorityAppointment, comment, idsRes);
+}
+
+bool Controller_client::addRessources(int idClient, vector<int> idsRessources)
+{
+    return daoClient.addRessources(idClient, idsRessources);
 }

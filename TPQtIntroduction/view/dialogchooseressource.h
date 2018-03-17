@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QStandardItemModel>
 #include "controller/controller_employee.h"
+#include "controller/controller_client.h"
 namespace Ui {
 class DialogChooseRessource;
 }
@@ -23,6 +24,7 @@ private slots:
     void on_pushBtn_Cancel_clicked();
     void on_pushBtn_OK_clicked();
 private:
+
     Ui::DialogChooseRessource *ui;
     QStandardItemModel * modelTreeView;
     Controller_employee controllerEmployee;
