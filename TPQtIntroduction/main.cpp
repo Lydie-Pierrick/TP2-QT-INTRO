@@ -7,7 +7,7 @@ int Controller_client::selectedID = 0;
 int main(int argc, char *argv[])
 {
     // Initialiser BD
-    C_INIT_BD::Creation_BD();
+    //C_INIT_BD::Creation_BD();
 
     QApplication a(argc, argv);
 

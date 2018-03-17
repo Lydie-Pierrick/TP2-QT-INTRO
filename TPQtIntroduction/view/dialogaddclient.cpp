@@ -5,6 +5,7 @@ DialogAddClient::DialogAddClient(QWidget *parent) :
     ui(new Ui::DialogAddClient)
 {
     ui->setupUi(this);
+    ui->dateEdit->setDate(QDate::currentDate());
 }
 
 DialogAddClient::~DialogAddClient()
@@ -23,15 +24,22 @@ void DialogAddClient::on_pushButton_reset_clicked()
     ui->lineEdit_duration->clear();
     ui->comboBox_priority->setCurrentIndex(0);
     ui->textEdit->clear();
+    ui->dateEdit->setDate(QDate::currentDate());
 }
 
 void DialogAddClient::on_pushButton_ok_clicked()
 {
     // Get all the texts
     QString firstName = ui->lineEdit_firstName->text();
+    if (!firstName.isEmpty())
+        firstName[0] = firstName[0].toUpper();
     QString lastName = ui->lineEdit_lastName->text();
+    if (!lastName.isEmpty())
+        lastName[0] = lastName[0].toUpper();
     QString address = ui->lineEdit_address->text();
     QString city = ui->lineEdit_city->text();
+    if (!city.isEmpty())
+        city[0] = city[0].toUpper();
     int telephone = ui->lineEdit_telephone->text().toInt();
     int postalCode = ui->lineEdit_postalCode->text().toInt();
     int duration = ui->lineEdit_duration->text().toInt();
@@ -94,7 +102,7 @@ bool DialogAddClient::colorBoderFail()
     }
     else
         ui->lineEdit_city->setStyleSheet("");
-    if(ui->lineEdit_postalCode->text().isEmpty())
+    if(ui->lineEdit_postalCode->text().isEmpty() || (QString::number(ui->lineEdit_postalCode->text().toInt()) == "0"))
     {
         ui->lineEdit_postalCode->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
@@ -108,6 +116,20 @@ bool DialogAddClient::colorBoderFail()
     }
     else
         ui->lineEdit_duration->setStyleSheet("");
+    if(ui->dateEdit->date() < QDate::currentDate())
+    {
+        ui->dateEdit->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->dateEdit->setStyleSheet("");
+    if(ui->label_status->text() == "empty")
+    {
+        ui->label_status->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->label_status->setStyleSheet("");
 
     return noEmptyField;
 }

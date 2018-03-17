@@ -21,8 +21,8 @@ DialogAddEmployee::~DialogAddEmployee()
 
 void DialogAddEmployee::on_pushBtn_reset_clicked()
 {
-    ui->lineEdit_Firstname->clear();
-    ui->lineEdit_Lastname->clear();
+    ui->lineEdit_firstName->clear();
+    ui->lineEdit_lastName->clear();
 }
 
 void DialogAddEmployee::on_pushButton_cancel_clicked()
@@ -33,42 +33,54 @@ void DialogAddEmployee::on_pushButton_cancel_clicked()
 bool DialogAddEmployee::colorBoderFail()
 {
     bool noEmptyField = true;
-    if(ui->lineEdit_Firstname->text().isEmpty())
+    if(ui->lineEdit_firstName->text().isEmpty())
     {
-        ui->lineEdit_Firstname->setStyleSheet("border: 1px solid red");
+        ui->lineEdit_firstName->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
     }
     else
-        ui->lineEdit_Firstname->setStyleSheet("");
-    if(ui->lineEdit_Lastname->text().isEmpty())
+        ui->lineEdit_firstName->setStyleSheet("");
+    if(ui->lineEdit_lastName->text().isEmpty())
     {
-        ui->lineEdit_Lastname->setStyleSheet("border: 1px solid red");
+        ui->lineEdit_lastName->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
     }
     else
-        ui->lineEdit_Lastname->setStyleSheet("");
-    if(ui->lineEdit_Username->text().isEmpty() && ui->lineEdit_Username->isEnabled())
+        ui->lineEdit_lastName->setStyleSheet("");
+    if(ui->lineEdit_username->text().isEmpty() && ui->lineEdit_username->isEnabled())
     {
-        ui->lineEdit_Username->setStyleSheet("border: 1px solid red" );
+        ui->lineEdit_username->setStyleSheet("border: 1px solid red" );
         noEmptyField = false;
     }
     else
-        ui->lineEdit_Username->setStyleSheet("");
-    if(ui->lineEdit_Password->text().isEmpty() && ui->lineEdit_Password->isEnabled())
+        ui->lineEdit_username->setStyleSheet("");
+    if(ui->lineEdit_password->text().isEmpty() && ui->lineEdit_password->isEnabled())
     {
-        ui->lineEdit_Password->setStyleSheet("border: 1px solid red");
+        ui->lineEdit_password->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
     }
     else
-        ui->lineEdit_Password->setStyleSheet("");
+        ui->lineEdit_password->setStyleSheet("");
 
     return noEmptyField;
 }
 
 void DialogAddEmployee::on_pushButton_ok_clicked()
 {
+    // Get all the texts
+    QString firstName = ui->lineEdit_firstName->text();
+    if (!firstName.isEmpty())
+        firstName[0] = firstName[0].toUpper();
+    QString lastName = ui->lineEdit_lastName->text();
+    if (!lastName.isEmpty())
+        lastName[0] = lastName[0].toUpper();
+    QString username = ui->lineEdit_username->text();
+    if (!username.isEmpty())
+        username[0] = username[0].toUpper();
+    QString password = ui->lineEdit_password->text();
+
     // Call the controller employee and add employee
-    if(colorBoderFail() && controllerEmployee.addEmployee(ui->lineEdit_Firstname->text(), ui->lineEdit_Lastname->text(), ui->comboBox_Type->currentIndex()+1, ui->lineEdit_Username->text(), ui->lineEdit_Password->text()))
+    if(colorBoderFail() && controllerEmployee.addEmployee(firstName, lastName, ui->comboBox_Type->currentIndex()+1, username, password))
     {
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully added the employee !"));
         accept();
@@ -83,16 +95,16 @@ void DialogAddEmployee::on_comboBox_Type_activated(const QString &arg1)
 {
     if(arg1 == "Computer Scientist")
     {
-        ui->label_Username->setEnabled(true);
-        ui->lineEdit_Username->setEnabled(true);
-        ui->label_Password->setEnabled(true);
-        ui->lineEdit_Password->setEnabled(true);
+        ui->label_username->setEnabled(true);
+        ui->lineEdit_username->setEnabled(true);
+        ui->label_password->setEnabled(true);
+        ui->lineEdit_password->setEnabled(true);
     }
     else
     {
-        ui->label_Username->setEnabled(false);
-        ui->lineEdit_Username->setEnabled(false);
-        ui->label_Password->setEnabled(false);
-        ui->lineEdit_Password->setEnabled(false);
+        ui->label_username->setEnabled(false);
+        ui->lineEdit_username->setEnabled(false);
+        ui->label_password->setEnabled(false);
+        ui->lineEdit_password->setEnabled(false);
     }
 }

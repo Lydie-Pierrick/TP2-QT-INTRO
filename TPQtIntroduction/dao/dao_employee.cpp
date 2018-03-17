@@ -114,10 +114,10 @@ void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString p
 {
     // Check if an entry already existed in TCompte
     bool alreadyExist = false;
-    int idRessourceDB;
+    int idCompteDB;
 
     QSqlQuery sqlQuery(db);
-    sqlQuery.prepare("SELECT IdRessource FROM TCompte where IdRessource = ?");
+    sqlQuery.prepare("SELECT id FROM TCompte where IdRessource = ?");
     sqlQuery.addBindValue(id);
 
     if(!sqlQuery.exec())
@@ -127,7 +127,8 @@ void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString p
 
     alreadyExist = sqlQuery.next();
 
-    idRessourceDB = sqlQuery.value(0).toInt();
+    if(alreadyExist)
+        idCompteDB = sqlQuery.value(0).toInt();
 
     // If it's a Computer Scientist Update if exist or insert new row account
     if(convertIntToType(idType) == "Computer Scientist" && !username.isEmpty() && !password.isEmpty())
@@ -135,10 +136,10 @@ void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString p
         QSqlQuery sqlQuery3(db);
 
         if(alreadyExist){
-            sqlQuery3.prepare("UPDATE TCompte SET Login = ?, MdP = ? WHERE IdRessource = ?");
+            sqlQuery3.prepare("UPDATE TCompte SET Login = ?, MdP = ? WHERE Id = ?");
             sqlQuery3.addBindValue(username);
             sqlQuery3.addBindValue(password);
-            sqlQuery3.addBindValue(idRessourceDB);
+            sqlQuery3.addBindValue(idCompteDB);
         }
         else{
             sqlQuery3.prepare("INSERT INTO TCompte (IdRessource, Login, MdP) VALUES (?, ?, ?)");
@@ -172,7 +173,7 @@ void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString p
 bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, int idType, QString username, QString password)
 {
     QSqlQuery sqlQuery(db);
-    sqlQuery.prepare("UPDATE TRessource SET Nom = ?, Prenom = ?, IdType = ? WHERE Id = ? ");
+    sqlQuery.prepare("UPDATE TRessource SET Nom = ?, Prenom = ?, IdType = ? WHERE Id = ?");
     sqlQuery.addBindValue(lastname);
     sqlQuery.addBindValue(firstname);
     sqlQuery.addBindValue(idType);

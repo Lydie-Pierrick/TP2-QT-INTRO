@@ -10,8 +10,8 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
     Employee e = controllerEmployee.searchEmployee(id);
 
     ui->text_ID->setText(QString::number(id, 10));
-    ui->lineEdit_Lastname->setText(e.getLastname());
-    ui->lineEdit_Firstname->setText(e.getFirstname());;
+    ui->lineEdit_lastname->setText(e.getLastname());
+    ui->lineEdit_firstname->setText(e.getFirstname());;
 
     // All types
     vector<map<QString, QString> > v_types = controllerEmployee.getAllTypes();
@@ -25,12 +25,12 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
 
     if(e.getType() == "Computer Scientist")
     {
-        ui->label_OnlyIT->setEnabled(true);
-        ui->lineEdit_Username->setEnabled(true);
-        ui->lineEdit_Password->setEnabled(true);
+        ui->label_onlyIT->setEnabled(true);
+        ui->lineEdit_username->setEnabled(true);
+        ui->lineEdit_password->setEnabled(true);
 
-        ui->lineEdit_Username->setText(e.getUsername());
-        ui->lineEdit_Password->setText(e.getPassword());
+        ui->lineEdit_username->setText(e.getUsername());
+        ui->lineEdit_password->setText(e.getPassword());
     }
 }
 
@@ -41,12 +41,20 @@ DialogModifyEmployee::~DialogModifyEmployee()
 
 void DialogModifyEmployee::on_pushButton_ok_clicked()
 {
+    // Get all the texts
     int id = Controller_employee::selectedID;
-    QString lastname = ui->lineEdit_Lastname->text();
-    QString firstname = ui->lineEdit_Firstname->text();
     int idType = ui->comboBox_Type->currentIndex() + 1;
-    QString username = ui->lineEdit_Username->text();
-    QString password = ui->lineEdit_Password->text();
+
+    QString firstname = ui->lineEdit_firstname->text();
+    if (!firstname.isEmpty())
+        firstname[0] = firstname[0].toUpper();
+    QString lastname = ui->lineEdit_lastname->text();
+    if (!lastname.isEmpty())
+        lastname[0] = lastname[0].toUpper();
+    QString username = ui->lineEdit_username->text();
+    if (!username.isEmpty())
+        username[0] = username[0].toUpper();
+    QString password = ui->lineEdit_password->text();
 
     if(colorBoderFail() && controllerEmployee.modifyEmployee(id, lastname, firstname, idType, username, password))
     {
@@ -68,51 +76,51 @@ void DialogModifyEmployee::on_comboBox_Type_activated(const QString &arg1)
 {
     if(arg1 == "Computer Scientist")
     {
-        ui->label_Username->setEnabled(true);
-        ui->lineEdit_Username->setEnabled(true);
-        ui->label_Password->setEnabled(true);
-        ui->lineEdit_Password->setEnabled(true);
+        ui->label_username->setEnabled(true);
+        ui->lineEdit_username->setEnabled(true);
+        ui->label_password->setEnabled(true);
+        ui->lineEdit_password->setEnabled(true);
     }
     else
     {
-        ui->label_Username->setEnabled(false);
-        ui->lineEdit_Username->setEnabled(false);
-        ui->label_Password->setEnabled(false);
-        ui->lineEdit_Password->setEnabled(false);
+        ui->label_username->setEnabled(false);
+        ui->lineEdit_username->setEnabled(false);
+        ui->label_password->setEnabled(false);
+        ui->lineEdit_password->setEnabled(false);
     }
 }
 
 bool DialogModifyEmployee::colorBoderFail()
 {
     bool noEmptyField = true;
-    if(ui->lineEdit_Firstname->text().isEmpty())
+    if(ui->lineEdit_firstname->text().isEmpty())
     {
-        ui->lineEdit_Firstname->setStyleSheet("border: 1px solid red");
+        ui->lineEdit_firstname->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
     }
     else
-        ui->lineEdit_Firstname->setStyleSheet("");
-    if(ui->lineEdit_Lastname->text().isEmpty())
+        ui->lineEdit_firstname->setStyleSheet("");
+    if(ui->lineEdit_lastname->text().isEmpty())
     {
-        ui->lineEdit_Lastname->setStyleSheet("border: 1px solid red");
+        ui->lineEdit_lastname->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
     }
     else
-        ui->lineEdit_Lastname->setStyleSheet("");
-    if(ui->lineEdit_Username->text().isEmpty() && ui->lineEdit_Username->isEnabled())
+        ui->lineEdit_lastname->setStyleSheet("");
+    if(ui->lineEdit_username->text().isEmpty() && ui->lineEdit_username->isEnabled())
     {
-        ui->lineEdit_Username->setStyleSheet("border: 1px solid red" );
+        ui->lineEdit_username->setStyleSheet("border: 1px solid red" );
         noEmptyField = false;
     }
     else
-        ui->lineEdit_Username->setStyleSheet("");
-    if(ui->lineEdit_Password->text().isEmpty() && ui->lineEdit_Password->isEnabled())
+        ui->lineEdit_username->setStyleSheet("");
+    if(ui->lineEdit_password->text().isEmpty() && ui->lineEdit_password->isEnabled())
     {
-        ui->lineEdit_Password->setStyleSheet("border: 1px solid red");
+        ui->lineEdit_password->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
     }
     else
-        ui->lineEdit_Password->setStyleSheet("");
+        ui->lineEdit_password->setStyleSheet("");
 
     return noEmptyField;
 }

@@ -35,12 +35,23 @@ DialogModifyClient::~DialogModifyClient()
 
 void DialogModifyClient::on_pushButton_ok_clicked()
 {
+    // Get all the texts
+    QString firstName = ui->lineEdit_firstname->text();
+    if (!firstName.isEmpty())
+        firstName[0] = firstName[0].toUpper();
+    QString lastName = ui->lineEdit_lastname->text();
+    if (!lastName.isEmpty())
+        lastName[0] = lastName[0].toUpper();
+    QString city = ui->lineEdit_city->text();
+    if (!city.isEmpty())
+        city[0] = city[0].toUpper();
+
     if(colorBoderFail() && controllerClient.modifyClient(Controller_client::selectedID,
-                                     ui->lineEdit_firstname->text(),
-                                     ui->lineEdit_lastname->text(),
+                                     firstName,
+                                     lastName,
                                      ui->lineEdit_telephone->text().toInt(),
                                      ui->lineEdit_address->text(),
-                                     ui->lineEdit_city->text(),
+                                     city,
                                      ui->lineEdit_postalCode->text().toInt(),
                                      ui->lineEdit_duration->text().toInt(),
                                       ui->dateEdit->date(),
@@ -126,6 +137,13 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_duration->setStyleSheet("");
+    if(ui->label_status->text() == "empty")
+    {
+        ui->label_status->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->label_status->setStyleSheet("");
 
     return noEmptyField;
 }
