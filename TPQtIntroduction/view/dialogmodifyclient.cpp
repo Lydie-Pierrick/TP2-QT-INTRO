@@ -20,6 +20,7 @@ DialogModifyClient::DialogModifyClient(QWidget *parent) :
         ui->lineEdit_address->setText(client.getAddress());
         ui->lineEdit_city->setText(client.getCity());
         ui->lineEdit_postalCode->setText(QString::number(client.getPostalCode()));
+        ui->dateEdit->setDate(client.getDateAppointment());
         ui->lineEdit_duration->setText(QString::number(client.getDuration()));
         ui->comboBox_priority->setCurrentText(QString::number(client.getPriorityAppointment()));
         ui->textEdit->setPlainText(client.getComment());
@@ -84,6 +85,7 @@ void DialogModifyClient::on_pushButton_reset_clicked()
     ui->lineEdit_city->clear();
     ui->lineEdit_postalCode->clear();
     ui->lineEdit_duration->clear();
+    ui->dateEdit->setDate(QDate::currentDate());
     ui->comboBox_priority->setCurrentIndex(0);
     ui->textEdit->clear();
 }

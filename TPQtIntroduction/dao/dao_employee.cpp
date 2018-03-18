@@ -224,12 +224,21 @@ bool DAO_Employee::deleteEmployee(int id)
     }
 
     QSqlQuery sqlQuery2(db);
-    sqlQuery2.prepare("DELETE FROM TRessource WHERE Id = ? ");
+    sqlQuery2.prepare("DELETE FROM TRdv WHERE IdRessource = ? ");
     sqlQuery2.addBindValue(id);
 
     if(!sqlQuery2.exec())
     {
         qDebug() << sqlQuery2.lastError();
+    }
+
+    QSqlQuery sqlQuery3(db);
+    sqlQuery3.prepare("DELETE FROM TRessource WHERE Id = ? ");
+    sqlQuery3.addBindValue(id);
+
+    if(!sqlQuery3.exec())
+    {
+        qDebug() << sqlQuery3.lastError();
         return false;
     }
     else{

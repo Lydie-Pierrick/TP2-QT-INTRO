@@ -152,6 +152,15 @@ bool DAO_Client::deleteClient(int id)
     sqlQuery.prepare("DELETE FROM TClient WHERE Id = ? ");
     sqlQuery.addBindValue(id);
 
+    QSqlQuery sqlQuery2(db);
+    sqlQuery2.prepare("DELETE FROM TRdv WHERE IdClient = ? ");
+    sqlQuery2.addBindValue(id);
+
+    if(!sqlQuery2.exec())
+    {
+        qDebug() << sqlQuery2.lastError();
+    }
+
     if(!sqlQuery.exec())
     {
         qDebug() << sqlQuery.lastError();
