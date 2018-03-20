@@ -31,6 +31,8 @@ public:
 private slots:
     void addClient();
     void addEmployee();
+    void modifyClient();
+    void modifyEmployee();
     void initTreeViewRessources();
     void initTableViewClients();
     void refreshTableViewClients(vector<Client> v_clients);
@@ -55,6 +57,8 @@ private slots:
     void on_tableView_SearchClient_clicked(const QModelIndex &index);
 
     void on_pushBtn_ModifyClient_clicked();
+
+    void on_tableView_SearchClient_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;

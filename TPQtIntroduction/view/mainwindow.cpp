@@ -20,10 +20,10 @@ MainWindow::~MainWindow()
     SingletonDB::closeDB();
 
     // Delete the pointers
-    if(modelTreeView != nullptr_t())
+    if(modelTreeView != nullptr)
         delete modelTreeView;
 
-    if(modelTableView != nullptr_t())
+    if(modelTableView != nullptr)
         delete modelTableView;
 
     deletePointersTableView();
@@ -90,6 +90,30 @@ void MainWindow::addEmployee()
     }
 }
 
+void MainWindow::modifyClient()
+{
+    // Open the dialog
+    DialogModifyClient dmc;
+
+    if(dmc.exec() == QDialog::Accepted)
+    {
+        ui->statusBar->showMessage("You have modified a client !");
+        initTableViewClients();
+    }
+}
+
+void MainWindow::modifyEmployee()
+{
+    // Open the dialog
+    DialogModifyEmployee dme;
+
+    if(dme.exec() == QDialog::Accepted)
+    {
+        ui->statusBar->showMessage("You have modified an employee !");
+        initTreeViewRessources();
+    }
+}
+
 void MainWindow::initTreeViewRessources()
 {
     deletePointersTreeView();
@@ -128,8 +152,8 @@ void MainWindow::initTreeViewRessources()
 
             //delete itemId;
             //delete itemName;
-            //itemId = nullptr_t();
-            //itemName = nullptr_t();
+            //itemId = nullptr;
+            //itemName = nullptr;
         }
         modelTreeView->setItem(i, 0, itemType);
 
@@ -144,6 +168,7 @@ void MainWindow::initTreeViewRessources()
 void MainWindow::initTableViewClients()
 {
     //deletePointersTableView();
+
     // Set model for tableView
     ui->tableView_SearchClient->setModel(modelTableView);
     // Hide the vertical header
@@ -158,21 +183,37 @@ void MainWindow::initTableViewClients()
                                                QStringLiteral("Lastname")<<QStringLiteral("Address")<<
                                                QStringLiteral("City")<<QStringLiteral("Telephone")<<
                                                QStringLiteral("Postal Code")<<QStringLiteral("Duration")<<
-                                               QStringLiteral("Date")<<QStringLiteral("Priority")<<QStringLiteral("Comment")));
+                                               QStringLiteral("Date")<<QStringLiteral("Priority")<<
+                                               QStringLiteral("Comment")<<QStringLiteral("Ressources")));
 
     // Get all clients
     vector<Client> v_clients = controllerClient.getAllClients();
     // Refresh the tableView
     refreshTableViewClients(v_clients);
+
 }
 
 void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 {
+    vector<int> idsRes;
+    QString namesRes;
+    int id;
     // Clear all the existing rows
-    modelTableView->removeRows(0,modelTableView->rowCount());
+    modelTableView->removeRows(0, modelTableView->rowCount());
 
     for(unsigned int i = 0; i < v_clients.size(); i ++)
     {
+        idsRes = v_clients[i].getIdRessources();
+        namesRes = "";
+        for(unsigned int j = 0; j < idsRes.size() - 1; j ++)
+        {
+            id = idsRes[j];
+            namesRes += controllerEmployee.searchEmployee(id).getLastname();
+            namesRes += " / ";
+        }
+        id = idsRes[idsRes.size()-1];
+        namesRes += controllerEmployee.searchEmployee(id).getLastname();
+
         QStandardItem * itemId = new QStandardItem(QString::number(v_clients[i].getId()));
         QStandardItem * itemFirstname = new QStandardItem(v_clients[i].getFirstName());
         QStandardItem * itemLastname = new QStandardItem(v_clients[i].getLastName());
@@ -184,6 +225,7 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
         QStandardItem * itemDate = new QStandardItem(v_clients[i].getDateAppointment().toString("yyyy-MM-dd"));
         QStandardItem * itemPriority = new QStandardItem(QString::number(v_clients[i].getPriorityAppointment()));
         QStandardItem * itemComment = new QStandardItem(v_clients[i].getComment());
+        QStandardItem * itemRes = new QStandardItem(namesRes);
 
         modelTableView->setItem(i, 0, itemId);
         modelTableView->setItem(i, 1, itemFirstname);
@@ -196,7 +238,11 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
         modelTableView->setItem(i, 8, itemDate);
         modelTableView->setItem(i, 9, itemPriority);
         modelTableView->setItem(i, 10, itemComment);
+        modelTableView->setItem(i, 11, itemRes);
     }
+
+    ui->tableView_SearchClient->resizeColumnsToContents();
+    ui->tableView_SearchClient->resizeRowsToContents();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -205,7 +251,7 @@ void MainWindow::deletePointersTreeView()
 {
     for(unsigned int i = 0; i < v_pointersTreeView.size(); i ++)
     {
-        if(v_pointersTreeView[i] != nullptr_t())
+        if(v_pointersTreeView[i] != nullptr)
             delete v_pointersTreeView[i];
     }
     v_pointersTreeView.clear();
@@ -215,7 +261,7 @@ void MainWindow::deletePointersTableView()
 {
     for(unsigned int i = 0; i < v_pointersTableView.size(); i ++)
     {
-        if(v_pointersTableView[i] != nullptr_t())
+        if(v_pointersTableView[i] != nullptr)
             delete v_pointersTableView[i];
     }
     v_pointersTableView.clear();
@@ -260,27 +306,13 @@ void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
         int id = indexId.data().toInt();
         Controller_employee::selectedID = id;
 
-        // Open the dialog
-        DialogModifyEmployee dme;
-
-        if(dme.exec() == QDialog::Accepted)
-        {
-            ui->statusBar->showMessage("You have modified an employee !");
-            initTreeViewRessources();
-        }
+        modifyEmployee();
     }
 }
 
 void MainWindow::on_pushBtn_ModifyEmployee_clicked()
 {
-    // Open the dialog
-    DialogModifyEmployee dme;
-
-    if(dme.exec() == QDialog::Accepted)
-    {
-        ui->statusBar->showMessage("You have modified an employee !");
-        initTreeViewRessources();
-    }
+    modifyEmployee();
 }
 
 void MainWindow::on_pushBtn_DeleteEmployee_clicked()
@@ -389,13 +421,10 @@ void MainWindow::on_tableView_SearchClient_clicked(const QModelIndex &index)
 
 void MainWindow::on_pushBtn_ModifyClient_clicked()
 {
-    DialogModifyClient dmc;
+    modifyClient();
+}
 
-
-    if(dmc.exec() == QDialog::Accepted)
-    {
-        ui->statusBar->showMessage("You have modified a client !");
-        initTableViewClients();
-    }
-
+void MainWindow::on_tableView_SearchClient_doubleClicked(const QModelIndex &index)
+{
+    modifyClient();
 }

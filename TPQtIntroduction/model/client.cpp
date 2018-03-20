@@ -122,6 +122,16 @@ int Client::getId() const
     return id;
 }
 
+void Client::setIdRessources(const vector<int> &value)
+{
+    idRessources = value;
+}
+
+vector<int> Client::getIdRessources() const
+{
+    return idRessources;
+}
+
 void Client::setTelephone(int value)
 {
     telephone = value;

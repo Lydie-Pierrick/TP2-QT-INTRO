@@ -42,6 +42,9 @@ public:
     void setId(int value);
     int getId() const;
 
+    void setIdRessources(const vector<int> &value);
+    vector<int> getIdRessources() const;
+
 private:
     int id;
     QString lastName;
