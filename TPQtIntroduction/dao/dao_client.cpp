@@ -2,7 +2,7 @@
 
 DAO_Client::DAO_Client()
 {
-    db = SingletonDB::getInstance();
+    db = SingletonDB::getInstance()->getDB();
 }
 
 bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,

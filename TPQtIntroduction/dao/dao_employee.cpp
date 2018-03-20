@@ -2,7 +2,7 @@
 
 DAO_Employee::DAO_Employee()
 {
-    db = SingletonDB::getInstance();
+    db = SingletonDB::getInstance()->getDB();
 }
 
 bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, QString username, QString password)

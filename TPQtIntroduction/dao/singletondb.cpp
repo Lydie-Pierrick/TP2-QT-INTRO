@@ -1,5 +1,6 @@
 #include "singletondb.h"
 #include <iostream>
+
 using namespace std;
 
 SingletonDB* SingletonDB::m_instance = NULL;
@@ -17,13 +18,19 @@ SingletonDB::~SingletonDB()
     db.close();
 }
 
-QSqlDatabase SingletonDB::getInstance()
+SingletonDB* SingletonDB::getInstance()
 {
     if(m_instance == NULL)
         m_instance = new SingletonDB();
 
+    return m_instance;
+}
+
+QSqlDatabase SingletonDB::getDB()
+{
     return db;
 }
+
 void SingletonDB::closeDB()
 {
     if(m_instance != NULL) {

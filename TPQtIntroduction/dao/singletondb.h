@@ -17,7 +17,8 @@ private:
     SingletonDB();
     ~SingletonDB();
 public:
-    static QSqlDatabase getInstance();
+    static SingletonDB* getInstance();
+    static QSqlDatabase getDB();
     static void closeDB();
 };
 
