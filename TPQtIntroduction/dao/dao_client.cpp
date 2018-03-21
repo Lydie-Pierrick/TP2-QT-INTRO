@@ -99,13 +99,14 @@ vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
     return v_records;
 }
 
-vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate date)
+vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate dateFrom, QDate dateTo)
 {
     vector<map<QString, QString> > v_records;
     map<QString, QString> m_record;
     QSqlQuery sqlQuery(db);
-    sqlQuery.prepare("SELECT * FROM TClient WHERE DateRdv = ?");
-    sqlQuery.addBindValue(date);
+    sqlQuery.prepare("SELECT * FROM TClient WHERE DateRdv >= ? AND DateRdv <= ?");
+    sqlQuery.addBindValue(dateFrom);
+    sqlQuery.addBindValue(dateTo);
 
     if(!sqlQuery.exec())
     {
@@ -218,6 +219,8 @@ bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int t
             }
         }
     }
+
+    return false;
 }
 
 bool DAO_Client::addRessources(int idClient, vector<int> idRessources)
