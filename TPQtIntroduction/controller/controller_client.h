@@ -25,7 +25,7 @@ public:
                    QDate dateAppointment, int priorityAppointment, QString comment, vector<int> idsRes);
     vector<Client> searchClientById(int id);
     vector<Client> searchClientsByName(QString name);
-    vector<Client> searchClientsByDate(QDate date);
+    vector<Client> searchClientsByDate(QDate dateFrom, QDate dateTo);
     vector<Client> getAllClients();
     bool deleteClient(int id);
     bool modifyClient(int id, QString firstname, QString lastname, int telephone,

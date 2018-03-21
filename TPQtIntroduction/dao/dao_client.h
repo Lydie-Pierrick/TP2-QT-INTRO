@@ -12,7 +12,7 @@ public:
                    QDate dateAppointment, int priorityAppointment, QString comment, vector<int> idsRes);
     vector<map<QString, QString> > searchClientById(int id);
     vector<map<QString, QString> > searchClientsByName(QString name);
-    vector<map<QString, QString> > searchClientsByDate(QDate date);
+    vector<map<QString, QString> > searchClientsByDate(QDate dateFrom, QDate dateTo);
     vector<map<QString, QString> > getAllClients();
     bool deleteClient(int id);
     bool modifyClient(int id, QString firstname, QString lastname, int telephone,

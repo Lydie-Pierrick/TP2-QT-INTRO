@@ -62,9 +62,9 @@ vector<Client> Controller_client::searchClientsByName(QString name)
     return v_clients;
 }
 
-vector<Client> Controller_client::searchClientsByDate(QDate date)
+vector<Client> Controller_client::searchClientsByDate(QDate dateFrom, QDate dateTo)
 {
-    vector<map<QString, QString> > v_m_attributesClients = daoClient.searchClientsByDate(date);
+    vector<map<QString, QString> > v_m_attributesClients = daoClient.searchClientsByDate(dateFrom, dateTo);
     map<QString, QString> m_attributesClient;
     vector<Client> v_clients;
 

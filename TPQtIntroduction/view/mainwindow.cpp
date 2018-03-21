@@ -201,7 +201,7 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
     // Clear all the existing rows
     modelTableView->removeRows(0, modelTableView->rowCount());
 
-    for(unsigned int i = 0; i < v_clients.size(); i ++)
+    for(unsigned int i = 0; i < v_clients.size(); i++)
     {
         idsRes = v_clients[i].getIdRessources();
         namesRes = "";
@@ -337,9 +337,10 @@ void MainWindow::on_pushBtn_RefreshEmployee_clicked()
 
 void MainWindow::on_pushBtn_SearchByDate_clicked()
 {
-    QDate date = ui->dateEdit->date();
+    QDate dateFrom = ui->dateEdit_From->date();
+    QDate dateTo = ui->dateEdit_To->date();
 
-    vector<Client> v_clients = controllerClient.searchClientsByDate(date);
+    vector<Client> v_clients = controllerClient.searchClientsByDate(dateFrom, dateTo);
 
     refreshTableViewClients(v_clients);
 
