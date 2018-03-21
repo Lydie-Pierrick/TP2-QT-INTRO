@@ -30,8 +30,6 @@ MainWindow::~MainWindow()
     if(modelTableView != NULL)
         delete modelTableView;
 
-    deletePointersTableView();
-    deletePointersTreeView();
 
     delete ui;
 }
@@ -120,7 +118,6 @@ void MainWindow::modifyEmployee()
 
 void MainWindow::initTreeViewRessources()
 {
-    deletePointersTreeView();
     // Set model for treeView
     ui->treeView_Ressource->setModel(modelTreeView);
     // The items cannot be edited
@@ -149,21 +146,8 @@ void MainWindow::initTreeViewRessources()
 
             itemType->setChild(j, 0, itemId);
             itemType->setChild(j, 1, itemName);
-
-            // Store the pointers
-            //v_pointersTreeView.push_back(itemId);
-            //v_pointersTreeView.push_back(itemName);
-
-            //delete itemId;
-            //delete itemName;
-            //itemId = nullptr;
-            //itemName = nullptr;
         }
         modelTreeView->setItem(i, 0, itemType);
-
-
-        //pointersTreeView.push_back(itemType);
-        //itemType = nullptr_t();
     }
     // Expand all the nodes
     ui->treeView_Ressource->expandAll();
@@ -185,6 +169,8 @@ void MainWindow::initTableViewClients()
     // Set horizontal header labels
     modelTableView->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Firstname")<<
                                                QStringLiteral("Lastname")<<QStringLiteral("Ressources")));
+    // Stretch the last section
+    ui->tableView_SearchClient->horizontalHeader()->setStretchLastSection(true);
     // Get all clients
     vector<Client> v_clients = controllerClient.getAllClients();
     // Refresh the tableView
@@ -224,32 +210,10 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
         modelTableView->setItem(i, 3, itemRes);
     }
 
-    ui->tableView_SearchClient->resizeColumnsToContents();
+    ui->tableView_SearchClient->resizeColumnToContents(3);
+
     ui->tableView_SearchClient->resizeRowsToContents();
 }
-
-///////////////////////////////////////////////////////////////////////////////////
-// Problems
-void MainWindow::deletePointersTreeView()
-{
-    for(unsigned int i = 0; i < v_pointersTreeView.size(); i ++)
-    {
-        if(v_pointersTreeView[i] != NULL)
-            delete v_pointersTreeView[i];
-    }
-    v_pointersTreeView.clear();
-}
-
-void MainWindow::deletePointersTableView()
-{
-    for(unsigned int i = 0; i < v_pointersTableView.size(); i ++)
-    {
-        if(v_pointersTableView[i] != NULL)
-            delete v_pointersTableView[i];
-    }
-    v_pointersTableView.clear();
-}
-/////////////////////////////////////////////////////////////////////////////////
 
 void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
 {

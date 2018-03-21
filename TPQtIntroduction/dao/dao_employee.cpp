@@ -1,10 +1,12 @@
 #include "dao_employee.h"
 
+// Constructor
 DAO_Employee::DAO_Employee()
 {
     db = SingletonDB::getInstance()->getDB();
 }
 
+// Add an employee
 bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, QString username, QString password)
 {
     QSqlQuery sqlQuery(db);
@@ -21,6 +23,7 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, 
     }
     else
     {
+        // If the type is "Computer Scientist"
         if(convertIntToType(idType) == "Computer Scientist" && !username.isEmpty() && !password.isEmpty())
         {
             QSqlQuery sqlQuery2(db);
@@ -39,6 +42,7 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, 
     }
 }
 
+// Get all employees from database
 vector<map<QString, QString> > DAO_Employee::getAllEmployees()
 {
     map<QString, QString> m_record;
@@ -59,6 +63,8 @@ vector<map<QString, QString> > DAO_Employee::getAllEmployees()
             m_record.insert(pair<QString,QString>("type", convertIntToType(sqlQuery.value(3).toInt())));
 
             v_records.push_back(m_record);
+
+            // Clear this map for reusing
             m_record.clear();
         }
     }
@@ -66,6 +72,7 @@ vector<map<QString, QString> > DAO_Employee::getAllEmployees()
     return v_records;
 }
 
+// Search Employee by ID
 map<QString, QString> DAO_Employee::searchEmployee(int id)
 {
     map<QString, QString> m_record;
@@ -88,6 +95,7 @@ map<QString, QString> DAO_Employee::searchEmployee(int id)
     return m_record;
 }
 
+// Get employee account by ID
 map<QString, QString> DAO_Employee::getEmployeeAccount(int id)
 {
     map<QString, QString> m_record;
@@ -109,6 +117,7 @@ map<QString, QString> DAO_Employee::getEmployeeAccount(int id)
 
     return m_record;
 }
+
 
 void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString password, int id)
 {
@@ -170,6 +179,7 @@ void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString p
     }
 }
 
+// Modify an employee
 bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, int idType, QString username, QString password)
 {
     QSqlQuery sqlQuery(db);
@@ -193,10 +203,13 @@ bool DAO_Employee::modifyEmployee(int id, QString lastname, QString firstname, i
     }
 }
 
+// Delete an employee
 bool DAO_Employee::deleteEmployee(int id)
 {
     // Remove account of Computer Scientist
     map<QString,QString> m_employee = searchEmployee(id);
+
+    // Check the type
     if(m_employee["type"] == "Computer Scientist")
     {
         // Check if account exist to avoid error
@@ -246,6 +259,7 @@ bool DAO_Employee::deleteEmployee(int id)
     }
 }
 
+// Convert type ID to type name
 QString DAO_Employee::convertIntToType(int idType)
 {
     // Get type of employee by label
@@ -267,6 +281,7 @@ QString DAO_Employee::convertIntToType(int idType)
     return type;
 }
 
+// Get all types of employees
 vector<map<QString, QString> > DAO_Employee::getAllTypes()
 {
     vector<map<QString, QString> > v_records;
@@ -292,6 +307,7 @@ vector<map<QString, QString> > DAO_Employee::getAllTypes()
     return v_records;
 }
 
+// Get employees by type ID
 vector<map<QString, QString> > DAO_Employee::getEmployeesByType(int idType)
 {
     map<QString, QString> m_record;
@@ -321,6 +337,7 @@ vector<map<QString, QString> > DAO_Employee::getEmployeesByType(int idType)
     return v_records;
 }
 
+// Function to check login
 bool DAO_Employee::checkLogin(QString username, QString password)
 {
     QSqlQuery sqlQuery(db);
@@ -362,11 +379,8 @@ bool DAO_Employee::checkLogin(QString username, QString password)
                 if(!(convertIntToType(idType.toInt()) == "Computer Scientist"))
                     return false;
             }
-
             return true;
         }
-
     }
-
     return false;
 }

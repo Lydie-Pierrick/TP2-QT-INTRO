@@ -36,8 +36,6 @@ private slots:
     void initTreeViewRessources();
     void initTableViewClients();
     void refreshTableViewClients(vector<Client> v_clients);
-    void deletePointersTreeView();
-    void deletePointersTableView();
 
     void on_actionAbout_triggered();
     void on_actionQuit_triggered();
@@ -55,9 +53,7 @@ private slots:
     void on_pushBtn_SearchByName_clicked();
     void on_pushBtn_DeleteClient_clicked();
     void on_tableView_SearchClient_clicked(const QModelIndex &index);
-
     void on_pushBtn_ModifyClient_clicked();
-
     void on_tableView_SearchClient_doubleClicked();
 
 private:
@@ -66,8 +62,6 @@ private:
     Controller_client controllerClient;
     QStandardItemModel* modelTreeView;
     QStandardItemModel* modelTableView;
-    vector<QStandardItem*> v_pointersTreeView;
-    vector<QStandardItem*> v_pointersTableView;
 };
 
 #endif // MAINWINDOW_H
