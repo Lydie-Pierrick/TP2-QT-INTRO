@@ -8,8 +8,13 @@ vector<int> Controller_client::idsRes;
 
 int main(int argc, char *argv[])
 {
-    // Initialiser BD
-    C_INIT_BD::Creation_BD();
+
+    QFile file("./base_tmp.sqli");
+    if(! file.exists())
+    {
+        // Initialiser BD
+        C_INIT_BD::Creation_BD();
+    }
 
     QApplication a(argc, argv);
 

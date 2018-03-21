@@ -29,6 +29,11 @@ DialogModifyClient::DialogModifyClient(QWidget *parent) :
     Controller_client::idsRes = controllerClient.searchRessourcesID(id);
     Controller_client::resNumber = Controller_client::idsRes.size();
     ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
+
+    // Set label color
+    QPalette palette;
+    palette.setColor(QPalette::WindowText, Qt::red);
+    ui->label_required->setPalette(palette);
 }
 
 DialogModifyClient::~DialogModifyClient()
@@ -49,18 +54,7 @@ void DialogModifyClient::on_pushButton_ok_clicked()
     if (!city.isEmpty())
         city[0] = city[0].toUpper();
 
-    if(colorBoderFail() && controllerClient.modifyClient(Controller_client::selectedID,
-                                     firstName,
-                                     lastName,
-                                     ui->lineEdit_telephone->text().toInt(),
-                                     ui->lineEdit_address->text(),
-                                     city,
-                                     ui->lineEdit_postalCode->text().toInt(),
-                                     ui->lineEdit_duration->text().toInt(),
-                                      ui->dateEdit->date(),
-                                     ui->comboBox_priority->currentText().toInt(),
-                                     ui->textEdit->toPlainText(),
-                                     Controller_client::idsRes))
+    if(colorBoderFail() && controllerClient.modifyClient(Controller_client::selectedID, firstName, lastName, ui->lineEdit_telephone->text().toInt(), ui->lineEdit_address->text(), city, ui->lineEdit_postalCode->text().toInt(), ui->lineEdit_duration->text().toInt(), ui->dateEdit->date(), ui->comboBox_priority->currentText().toInt(), ui->textEdit->toPlainText(), Controller_client::idsRes))
     {
         accept();
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the client !"));

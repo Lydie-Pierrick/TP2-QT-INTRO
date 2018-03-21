@@ -12,6 +12,11 @@ DialogAddEmployee::DialogAddEmployee(QWidget *parent) :
     {
         ui->comboBox_Type->setItemText(i, v_types[i]["label"]);
     }
+
+    // Set label color
+    QPalette palette;
+    palette.setColor(QPalette::WindowText, Qt::red);
+    ui->label_required->setPalette(palette);
 }
 
 DialogAddEmployee::~DialogAddEmployee()

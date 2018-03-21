@@ -11,7 +11,6 @@ Client Controller_client::getClient(map<QString, QString> m_attributesClient)
             m_attributesClient["telephone"].toInt(), m_attributesClient["address"], m_attributesClient["city"],
             m_attributesClient["postalCode"].toInt(), m_attributesClient["duration"].toInt(),
             QDate::fromString(m_attributesClient["date"], "yyyy-MM-dd"), m_attributesClient["priority"].toInt(), m_attributesClient["comment"]);
-
     client.setIdRessources(daoClient.searchRessourcesID(client.getId()));
     return client;
 }

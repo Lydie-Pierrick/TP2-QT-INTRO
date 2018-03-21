@@ -7,6 +7,11 @@ DialogAddClient::DialogAddClient(QWidget *parent) :
     ui->setupUi(this);
     ui->dateEdit->setDate(QDate::currentDate());
 
+    // Set label color
+    QPalette palette;
+    palette.setColor(QPalette::WindowText, Qt::red);
+    ui->label_required->setPalette(palette);
+    // Clear ids in the vector
     Controller_client::idsRes.clear();
 }
 
@@ -143,7 +148,6 @@ void DialogAddClient::on_pushBtn_choose_clicked()
     DialogChooseRessource dcr;
     if(dcr.exec() == QDialog::Accepted)
     {
-        qDebug()<<Controller_client::resNumber;
         ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
     }
 }

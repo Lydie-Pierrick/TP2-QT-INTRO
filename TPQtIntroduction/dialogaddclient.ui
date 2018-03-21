@@ -242,7 +242,10 @@
   <tabstop>dateEdit</tabstop>
   <tabstop>lineEdit_duration</tabstop>
   <tabstop>comboBox_priority</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>pushBtn_choose</tabstop>
   <tabstop>pushButton_ok</tabstop>
+  <tabstop>pushButton_reset</tabstop>
   <tabstop>pushButton_cancel</tabstop>
  </tabstops>
  <resources/>

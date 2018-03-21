@@ -259,6 +259,22 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_firstname</tabstop>
+  <tabstop>lineEdit_lastname</tabstop>
+  <tabstop>lineEdit_telephone</tabstop>
+  <tabstop>lineEdit_address</tabstop>
+  <tabstop>lineEdit_city</tabstop>
+  <tabstop>lineEdit_postalCode</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>lineEdit_duration</tabstop>
+  <tabstop>comboBox_priority</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>pushBtn_choose</tabstop>
+  <tabstop>pushButton_ok</tabstop>
+  <tabstop>pushButton_reset</tabstop>
+  <tabstop>pushButton_cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

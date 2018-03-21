@@ -40,7 +40,6 @@ bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
             // Check if add ressources successfully
             if(addRessources(idClient, idsRes))
             {
-                qDebug() <<"Successfully add client";
                 return true;
             }
         }
@@ -177,6 +176,8 @@ bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int t
                               QDate dateAppointment, int priorityAppointment, QString comment,
                               vector<int> idsRes)
 {
+    bool isOk = false;
+
     QSqlQuery sqlQuery(db);
     sqlQuery.prepare("UPDATE TClient SET Nom = ?, Prenom = ?, Adresse = ?, Ville = ?, CP = ?, "
                      "Commentaire = ?, Tel = ?, DateRdv = ?, DureeRdv = ?, Priorite = ? "
@@ -196,10 +197,10 @@ bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int t
     if(!sqlQuery.exec())
     {
         qDebug() << sqlQuery.lastError();
-        return false;
+        isOk = false;
     }
     else{
-        return true;
+        isOk = true;
     }
 
     // Check if the sql was executed
@@ -214,13 +215,16 @@ bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int t
             // Check if add ressources successfully
             if(addRessources(id, idsRes))
             {
-                qDebug() <<"Successfully add client";
-                return true;
+                isOk = true;
+            }
+            else
+            {
+                isOk = false;
             }
         }
     }
 
-    return false;
+    return isOk;
 }
 
 bool DAO_Client::addRessources(int idClient, vector<int> idRessources)
@@ -260,7 +264,6 @@ bool DAO_Client::modifyRessources(int idClient, vector<int> idRessources)
         }
         else
         {
-            qDebug() <<"Successfully modified ressource to client " + idClient;
             return true;
         }
     }

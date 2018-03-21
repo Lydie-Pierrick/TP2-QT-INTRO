@@ -41,7 +41,8 @@ SOURCES += \
     c_init_bd.cpp \
     dao/dao_client.cpp \
     dao/dao_employee.cpp \
-    dao/singletondb.cpp
+    dao/singletondb.cpp \
+    controller/controller_appointment.cpp
 
 HEADERS += \
         view/mainwindow.h \
@@ -60,7 +61,8 @@ HEADERS += \
     c_init_bd.h \
     dao/dao_client.h \
     dao/dao_employee.h \
-    dao/singletondb.h
+    dao/singletondb.h \
+    controller/controller_appointment.h
 
 FORMS += \
     mainwindow.ui \
