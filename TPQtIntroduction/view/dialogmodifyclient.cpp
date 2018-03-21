@@ -29,6 +29,11 @@ DialogModifyClient::DialogModifyClient(QWidget *parent) :
     Controller_client::idsRes = controllerClient.searchRessourcesID(id);
     Controller_client::resNumber = Controller_client::idsRes.size();
     ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
+
+    // Set label color
+    QPalette palette;
+    palette.setColor(QPalette::WindowText, Qt::red);
+    ui->label_required->setPalette(palette);
 }
 
 DialogModifyClient::~DialogModifyClient()

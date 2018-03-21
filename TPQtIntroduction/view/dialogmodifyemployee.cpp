@@ -32,6 +32,11 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
         ui->lineEdit_username->setText(e.getUsername());
         ui->lineEdit_password->setText(e.getPassword());
     }
+
+    // Set label color
+    QPalette palette;
+    palette.setColor(QPalette::WindowText, Qt::red);
+    ui->label_required->setPalette(palette);
 }
 
 DialogModifyEmployee::~DialogModifyEmployee()

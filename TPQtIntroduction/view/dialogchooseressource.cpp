@@ -15,7 +15,7 @@ DialogChooseRessource::~DialogChooseRessource()
     delete ui;
 
     // Delete the pointer
-    if(modelTreeView != nullptr_t())
+    if(modelTreeView != NULL)
         delete modelTreeView;
 }
 
@@ -52,9 +52,9 @@ void DialogChooseRessource::initTreeViewRessources()
             // Set checkbox
             itemId->setCheckable(true);
 
-            for(int idRes : Controller_client::idsRes)
+            for(unsigned int k = 0; k < Controller_client::idsRes.size(); k ++)
             {
-                if(itemId->text().toInt() == idRes)
+                if(itemId->text().toInt() == Controller_client::idsRes[k])
                     itemId->setCheckState(Qt::Checked);
             }
         }

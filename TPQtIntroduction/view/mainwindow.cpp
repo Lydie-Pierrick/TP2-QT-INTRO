@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->statusBar->showMessage("You logged in!");
 
+    ui->dateEdit_Planification->setDate(QDate::currentDate());
+    ui->dateEdit_SearchClient->setDate(QDate::currentDate());
+
     modelTreeView = new QStandardItemModel();
     modelTableView = new QStandardItemModel();
 
@@ -20,10 +23,10 @@ MainWindow::~MainWindow()
     SingletonDB::closeDB();
 
     // Delete the pointers
-    if(modelTreeView != nullptr)
+    if(modelTreeView != NULL)
         delete modelTreeView;
 
-    if(modelTableView != nullptr)
+    if(modelTableView != NULL)
         delete modelTableView;
 
     deletePointersTableView();
@@ -178,14 +181,16 @@ void MainWindow::initTableViewClients()
     // One case chosen, one row chosen
     ui->tableView_SearchClient->setSelectionBehavior(QAbstractItemView::SelectRows);
 
+//    // Set horizontal header labels
+//    modelTableView->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Firstname")<<
+//                                               QStringLiteral("Lastname")<<QStringLiteral("Address")<<
+//                                               QStringLiteral("City")<<QStringLiteral("Telephone")<<
+//                                               QStringLiteral("Postal Code")<<QStringLiteral("Duration")<<
+//                                               QStringLiteral("Date")<<QStringLiteral("Priority")<<
+//                                               QStringLiteral("Comment")<<QStringLiteral("Ressources")));
     // Set horizontal header labels
     modelTableView->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Firstname")<<
-                                               QStringLiteral("Lastname")<<QStringLiteral("Address")<<
-                                               QStringLiteral("City")<<QStringLiteral("Telephone")<<
-                                               QStringLiteral("Postal Code")<<QStringLiteral("Duration")<<
-                                               QStringLiteral("Date")<<QStringLiteral("Priority")<<
-                                               QStringLiteral("Comment")<<QStringLiteral("Ressources")));
-
+                                               QStringLiteral("Lastname")<<QStringLiteral("Ressources")));
     // Get all clients
     vector<Client> v_clients = controllerClient.getAllClients();
     // Refresh the tableView
@@ -217,28 +222,28 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
         QStandardItem * itemId = new QStandardItem(QString::number(v_clients[i].getId()));
         QStandardItem * itemFirstname = new QStandardItem(v_clients[i].getFirstName());
         QStandardItem * itemLastname = new QStandardItem(v_clients[i].getLastName());
-        QStandardItem * itemAddr = new QStandardItem(v_clients[i].getAddress());
-        QStandardItem * itemCity = new QStandardItem(v_clients[i].getCity());
-        QStandardItem * itemTele = new QStandardItem(QString::number(v_clients[i].getTelephone()));
-        QStandardItem * itemPC = new QStandardItem(QString::number(v_clients[i].getPostalCode()));
-        QStandardItem * itemDuration = new QStandardItem(QString::number(v_clients[i].getDuration()));
-        QStandardItem * itemDate = new QStandardItem(v_clients[i].getDateAppointment().toString("yyyy-MM-dd"));
-        QStandardItem * itemPriority = new QStandardItem(QString::number(v_clients[i].getPriorityAppointment()));
-        QStandardItem * itemComment = new QStandardItem(v_clients[i].getComment());
+//        QStandardItem * itemAddr = new QStandardItem(v_clients[i].getAddress());
+//        QStandardItem * itemCity = new QStandardItem(v_clients[i].getCity());
+//        QStandardItem * itemTele = new QStandardItem(QString::number(v_clients[i].getTelephone()));
+//        QStandardItem * itemPC = new QStandardItem(QString::number(v_clients[i].getPostalCode()));
+//        QStandardItem * itemDuration = new QStandardItem(QString::number(v_clients[i].getDuration()));
+//        QStandardItem * itemDate = new QStandardItem(v_clients[i].getDateAppointment().toString("yyyy-MM-dd"));
+//        QStandardItem * itemPriority = new QStandardItem(QString::number(v_clients[i].getPriorityAppointment()));
+//        QStandardItem * itemComment = new QStandardItem(v_clients[i].getComment());
         QStandardItem * itemRes = new QStandardItem(namesRes);
 
         modelTableView->setItem(i, 0, itemId);
         modelTableView->setItem(i, 1, itemFirstname);
         modelTableView->setItem(i, 2, itemLastname);
-        modelTableView->setItem(i, 3, itemAddr);
-        modelTableView->setItem(i, 4, itemCity);
-        modelTableView->setItem(i, 5, itemTele);
-        modelTableView->setItem(i, 6, itemPC);
-        modelTableView->setItem(i, 7, itemDuration);
-        modelTableView->setItem(i, 8, itemDate);
-        modelTableView->setItem(i, 9, itemPriority);
-        modelTableView->setItem(i, 10, itemComment);
-        modelTableView->setItem(i, 11, itemRes);
+//        modelTableView->setItem(i, 3, itemAddr);
+//        modelTableView->setItem(i, 4, itemCity);
+//        modelTableView->setItem(i, 5, itemTele);
+//        modelTableView->setItem(i, 6, itemPC);
+//        modelTableView->setItem(i, 7, itemDuration);
+//        modelTableView->setItem(i, 8, itemDate);
+//        modelTableView->setItem(i, 9, itemPriority);
+//        modelTableView->setItem(i, 10, itemComment);
+        modelTableView->setItem(i, 3, itemRes);
     }
 
     ui->tableView_SearchClient->resizeColumnsToContents();
@@ -251,7 +256,7 @@ void MainWindow::deletePointersTreeView()
 {
     for(unsigned int i = 0; i < v_pointersTreeView.size(); i ++)
     {
-        if(v_pointersTreeView[i] != nullptr)
+        if(v_pointersTreeView[i] != NULL)
             delete v_pointersTreeView[i];
     }
     v_pointersTreeView.clear();
@@ -261,7 +266,7 @@ void MainWindow::deletePointersTableView()
 {
     for(unsigned int i = 0; i < v_pointersTableView.size(); i ++)
     {
-        if(v_pointersTableView[i] != nullptr)
+        if(v_pointersTableView[i] != NULL)
             delete v_pointersTableView[i];
     }
     v_pointersTableView.clear();
@@ -337,7 +342,7 @@ void MainWindow::on_pushBtn_RefreshEmployee_clicked()
 
 void MainWindow::on_pushBtn_SearchByDate_clicked()
 {
-    QDate date = ui->dateEdit->date();
+    QDate date = ui->dateEdit_SearchClient->date();
 
     vector<Client> v_clients = controllerClient.searchClientsByDate(date);
 
