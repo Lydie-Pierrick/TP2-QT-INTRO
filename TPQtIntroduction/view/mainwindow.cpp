@@ -425,7 +425,7 @@ void MainWindow::on_pushBtn_ModifyClient_clicked()
     modifyClient();
 }
 
-void MainWindow::on_tableView_SearchClient_doubleClicked(const QModelIndex &index)
+void MainWindow::on_tableView_SearchClient_doubleClicked()
 {
     modifyClient();
 }

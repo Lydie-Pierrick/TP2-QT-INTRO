@@ -29,8 +29,6 @@ private slots:
 private:
     Ui::DialogModifyClient *ui;
     Controller_client controllerClient;
-    DialogChooseRessource *dcr;
-    DialogChooseRessource *dcrsave;
 };
 
 #endif // DIALOGMODIFYCLIENT_H

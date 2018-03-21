@@ -60,15 +60,13 @@ void DialogChooseRessource::initTreeViewRessources()
         }
         modelTreeView->setItem(i, 0, itemType);
     }
+
     // Expand all the nodes
     ui->treeView_Ressource->expandAll();
 }
 
 void DialogChooseRessource::on_pushBtn_Cancel_clicked()
 {
-    //Controller_client::windowChooseOpen = false;
-    //close();
-
     reject();
 }
 
@@ -96,6 +94,5 @@ void DialogChooseRessource::on_pushBtn_OK_clicked()
     Controller_client::idsRes = idsRes;
     Controller_client::resNumber = counter;
 
-    //hide();
     accept();
 }

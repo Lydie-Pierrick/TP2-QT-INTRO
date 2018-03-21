@@ -58,7 +58,7 @@ private slots:
 
     void on_pushBtn_ModifyClient_clicked();
 
-    void on_tableView_SearchClient_doubleClicked(const QModelIndex &index);
+    void on_tableView_SearchClient_doubleClicked();
 
 private:
     Ui::MainWindow *ui;

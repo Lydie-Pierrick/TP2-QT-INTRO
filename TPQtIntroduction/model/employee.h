@@ -5,16 +5,6 @@
 
 using namespace std;
 
-//enum typeEmployee{
-//    bankerA = 0,
-//    bankerB = 1,
-//    housingInsurer = 2,
-//    carInsurer = 3,
-//    lifeInsurer = 4,
-//    computerScientist = 5,
-//    other = 6
-//};
-
 class Employee
 {
 public:
