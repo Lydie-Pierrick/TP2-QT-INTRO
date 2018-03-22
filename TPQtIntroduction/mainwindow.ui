@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>839</width>
+    <width>900</width>
     <height>587</height>
    </rect>
   </property>
@@ -66,7 +66,7 @@
          <bool>false</bool>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_SearchClient">
          <property name="sizePolicy">
@@ -81,6 +81,9 @@
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
            <layout class="QGridLayout" name="gridLayout_SearchClient">
+            <item row="1" column="12">
+             <widget class="QLineEdit" name="lineEdit_SearchByName"/>
+            </item>
             <item row="0" column="0">
              <spacer name="verticalSpacer">
               <property name="orientation">
@@ -97,117 +100,74 @@
               </property>
              </spacer>
             </item>
-            <item row="1" column="11">
+            <item row="1" column="9">
              <widget class="QLineEdit" name="lineEdit_SearchByID"/>
             </item>
-            <item row="1" column="14">
-             <widget class="QLineEdit" name="lineEdit_SearchByName"/>
+            <item row="4" column="0">
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <spacer name="verticalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushBtn_ModifyClient">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="text">
+                 <string>Modify</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushBtn_DeleteClient">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="text">
+                 <string>Delete</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
-            <item row="3" column="0" colspan="18">
-             <widget class="QTableView" name="tableView_SearchClient"/>
-            </item>
-            <item row="1" column="9">
+            <item row="1" column="7">
              <widget class="QPushButton" name="pushBtn_SearchByDate">
               <property name="text">
                <string>Search by date</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="12">
-             <widget class="QPushButton" name="pushBtn_SearchByID">
+            <item row="1" column="5">
+             <widget class="QLabel" name="label_To">
               <property name="text">
-               <string> Search by ID</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="10">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="15">
-             <widget class="QPushButton" name="pushBtn_SearchByName">
-              <property name="text">
-               <string>Search by name</string>
+               <string>To</string>
               </property>
              </widget>
             </item>
             <item row="1" column="6">
-             <widget class="QDateEdit" name="dateEdit_From">
-              <property name="dateTime">
-               <datetime>
-                <hour>0</hour>
-                <minute>0</minute>
-                <second>0</second>
-                <year>2018</year>
-                <month>1</month>
-                <day>1</day>
-               </datetime>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="pushBtn_DeleteClient">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Delete</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="pushBtn_ModifyClient">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Modify</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="13">
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="5">
-             <widget class="QLabel" name="label_From">
-              <property name="text">
-               <string>From</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="8">
              <widget class="QDateEdit" name="dateEdit_To">
               <property name="dateTime">
                <datetime>
@@ -221,79 +181,69 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="7">
-             <widget class="QLabel" name="label_To">
+            <item row="1" column="8">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="13">
+             <widget class="QPushButton" name="pushBtn_SearchByName">
               <property name="text">
-               <string>To</string>
+               <string>Search by name</string>
               </property>
              </widget>
+            </item>
+            <item row="1" column="10">
+             <widget class="QPushButton" name="pushBtn_SearchByID">
+              <property name="text">
+               <string> Search by ID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="11">
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="2" colspan="14">
+             <widget class="QTableView" name="tableView_SearchClient"/>
             </item>
             <item row="1" column="4">
-             <widget class="QLabel" name="label_SearchDate">
-              <property name="text">
-               <string>Date Search:</string>
+             <widget class="QDateEdit" name="dateEdit_From">
+              <property name="dateTime">
+               <datetime>
+                <hour>0</hour>
+                <minute>0</minute>
+                <second>0</second>
+                <year>2018</year>
+                <month>1</month>
+                <day>1</day>
+               </datetime>
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tab_Planification">
-         <attribute name="title">
-          <string>Planification</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_8">
-          <item>
-           <layout class="QGridLayout" name="gridLayout">
-            <item row="0" column="2">
-             <widget class="QPushButton" name="pushButton">
+            <item row="1" column="3">
+             <widget class="QLabel" name="label_From">
               <property name="text">
-               <string>Plan it</string>
+               <string>From</string>
               </property>
              </widget>
-            </item>
-            <item row="0" column="0">
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="1">
-             <widget class="QDateEdit" name="dateEdit_Planification"/>
-            </item>
-            <item row="1" column="2">
-             <spacer name="verticalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="3">
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </item>
@@ -383,6 +333,66 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tab_Planification">
+         <attribute name="title">
+          <string>Planification</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="2">
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>Plan it</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDateEdit" name="dateEdit_Planification"/>
+            </item>
+            <item row="1" column="2">
+             <spacer name="verticalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="3">
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -394,7 +404,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>839</width>
+     <width>900</width>
      <height>20</height>
     </rect>
    </property>

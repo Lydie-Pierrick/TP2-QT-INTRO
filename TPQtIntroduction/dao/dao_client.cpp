@@ -1,10 +1,12 @@
 #include "dao_client.h"
 
+// Constructor
 DAO_Client::DAO_Client()
 {
     db = SingletonDB::getInstance()->getDB();
 }
 
+// Add a client
 bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
                            QString address, QString city, int postalCode, int duration,
                            QDate dateAppointment, int priorityAppointment, QString comment,
@@ -35,6 +37,7 @@ bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
         if(sqlQuery2.exec())
         {
             sqlQuery2.next();
+            // Get client ID
             int idClient = sqlQuery2.value(0).toInt();
 
             // Check if add ressources successfully
@@ -48,6 +51,7 @@ bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
     return false;
 }
 
+// Search client by ID
 vector<map<QString, QString> > DAO_Client::searchClientById(int id)
 {
     vector<map<QString, QString> > v_records;
@@ -64,6 +68,7 @@ vector<map<QString, QString> > DAO_Client::searchClientById(int id)
     else {
         while(sqlQuery.next())
         {
+            // Get a map of all information of client
             m_record = collectInfosClient(sqlQuery);
             v_records.push_back(m_record);
 
@@ -73,6 +78,7 @@ vector<map<QString, QString> > DAO_Client::searchClientById(int id)
     return v_records;
 }
 
+// Search clients by name
 vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
 {
     vector<map<QString, QString> > v_records;
@@ -89,6 +95,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
     else {
         while(sqlQuery.next())
         {
+            // Get a map of all information of client
             m_record = collectInfosClient(sqlQuery);
             v_records.push_back(m_record);
 
@@ -98,6 +105,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
     return v_records;
 }
 
+// Search clients by date
 vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate dateFrom, QDate dateTo)
 {
     vector<map<QString, QString> > v_records;
@@ -114,6 +122,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate dateFrom, Q
     else {
         while(sqlQuery.next())
         {
+            // Get a map of all information of client
             m_record = collectInfosClient(sqlQuery);
             v_records.push_back(m_record);
 
@@ -123,6 +132,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate dateFrom, Q
     return v_records;
 }
 
+// Get all clients form database
 vector<map<QString, QString> > DAO_Client::getAllClients()
 {
     vector<map<QString, QString> > v_records;
@@ -137,6 +147,7 @@ vector<map<QString, QString> > DAO_Client::getAllClients()
     else {
         while(sqlQuery.next())
         {
+            // Get a map of all information of client
             m_record = collectInfosClient(sqlQuery);
             v_records.push_back(m_record);
 
@@ -146,6 +157,7 @@ vector<map<QString, QString> > DAO_Client::getAllClients()
     return v_records;
 }
 
+// Delete a client
 bool DAO_Client::deleteClient(int id)
 {
     QSqlQuery sqlQuery(db);
@@ -166,11 +178,13 @@ bool DAO_Client::deleteClient(int id)
         qDebug() << sqlQuery.lastError();
         return false;
     }
-    else{
+    else
+    {
         return true;
     }
 }
 
+// Modify a client
 bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int telephone,
                               QString address, QString city, int postalCode, int duration,
                               QDate dateAppointment, int priorityAppointment, QString comment,
@@ -227,6 +241,7 @@ bool DAO_Client::modifyClient(int id, QString firstname, QString lastname, int t
     return isOk;
 }
 
+// Add ressources to a client
 bool DAO_Client::addRessources(int idClient, vector<int> idRessources)
 {
     QSqlQuery sqlQuery(db);
@@ -247,6 +262,7 @@ bool DAO_Client::addRessources(int idClient, vector<int> idRessources)
     return true;
 }
 
+// Modify ressources of a client
 bool DAO_Client::modifyRessources(int idClient, vector<int> idRessources)
 {
     QSqlQuery sqlQuery(db);
@@ -271,6 +287,7 @@ bool DAO_Client::modifyRessources(int idClient, vector<int> idRessources)
     return false;
 }
 
+// Searchi ressources IDs by client ID
 vector<int> DAO_Client::searchRessourcesID(int idClient)
 {
     QSqlQuery sqlQuery(db);
@@ -294,10 +311,12 @@ vector<int> DAO_Client::searchRessourcesID(int idClient)
     return v_records;
 }
 
+// Collect all the infomation of client and return to map
 map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)
 {
     map<QString, QString> m_record;
 
+    // Insert pairs into the map with keys and values
     m_record.insert(pair<QString,QString>("id", sqlQuery.value(0).toString()));
     m_record.insert(pair<QString,QString>("lastname", sqlQuery.value(1).toString()));
     m_record.insert(pair<QString,QString>("firstname", sqlQuery.value(2).toString()));
@@ -309,5 +328,6 @@ map<QString, QString> DAO_Client::collectInfosClient(QSqlQuery sqlQuery)
     m_record.insert(pair<QString,QString>("date", sqlQuery.value(8).toString()));
     m_record.insert(pair<QString,QString>("duration", sqlQuery.value(9).toString()));
     m_record.insert(pair<QString,QString>("priority", sqlQuery.value(10).toString()));
+
     return m_record;
 }
