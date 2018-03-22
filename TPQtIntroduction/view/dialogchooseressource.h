@@ -19,6 +19,7 @@ public:
     ~DialogChooseRessource();
 
     void initTreeViewRessources();
+    void deletePointers();
 
 private slots:
 
@@ -29,6 +30,7 @@ private:
     Ui::DialogChooseRessource *ui;
     QStandardItemModel * modelTreeView;
     Controller_employee controllerEmployee;
+    vector<QStandardItem*> v_pointers;
 };
 
 #endif // DIALOGCHOOSERESSOURCE_H

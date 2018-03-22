@@ -37,6 +37,7 @@ private slots:
     void initTableViewClients();
     void refreshTableViewClients(vector<Client> v_clients);
     void deletePointersTreeView();
+    void deletePointersTableView();
 
     void on_actionAbout_triggered();
     void on_actionQuit_triggered();
@@ -66,7 +67,8 @@ private:
     QStandardItemModel* modelTreeView;
     QStandardItemModel* modelTableView;
 
-    vector<QStandardItem*> v_pointers;
+    vector<QStandardItem*> v_pointersTreeView;
+    vector<QStandardItem*> v_pointersTableView;
 };
 
 #endif // MAINWINDOW_H

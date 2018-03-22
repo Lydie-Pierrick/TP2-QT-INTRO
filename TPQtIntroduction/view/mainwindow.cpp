@@ -177,7 +177,7 @@ void MainWindow::initTreeViewRessources()
         }
         // Set item for model
         modelTreeView->setItem(i, 0, itemType);
-        v_pointers.push_back(itemType);
+        v_pointersTreeView.push_back(itemType);
         itemType = NULL;
     }
     // Expand all the nodes
@@ -210,7 +210,7 @@ void MainWindow::initTableViewClients()
 // Function for refreshing the tableView
 void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 {
-    deletePointersTreeView();
+    deletePointersTableView();
 
     vector<int> idsRes;
     QString namesRes;
@@ -252,10 +252,10 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
         modelTableView->setItem(i, 2, itemLastname);
         modelTableView->setItem(i, 3, itemRes);
 
-        v_pointers.push_back(itemId);
-        v_pointers.push_back(itemFirstname);
-        v_pointers.push_back(itemLastname);
-        v_pointers.push_back(itemRes);
+        v_pointersTableView.push_back(itemId);
+        v_pointersTableView.push_back(itemFirstname);
+        v_pointersTableView.push_back(itemLastname);
+        v_pointersTableView.push_back(itemRes);
 
         itemId = NULL;
         itemFirstname = NULL;
@@ -269,14 +269,44 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
     ui->tableView_SearchClient->resizeRowsToContents();
 }
 
+// Funciton for deleting the pointer in treeView
 void MainWindow::deletePointersTreeView()
 {
-    for(int i = 0 ; i < v_pointers.size(); i ++)
+    for(int i = 0 ; i < v_pointersTreeView.size(); i ++)
     {
-        delete v_pointers[i];
+        for(int j = 0; j < v_pointersTreeView[i]->rowCount(); j ++)
+        {
+            if(v_pointersTreeView[i]->child(j, 0) != NULL)
+                delete v_pointersTreeView[i]->child(j, 0);
+            if(v_pointersTreeView[i]->child(j, 1) != NULL)
+                delete v_pointersTreeView[i]->child(j, 1);
+        }
+
+        if(v_pointersTreeView[i] != NULL)
+            delete v_pointersTreeView[i];
     }
 
-    v_pointers.clear();
+    v_pointersTreeView.clear();
+}
+
+// Funciton for deleting the pointer in tableView
+void MainWindow::deletePointersTableView()
+{
+    for(int i = 0 ; i < v_pointersTableView.size(); i ++)
+    {
+        for(int j = 0; j < v_pointersTableView[i]->rowCount(); j ++)
+        {
+            if(v_pointersTableView[i]->child(j, 0) != NULL)
+                delete v_pointersTableView[i]->child(j, 0);
+            if(v_pointersTableView[i]->child(j, 1) != NULL)
+                delete v_pointersTableView[i]->child(j, 1);
+        }
+
+        if(v_pointersTableView[i] != NULL)
+            delete v_pointersTableView[i];
+    }
+
+    v_pointersTableView.clear();
 }
 
 // Slot : click the treeView (choose an employee)
