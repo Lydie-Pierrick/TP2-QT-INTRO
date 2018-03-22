@@ -324,11 +324,18 @@ void MainWindow::on_pushBtn_SearchByDate_clicked()
     QDate dateFrom = ui->dateEdit_From->date();
     QDate dateTo = ui->dateEdit_To->date();
 
-    vector<Client> v_clients = controllerClient.searchClientsByDate(dateFrom, dateTo);
+    if(dateFrom > dateTo)
+    {
+        QMessageBox::critical(this, tr("Error"), tr("Error date searched ! Please check your field."));
+    }
+    else
+    {
+        vector<Client> v_clients = controllerClient.searchClientsByDate(dateFrom, dateTo);
 
-    refreshTableViewClients(v_clients);
+        refreshTableViewClients(v_clients);
 
-    ui->statusBar->showMessage("You have searched clients by date.");
+        ui->statusBar->showMessage("You have searched clients by date.");
+    }
 }
 
 void MainWindow::on_pushBtn_SearchByID_clicked()
