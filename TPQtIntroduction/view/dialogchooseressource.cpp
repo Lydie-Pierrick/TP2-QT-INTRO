@@ -1,5 +1,6 @@
 #include "dialogchooseressource.h"
 
+// Constructor
 DialogChooseRessource::DialogChooseRessource(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogChooseRessource)
@@ -10,6 +11,7 @@ DialogChooseRessource::DialogChooseRessource(QWidget *parent) :
     initTreeViewRessources();
 }
 
+// Destructor
 DialogChooseRessource::~DialogChooseRessource()
 {
     delete ui;
@@ -19,6 +21,7 @@ DialogChooseRessource::~DialogChooseRessource()
         delete modelTreeView;
 }
 
+// To init the tree view with data from Database
 void DialogChooseRessource::initTreeViewRessources()
 {
     // Set model for treeView
@@ -65,11 +68,13 @@ void DialogChooseRessource::initTreeViewRessources()
     ui->treeView_Ressource->expandAll();
 }
 
+// When the user want to cancel his action
 void DialogChooseRessource::on_pushBtn_Cancel_clicked()
 {
     reject();
 }
 
+// When the user comfirm. Treatment of client data.
 void DialogChooseRessource::on_pushBtn_OK_clicked()
 {
     int counter = 0;

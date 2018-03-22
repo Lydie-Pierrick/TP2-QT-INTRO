@@ -82,14 +82,14 @@ map<QString, QString> DAO_Employee::searchEmployee(int id)
 
     if(!sqlQuery.exec())
     {
-       qDebug() << sqlQuery.lastError();
+        qDebug() << sqlQuery.lastError();
     }
     else {
-       sqlQuery.next();
-       m_record.insert(pair<QString,QString>("id", sqlQuery.value(0).toString()));
-       m_record.insert(pair<QString,QString>("lastname", sqlQuery.value(1).toString()));
-       m_record.insert(pair<QString,QString>("firstname", sqlQuery.value(2).toString()));
-       m_record.insert(pair<QString,QString>("type", convertIntToType(sqlQuery.value(3).toInt())));
+        sqlQuery.next();
+        m_record.insert(pair<QString,QString>("id", sqlQuery.value(0).toString()));
+        m_record.insert(pair<QString,QString>("lastname", sqlQuery.value(1).toString()));
+        m_record.insert(pair<QString,QString>("firstname", sqlQuery.value(2).toString()));
+        m_record.insert(pair<QString,QString>("type", convertIntToType(sqlQuery.value(3).toInt())));
     }
 
     return m_record;
@@ -118,7 +118,7 @@ map<QString, QString> DAO_Employee::getEmployeeAccount(int id)
     return m_record;
 }
 
-
+// Modify the account access only for IT Employee
 void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString password, int id)
 {
     // Check if an entry already existed in TCompte

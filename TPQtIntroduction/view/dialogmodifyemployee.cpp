@@ -1,5 +1,6 @@
 #include "dialogmodifyemployee.h"
 
+// Constructor
 DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogModifyEmployee)
@@ -39,11 +40,13 @@ DialogModifyEmployee::DialogModifyEmployee(QWidget *parent) :
     ui->label_required->setPalette(palette);
 }
 
+//  Destructor
 DialogModifyEmployee::~DialogModifyEmployee()
 {
     delete ui;
 }
 
+// When the user comfirm. Treatment of employee data.
 void DialogModifyEmployee::on_pushButton_ok_clicked()
 {
     // Get all the texts
@@ -61,7 +64,7 @@ void DialogModifyEmployee::on_pushButton_ok_clicked()
         username[0] = username[0].toUpper();
     QString password = ui->lineEdit_password->text();
 
-    if(colorBoderFail() && controllerEmployee.modifyEmployee(id, lastname, firstname, idType, username, password))      
+    if(colorBoderFail() && controllerEmployee.modifyEmployee(id, lastname, firstname, idType, username, password))
     {
         accept();
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully modified the employee !"));
@@ -72,11 +75,13 @@ void DialogModifyEmployee::on_pushButton_ok_clicked()
     }
 }
 
+// When the user want to cancel his action
 void DialogModifyEmployee::on_pushButton_cancel_clicked()
 {
     reject();
 }
 
+// When the user want to create or update an IT Employee. It's to show fields.
 void DialogModifyEmployee::on_comboBox_Type_activated(const QString &arg1)
 {
     if(arg1 == "Computer Scientist")
@@ -95,6 +100,7 @@ void DialogModifyEmployee::on_comboBox_Type_activated(const QString &arg1)
     }
 }
 
+// It's for color the field border when it's wrong
 bool DialogModifyEmployee::colorBoderFail()
 {
     bool noEmptyField = true;

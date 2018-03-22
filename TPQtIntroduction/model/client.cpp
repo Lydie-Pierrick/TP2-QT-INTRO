@@ -1,10 +1,11 @@
 #include "client.h"
 
+// Default Constructor
 Client::Client()
 {
-
 }
 
+// Comfort Constructor
 Client::Client(int id, QString firstname, QString lastname, int telephone,
                QString address, QString city, int postalCode, int duration,
                QDate dateAppointment, int priorityAppointment, QString comment)
@@ -22,6 +23,7 @@ Client::Client(int id, QString firstname, QString lastname, int telephone,
     this->comment = comment;
 }
 
+// Getter Setter
 void Client::setLastName(const QString &value)
 {
     lastName = value;
