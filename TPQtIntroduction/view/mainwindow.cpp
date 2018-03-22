@@ -142,14 +142,14 @@ void MainWindow::modifyEmployee()
 // Funciton for initialising the treeView
 void MainWindow::initTreeViewRessources()
 {
+    deletePointersTreeView();
     // Set model for treeView
     ui->treeView_Ressource->setModel(modelTreeView);
     // The items cannot be edited
     ui->treeView_Ressource->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
     // Set header label
     modelTreeView->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Name")));
-    // FUITES !!!!!!!!!!!!!!
+
     QStandardItem* itemType;
     QStandardItem* itemId;
     QStandardItem* itemName;
@@ -172,9 +172,13 @@ void MainWindow::initTreeViewRessources()
             // Set children for itemType with itemId and itemName
             itemType->setChild(j, 0, itemId);
             itemType->setChild(j, 1, itemName);
+            itemId = NULL;
+            itemName = NULL;
         }
         // Set item for model
         modelTreeView->setItem(i, 0, itemType);
+        v_pointers.push_back(itemType);
+        itemType = NULL;
     }
     // Expand all the nodes
     ui->treeView_Ressource->expandAll();
@@ -206,12 +210,19 @@ void MainWindow::initTableViewClients()
 // Function for refreshing the tableView
 void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 {
+    deletePointersTreeView();
+
     vector<int> idsRes;
     QString namesRes;
     int id;
 
     // Clear all the existing rows
     modelTableView->removeRows(0, modelTableView->rowCount());
+
+    QStandardItem * itemId;
+    QStandardItem * itemFirstname;
+    QStandardItem * itemLastname;
+    QStandardItem * itemRes ;
 
     // Get information of each clients
     for(unsigned int i = 0; i < v_clients.size(); i++)
@@ -230,22 +241,42 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
         id = idsRes[idsRes.size()-1];
         namesRes += controllerEmployee.searchEmployee(id).getLastname();
 
-        QStandardItem * itemId = new QStandardItem(QString::number(v_clients[i].getId()));
-        QStandardItem * itemFirstname = new QStandardItem(v_clients[i].getFirstName());
-        QStandardItem * itemLastname = new QStandardItem(v_clients[i].getLastName());
-        QStandardItem * itemRes = new QStandardItem(namesRes);
+        itemId = new QStandardItem(QString::number(v_clients[i].getId()));
+        itemFirstname = new QStandardItem(v_clients[i].getFirstName());
+        itemLastname = new QStandardItem(v_clients[i].getLastName());
+        itemRes = new QStandardItem(namesRes);
 
         // Set items for model
         modelTableView->setItem(i, 0, itemId);
         modelTableView->setItem(i, 1, itemFirstname);
         modelTableView->setItem(i, 2, itemLastname);
         modelTableView->setItem(i, 3, itemRes);
+
+        v_pointers.push_back(itemId);
+        v_pointers.push_back(itemFirstname);
+        v_pointers.push_back(itemLastname);
+        v_pointers.push_back(itemRes);
+
+        itemId = NULL;
+        itemFirstname = NULL;
+        itemLastname = NULL;
+        itemRes = NULL;
     }
 
     // Resizing the width of column 3 according the content
     ui->tableView_SearchClient->resizeColumnToContents(3);
     // Resizing the height of rows
     ui->tableView_SearchClient->resizeRowsToContents();
+}
+
+void MainWindow::deletePointersTreeView()
+{
+    for(int i = 0 ; i < v_pointers.size(); i ++)
+    {
+        delete v_pointers[i];
+    }
+
+    v_pointers.clear();
 }
 
 // Slot : click the treeView (choose an employee)
@@ -441,4 +472,16 @@ void MainWindow::on_pushBtn_ModifyClient_clicked()
 void MainWindow::on_tableView_SearchClient_doubleClicked()
 {
     modifyClient();
+}
+
+void MainWindow::on_tabWidget_tabBarClicked(int index)
+{
+    if(index == 0)
+    {
+        initTableViewClients();
+    }
+    else if(index == 1)
+    {
+        initTreeViewRessources();
+    }
 }
