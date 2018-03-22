@@ -1,10 +1,12 @@
 #include "employee.h"
 
+// Default Constructor
 Employee::Employee()
 {
 
 }
 
+// Constructor
 Employee::Employee(int id, QString lastname, QString firstname, QString type, QString username, QString password)
 {
     this->id = id;
@@ -15,6 +17,7 @@ Employee::Employee(int id, QString lastname, QString firstname, QString type, QS
     this->password = password;
 }
 
+// Getter Setter
 int Employee::getId() const
 {
     return id;

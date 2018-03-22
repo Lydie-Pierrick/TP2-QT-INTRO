@@ -1,5 +1,6 @@
 #include "dialogaddemployee.h"
 
+// Constructor
 DialogAddEmployee::DialogAddEmployee(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogAddEmployee)
@@ -19,22 +20,26 @@ DialogAddEmployee::DialogAddEmployee(QWidget *parent) :
     ui->label_required->setPalette(palette);
 }
 
+// Destructor
 DialogAddEmployee::~DialogAddEmployee()
 {
     delete ui;
 }
 
+// When the user want to reset all fields
 void DialogAddEmployee::on_pushBtn_reset_clicked()
 {
     ui->lineEdit_firstName->clear();
     ui->lineEdit_lastName->clear();
 }
 
+// When the user want to cancel his action
 void DialogAddEmployee::on_pushButton_cancel_clicked()
 {
     reject();
 }
 
+// It's for color the field border when it's wrong
 bool DialogAddEmployee::colorBoderFail()
 {
     bool noEmptyField = true;
@@ -70,6 +75,7 @@ bool DialogAddEmployee::colorBoderFail()
     return noEmptyField;
 }
 
+// When the user comfirm. Treatment of employee data.
 void DialogAddEmployee::on_pushButton_ok_clicked()
 {
     // Get all the texts
@@ -96,6 +102,7 @@ void DialogAddEmployee::on_pushButton_ok_clicked()
     }
 }
 
+// When the user want to create or update an IT Employee. It's to show fields.
 void DialogAddEmployee::on_comboBox_Type_activated(const QString &arg1)
 {
     if(arg1 == "Computer Scientist")

@@ -371,8 +371,17 @@ void MainWindow::on_pushBtn_SearchByDate_clicked()
 
     // Refresh the tableView
     refreshTableViewClients(v_clients);
+    if(dateFrom > dateTo)
+    {
+        QMessageBox::critical(this, tr("Error"), tr("Error date searched ! Please check your field."));
+    }
+    else
+    {
+        vector<Client> v_clients = controllerClient.searchClientsByDate(dateFrom, dateTo);
+        refreshTableViewClients(v_clients);
 
-    ui->statusBar->showMessage("You have searched clients by date.");
+        ui->statusBar->showMessage("You have searched clients by date.");
+    }
 }
 
 // Slot :click the button of refreshEmployee

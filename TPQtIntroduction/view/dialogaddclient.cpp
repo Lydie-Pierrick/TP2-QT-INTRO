@@ -1,5 +1,6 @@
 #include "dialogaddclient.h"
 
+// Constructor
 DialogAddClient::DialogAddClient(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogAddClient)
@@ -15,11 +16,13 @@ DialogAddClient::DialogAddClient(QWidget *parent) :
     Controller_client::idsRes.clear();
 }
 
+// Destructor
 DialogAddClient::~DialogAddClient()
 {
     delete ui;
 }
 
+// When the user want to reset all fields
 void DialogAddClient::on_pushButton_reset_clicked()
 {
     ui->lineEdit_firstName->clear();
@@ -34,6 +37,7 @@ void DialogAddClient::on_pushButton_reset_clicked()
     ui->dateEdit->setDate(QDate::currentDate());
 }
 
+// When the user comfirm. Treatment of client data.
 void DialogAddClient::on_pushButton_ok_clicked()
 {
     // Get all the texts
@@ -68,11 +72,13 @@ void DialogAddClient::on_pushButton_ok_clicked()
     }
 }
 
+// When the user want to cancel his action
 void DialogAddClient::on_pushButton_cancel_clicked()
 {
     reject();
 }
 
+// It's for color the field border when it's wrong
 bool DialogAddClient::colorBoderFail()
 {
     bool noEmptyField = true;
@@ -118,6 +124,13 @@ bool DialogAddClient::colorBoderFail()
     }
     else
         ui->lineEdit_postalCode->setStyleSheet("");
+    if(!ui->lineEdit_telephone->text().isEmpty() && (QString::number(ui->lineEdit_telephone->text().toInt()) == "0"))
+    {
+        ui->lineEdit_telephone->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_telephone->setStyleSheet("");
     if(ui->lineEdit_duration->text().isEmpty())
     {
         ui->lineEdit_duration->setStyleSheet("border: 1px solid red");
@@ -143,6 +156,7 @@ bool DialogAddClient::colorBoderFail()
     return noEmptyField;
 }
 
+// It's a button to open a new windows for the ressource selection
 void DialogAddClient::on_pushBtn_choose_clicked()
 {
     DialogChooseRessource dcr;

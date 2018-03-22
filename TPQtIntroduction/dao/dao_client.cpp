@@ -63,7 +63,7 @@ vector<map<QString, QString> > DAO_Client::searchClientById(int id)
 
     if(!sqlQuery.exec())
     {
-       qDebug() << sqlQuery.lastError();
+        qDebug() << sqlQuery.lastError();
     }
     else {
         while(sqlQuery.next())
@@ -90,7 +90,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByName(QString name)
 
     if(!sqlQuery.exec())
     {
-       qDebug() << sqlQuery.lastError();
+        qDebug() << sqlQuery.lastError();
     }
     else {
         while(sqlQuery.next())
@@ -117,7 +117,7 @@ vector<map<QString, QString> > DAO_Client::searchClientsByDate(QDate dateFrom, Q
 
     if(!sqlQuery.exec())
     {
-       qDebug() << sqlQuery.lastError();
+        qDebug() << sqlQuery.lastError();
     }
     else {
         while(sqlQuery.next())
@@ -142,7 +142,7 @@ vector<map<QString, QString> > DAO_Client::getAllClients()
 
     if(!sqlQuery.exec())
     {
-       qDebug() << sqlQuery.lastError();
+        qDebug() << sqlQuery.lastError();
     }
     else {
         while(sqlQuery.next())
@@ -299,7 +299,7 @@ vector<int> DAO_Client::searchRessourcesID(int idClient)
 
     if(!sqlQuery.exec())
     {
-       qDebug() << sqlQuery.lastError();
+        qDebug() << sqlQuery.lastError();
     }
     else {
         while(sqlQuery.next())

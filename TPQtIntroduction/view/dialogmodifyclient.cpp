@@ -1,5 +1,6 @@
 #include "dialogmodifyclient.h"
 
+// Constructor
 DialogModifyClient::DialogModifyClient(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogModifyClient)
@@ -36,11 +37,13 @@ DialogModifyClient::DialogModifyClient(QWidget *parent) :
     ui->label_required->setPalette(palette);
 }
 
+// Destructor
 DialogModifyClient::~DialogModifyClient()
 {
     delete ui;
 }
 
+// When the user comfirm. Treatment of client data.
 void DialogModifyClient::on_pushButton_ok_clicked()
 {
     // Get all the texts
@@ -65,11 +68,13 @@ void DialogModifyClient::on_pushButton_ok_clicked()
     }
 }
 
+// When the user want to cancel his action
 void DialogModifyClient::on_pushButton_cancel_clicked()
 {
     reject();
 }
 
+// When the user want to reset all fields
 void DialogModifyClient::on_pushButton_reset_clicked()
 {
     ui->lineEdit_firstname->clear();
@@ -84,6 +89,7 @@ void DialogModifyClient::on_pushButton_reset_clicked()
     ui->textEdit->clear();
 }
 
+// It's for color the field border when it's wrong
 bool DialogModifyClient::colorBoderFail()
 {
     bool noEmptyField = true;
@@ -122,7 +128,14 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_city->setStyleSheet("");
-    if(ui->lineEdit_postalCode->text().isEmpty())
+    if(!ui->lineEdit_telephone->text().isEmpty() && (QString::number(ui->lineEdit_telephone->text().toInt()) == "0"))
+    {
+        ui->lineEdit_telephone->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->lineEdit_telephone->setStyleSheet("");
+    if(ui->lineEdit_postalCode->text().isEmpty() || (QString::number(ui->lineEdit_postalCode->text().toInt()) == "0"))
     {
         ui->lineEdit_postalCode->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
@@ -147,11 +160,11 @@ bool DialogModifyClient::colorBoderFail()
     return noEmptyField;
 }
 
-
+// It's a button to open a new windows for the ressource selection
 void DialogModifyClient::on_pushBtn_choose_clicked()
 {
     DialogChooseRessource dcr;
 
     if(dcr.exec() == QDialog::Accepted)
-            ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
+        ui->label_status->setText(QString::number(Controller_client::resNumber) + " ressources choosen.");
 }
