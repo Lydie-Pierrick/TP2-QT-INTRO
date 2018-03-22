@@ -1,23 +1,26 @@
 #include "mainwindow.h"
-
+// Constructor
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // Initialize the contenus of interface
     ui->statusBar->showMessage("You logged in!");
-
     ui->dateEdit_Planification->setDate(QDate::currentDate());
     ui->dateEdit_From->setDate(QDate::currentDate());
     ui->dateEdit_To->setDate(QDate::currentDate());
 
+    // Initialize two pointers of tableView and treeView
     modelTreeView = new QStandardItemModel();
     modelTableView = new QStandardItemModel();
 
+    // Initialize two tables : tableView and treeView
     initTreeViewRessources();
-    initTableViewClients();  
+    initTableViewClients();
 }
 
+// Destructor
 MainWindow::~MainWindow()
 {
     // Close the database
@@ -30,92 +33,113 @@ MainWindow::~MainWindow()
     if(modelTableView != NULL)
         delete modelTableView;
 
-
     delete ui;
 }
 
+// Trigger action About
 void MainWindow::on_actionAbout_triggered()
 {
+    // Change the text of statusBar
     ui->statusBar->showMessage("You have consulted \"about us\" !");
     DialogAbout da;
     da.exec();
 }
 
+// Trigger action Quit
 void MainWindow::on_actionQuit_triggered()
 {
+    // Close the window
     close();
 }
 
-// ADD CLIENT
-
+// Trigger action AddClient (Text)
 void MainWindow::on_actionClient_triggered()
 {
+    // Call the function to add a client
     addClient();
 }
-
+// Trigger action AddClient (Icon)
 void MainWindow::on_actionClient_2_triggered()
 {
+    // Call the function to add a client
     addClient();
 }
 
+// Function for adding a client
 void MainWindow::addClient()
 {
     DialogAddClient dac;
 
+    // If the dialog of AddClient accepts the operations
     if(dac.exec() == QDialog::Accepted)
     {
+        // Change the text of statusBar
         ui->statusBar->showMessage("You have added a client !");
+        // Refresh the table view
         refreshTableViewClients(controllerClient.getAllClients());
     }
 }
 
-// ADD EMPLOYEE
-
+// Trigger action AddEmployee (Text)
 void MainWindow::on_actionEmployee_triggered()
 {
+    // Add an employee
     addEmployee();
 }
 
+// Trigger action AddEmployee (Icon)
 void MainWindow::on_actionEmployee_2_triggered()
 {
+    // Add an employee
     addEmployee();
 }
 
+// Funcion for adding an employee
 void MainWindow::addEmployee()
 {
     DialogAddEmployee dae;
 
+    // If the dialog of AddEmployee accepts the operations
     if(dae.exec() == QDialog::Accepted)
     {
+        // Change the text of statusBar
         ui->statusBar->showMessage("You have added an employee !");
+        // Refresh the treeView
         initTreeViewRessources();
     }
 }
 
+// Funciton for modifying a client
 void MainWindow::modifyClient()
 {
-    // Open the dialog
     DialogModifyClient dmc;
 
+    // If the dialog of AddEmployee accepts the operations
     if(dmc.exec() == QDialog::Accepted)
     {
+        // Change the text of statusBar
         ui->statusBar->showMessage("You have modified a client !");
+        // Refresh the tableView
         initTableViewClients();
     }
 }
 
+// Function for modifying an employee
 void MainWindow::modifyEmployee()
 {
-    // Open the dialog
     DialogModifyEmployee dme;
 
+    // If the dialog of AddEmployee accepts the operations
     if(dme.exec() == QDialog::Accepted)
     {
+        // Change the text of statusBar
         ui->statusBar->showMessage("You have modified an employee !");
+        // Refresh the treeView
         initTreeViewRessources();
     }
 }
 
+// Funciton for initialising the treeView
 void MainWindow::initTreeViewRessources()
 {
     // Set model for treeView
@@ -141,22 +165,24 @@ void MainWindow::initTreeViewRessources()
 
         // Add the lastnames and ID as the child of Type
         for(unsigned int j = 0; j < v_employees.size(); j ++){
+            // Set itemId et itemName
             itemId = new QStandardItem(QString::number(v_employees[j].getId()));
             itemName = new QStandardItem(v_employees[j].getLastname());
 
+            // Set children for itemType with itemId and itemName
             itemType->setChild(j, 0, itemId);
             itemType->setChild(j, 1, itemName);
         }
+        // Set item for model
         modelTreeView->setItem(i, 0, itemType);
     }
     // Expand all the nodes
     ui->treeView_Ressource->expandAll();
 }
 
+// Funciton for initialising the tableView
 void MainWindow::initTableViewClients()
 {
-    //deletePointersTableView();
-
     // Set model for tableView
     ui->tableView_SearchClient->setModel(modelTableView);
     // Hide the vertical header
@@ -165,7 +191,6 @@ void MainWindow::initTableViewClients()
     ui->tableView_SearchClient->setEditTriggers(QAbstractItemView::NoEditTriggers);
     // One case chosen, one row chosen
     ui->tableView_SearchClient->setSelectionBehavior(QAbstractItemView::SelectRows);
-
     // Set horizontal header labels
     modelTableView->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Firstname")<<
                                                QStringLiteral("Lastname")<<QStringLiteral("Ressources")));
@@ -178,24 +203,30 @@ void MainWindow::initTableViewClients()
 
 }
 
+// Function for refreshing the tableView
 void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 {
     vector<int> idsRes;
     QString namesRes;
     int id;
+
     // Clear all the existing rows
     modelTableView->removeRows(0, modelTableView->rowCount());
 
+    // Get information of each clients
     for(unsigned int i = 0; i < v_clients.size(); i++)
     {
+        // Get ressources IDs
         idsRes = v_clients[i].getIdRessources();
         namesRes = "";
+        // Convert all IDs into a string
         for(unsigned int j = 0; j < idsRes.size() - 1; j ++)
         {
             id = idsRes[j];
             namesRes += controllerEmployee.searchEmployee(id).getLastname();
             namesRes += " / ";
         }
+        // Convert the last ID into a string
         id = idsRes[idsRes.size()-1];
         namesRes += controllerEmployee.searchEmployee(id).getLastname();
 
@@ -204,24 +235,30 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
         QStandardItem * itemLastname = new QStandardItem(v_clients[i].getLastName());
         QStandardItem * itemRes = new QStandardItem(namesRes);
 
+        // Set items for model
         modelTableView->setItem(i, 0, itemId);
         modelTableView->setItem(i, 1, itemFirstname);
         modelTableView->setItem(i, 2, itemLastname);
         modelTableView->setItem(i, 3, itemRes);
     }
 
+    // Resizing the width of column 3 according the content
     ui->tableView_SearchClient->resizeColumnToContents(3);
-
+    // Resizing the height of rows
     ui->tableView_SearchClient->resizeRowsToContents();
 }
 
+// Slot : click the treeView (choose an employee)
 void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
 {
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+    // Get the parent of current index (Type of employees)
     QModelIndex indexParent = index.parent();
 
+    // Check if the parent exists (for avoiding clicking the Type)
     if(indexParent.isValid())
     {
+        // Set two buttons enable
         ui->pushBtn_DeleteEmployee->setEnabled(true);
         ui->pushBtn_ModifyEmployee->setEnabled(true);
 
@@ -232,18 +269,21 @@ void  MainWindow::on_treeView_Ressource_clicked(const QModelIndex &index)
         int id = indexId.data().toInt();
         Controller_employee::selectedID = id;
     }
-    else
+    else // If user click Type the two buttons will not be enabled
     {
         ui->pushBtn_DeleteEmployee->setEnabled(false);
         ui->pushBtn_ModifyEmployee->setEnabled(false);
     }
 }
 
+// Slot : double click the treeView (modify the employees)
 void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
 {
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
+    // Get the parent of current index (Type of employees)
     QModelIndex indexParent = index.parent();
 
+    // Check if the parent exists (for avoiding clicking the Type)
     if(indexParent.isValid())
     {
         // Get content of the 1st column of selected line
@@ -257,16 +297,20 @@ void MainWindow::on_treeView_Ressource_doubleClicked(const QModelIndex &index)
     }
 }
 
+// Slot : click the button of modifyEmployee
 void MainWindow::on_pushBtn_ModifyEmployee_clicked()
 {
     modifyEmployee();
 }
 
+// Slot : click the button of deleteEmployee
 void MainWindow::on_pushBtn_DeleteEmployee_clicked()
 {
+    // If successfully delete an employee
     if(controllerEmployee.deleteEmployee(Controller_employee::selectedID))
     {
         ui->statusBar->showMessage("You have removed an employee !");
+        // Refresh the treeView
         initTreeViewRessources();
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully deleted the employee !"));
     }
@@ -276,66 +320,84 @@ void MainWindow::on_pushBtn_DeleteEmployee_clicked()
     }
 }
 
+// Slot : click the button of refreshEmployee
 void MainWindow::on_pushBtn_RefreshEmployee_clicked()
 {
     ui->statusBar->showMessage("You have refreshed the list of employee !");
+    // Refresh the treeView
     initTreeViewRessources();
 }
 
+// Slot :click the button of searchByDate
 void MainWindow::on_pushBtn_SearchByDate_clicked()
 {
-
+    // Get dates from interfaces
     QDate dateFrom = ui->dateEdit_From->date();
     QDate dateTo = ui->dateEdit_To->date();
 
+    // Search clients between two dates
     vector<Client> v_clients = controllerClient.searchClientsByDate(dateFrom, dateTo);
 
+    // Refresh the tableView
     refreshTableViewClients(v_clients);
 
     ui->statusBar->showMessage("You have searched clients by date.");
 }
 
+// Slot :click the button of refreshEmployee
 void MainWindow::on_pushBtn_SearchByID_clicked()
 {
-   int id = ui->lineEdit_SearchByID->text().toInt();
-   vector<Client> v_clients = controllerClient.searchClientById(id);
+    // Get ID from the interface
+    int id = ui->lineEdit_SearchByID->text().toInt();
+    // Get the client by ID
+    vector<Client> v_clients = controllerClient.searchClientById(id);
 
-   if(!v_clients.size() == 0)
-   {
-      ui->statusBar->showMessage("You have searched clients by id.");
-   }
-   else
-   {
-      ui->statusBar->showMessage("You have searched clients by id. No record was found !");
-      QMessageBox::critical(this, tr("Error"), tr("No record was found !"));
-   }
+    // If we find a client
+    if(!v_clients.size() == 0)
+    {
+        ui->statusBar->showMessage("You have searched clients by id.");
+    }
+    else // If there isn't a client with this ID
+    {
+        ui->statusBar->showMessage("You have searched clients by id. No record was found !");
+        QMessageBox::critical(this, tr("Error"), tr("No record was found !"));
+    }
 
-  refreshTableViewClients(v_clients);
+    // Refresh the tableView
+    refreshTableViewClients(v_clients);
 }
 
+// Slot :click the button of searchClientByName
 void MainWindow::on_pushBtn_SearchByName_clicked()
 {
-     QString name = ui->lineEdit_SearchByName->text();
-     vector<Client> v_clients = controllerClient.searchClientsByName(name);
+    // Get name from the interface
+    QString name = ui->lineEdit_SearchByName->text();
+    // Get clients by names
+    vector<Client> v_clients = controllerClient.searchClientsByName(name);
 
-     if(v_clients.size() != 0)
-     {
+    // If we find a client
+    if(v_clients.size() != 0)
+    {
         ui->statusBar->showMessage("You have searched clients by name.");
-     }
-     else
-     {
+    }
+    else // If there isn't a client with this name
+    {
         ui->statusBar->showMessage("You have searched clients by name. No record was found !");
         QMessageBox::critical(this, tr("Error"), tr("No record was found !"));
-     }
+    }
 
     refreshTableViewClients(v_clients);
 }
 
+
+// Slot :click the button of deleteClient
 void MainWindow::on_pushBtn_DeleteClient_clicked()
 {
+    // If successfully delete an client
     if(controllerClient.deleteClient(Controller_client::selectedID))
     {
         ui->statusBar->showMessage("You have deleted a client !");
+        // Refresh tableView
         initTableViewClients();
         QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully deleted the client !"));
     }
@@ -345,18 +407,19 @@ void MainWindow::on_pushBtn_DeleteClient_clicked()
     }
 }
 
+// Slot :click the tableView (choose a client)
 void MainWindow::on_tableView_SearchClient_clicked(const QModelIndex &index)
 {
     QAbstractItemModel* itemModel=(QAbstractItemModel*)index.model();
-    QModelIndex indexParent = index.parent();
 
+    // If this index is valid
     if(index.isValid())
     {
         ui->pushBtn_DeleteClient->setEnabled(true);
         ui->pushBtn_ModifyClient->setEnabled(true);
 
         // Get content of the 1st column of selected line
-        QModelIndex indexId = itemModel->index(index.row(), 0, indexParent);
+        QModelIndex indexId = itemModel->index(index.row(), 0);
 
         // Set selectedID
         int id = indexId.data().toInt();
@@ -368,11 +431,13 @@ void MainWindow::on_tableView_SearchClient_clicked(const QModelIndex &index)
     }
 }
 
+// Slot :click the button of modifyClient
 void MainWindow::on_pushBtn_ModifyClient_clicked()
 {
     modifyClient();
 }
 
+// Slot : double click the tableView (modify a client)
 void MainWindow::on_tableView_SearchClient_doubleClicked()
 {
     modifyClient();
