@@ -599,7 +599,8 @@ void MainWindow::on_pushBtn_Export_clicked()
 {
     QString fileName;
     // Set file name by default
-    QString fileNameDefault = "Ressources";
+    QString fileNameDefault = "Ressources_" +
+            QDate::currentDate().toString("ddMMyyyy");;
     // Open file dialog and set the properties
     fileName = QFileDialog::getSaveFileName(this,
         tr("Export Ressources"), fileNameDefault, tr("XML (*.xml)"));

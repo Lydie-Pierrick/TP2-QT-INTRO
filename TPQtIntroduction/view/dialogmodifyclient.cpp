@@ -100,6 +100,7 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_firstname->setStyleSheet("");
+
     if(ui->lineEdit_lastname->text().isEmpty())
     {
         ui->lineEdit_lastname->setStyleSheet("border: 1px solid red");
@@ -107,6 +108,7 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_lastname->setStyleSheet("");
+
     if(ui->lineEdit_address->text().isEmpty())
     {
         ui->lineEdit_address->setStyleSheet("border: 1px solid red");
@@ -114,6 +116,7 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_address->setStyleSheet("");
+
     if(ui->lineEdit_address->text().isEmpty())
     {
         ui->lineEdit_address->setStyleSheet("border: 1px solid red");
@@ -121,6 +124,7 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_address->setStyleSheet("");
+
     if(ui->lineEdit_city->text().isEmpty())
     {
         ui->lineEdit_city->setStyleSheet("border: 1px solid red");
@@ -128,6 +132,7 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_city->setStyleSheet("");
+
     if(!ui->lineEdit_telephone->text().isEmpty() && (QString::number(ui->lineEdit_telephone->text().toInt()) == "0"))
     {
         ui->lineEdit_telephone->setStyleSheet("border: 1px solid red");
@@ -135,6 +140,7 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_telephone->setStyleSheet("");
+
     if(ui->lineEdit_postalCode->text().isEmpty() || (QString::number(ui->lineEdit_postalCode->text().toInt()) == "0"))
     {
         ui->lineEdit_postalCode->setStyleSheet("border: 1px solid red");
@@ -142,6 +148,7 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_postalCode->setStyleSheet("");
+
     if(ui->lineEdit_duration->text().isEmpty())
     {
         ui->lineEdit_duration->setStyleSheet("border: 1px solid red");
@@ -149,6 +156,7 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->lineEdit_duration->setStyleSheet("");
+
     if(ui->label_status->text() == "0 ressources choosen.")
     {
         ui->label_status->setStyleSheet("border: 1px solid red");
@@ -156,6 +164,14 @@ bool DialogModifyClient::colorBoderFail()
     }
     else
         ui->label_status->setStyleSheet("");
+
+    if((ui->dateEdit->date() < QDate::currentDate()) || (ui->dateEdit->date() > QDate::currentDate().addDays(30)))
+    {
+        ui->dateEdit->setStyleSheet("border: 1px solid red");
+        noEmptyField = false;
+    }
+    else
+        ui->dateEdit->setStyleSheet("");
 
     return noEmptyField;
 }

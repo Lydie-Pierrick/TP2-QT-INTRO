@@ -1,5 +1,9 @@
 #include "view/mainwindow.h"
 #include "c_init_bd.h"
+#include <map>
+#include <iostream>
+#include <string>
+using namespace std;
 
 int Controller_employee::selectedID = 0;
 int Controller_client::selectedID = 0;
@@ -25,6 +29,21 @@ int main(int argc, char *argv[])
     }
     else {
         return 0;
+    }
+
+    // TP note
+    multimap<int, string> map;
+    multimap<int, string>::iterator it;
+    map.insert(pair<int, string>(1, "titi"));
+    map.insert(pair<int, string>(4, "toto"));
+    map.insert(pair<int, string>(3, "tutu"));
+    map.insert(pair<int, string>(4, "tata"));
+    map.erase(3);
+    map.insert(pair<int, string>(0, "tete"));
+
+    for(it = map.begin(); it != map.end(); it ++)
+    {
+        cout<<(*it).second<<endl;
     }
 
     return a.exec();
