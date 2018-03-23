@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     initTableViewClients();
 
     // TP note
-    //ui->lineEdit_SearchByID->setText("ID");
     ui->lineEdit_SearchByName->setText("His/Her firstname");
 }
 
@@ -301,7 +300,7 @@ void MainWindow::initTableViewPlanning()
 // Funciton for deleting the pointer in treeView
 void MainWindow::deletePointersTreeView()
 {
-    for(int i = 0 ; i < v_pointersTreeView.size(); i ++)
+    for(unsigned int i = 0 ; i < v_pointersTreeView.size(); i ++)
     {
         for(int j = 0; j < v_pointersTreeView[i]->rowCount(); j ++)
         {
@@ -321,7 +320,7 @@ void MainWindow::deletePointersTreeView()
 // Funciton for deleting the pointer in tableView
 void MainWindow::deletePointersTableView()
 {
-    for(int i = 0 ; i < v_pointersTableView.size(); i ++)
+    for(unsigned int i = 0 ; i < v_pointersTableView.size(); i ++)
     {
         for(int j = 0; j < v_pointersTableView[i]->rowCount(); j ++)
         {
@@ -645,4 +644,16 @@ void MainWindow::on_pushBtn_Export_clicked()
         }
     }
     ui->statusBar->showMessage("You have exported the XML of clients !");
+}
+
+void MainWindow::on_pushButton_AddOtherEmployee_clicked()
+{
+    DialogOthers dialogOthers;
+    if(dialogOthers.exec() == QDialog::Accepted) {
+    }
+}
+
+bool compareDate(Client const * c1, Client const * c2)
+{
+    return c1->lastname < c2->lastname;
 }

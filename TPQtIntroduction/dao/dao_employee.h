@@ -14,6 +14,7 @@ class DAO_Employee
 public:
     DAO_Employee();
     bool addEmployee(QString firstname, QString lastname, int idType, QString username, QString password);
+    bool addEmployeeOther(QString firstname, QString lastname);
     vector<map<QString, QString> > getAllEmployees();
     map<QString,QString> searchEmployee(int id);
     map<QString, QString> getEmployeeAccount(int id);
@@ -23,6 +24,7 @@ public:
     vector<map<QString, QString> > getAllTypes();
     vector<map<QString, QString> > getEmployeesByType(int idType);
     bool checkLogin(QString username, QString password);
+    static int counter_insert;
 private:
     QSqlDatabase db;
     void modify_TCompte_ITUser(int idType, QString username, QString password, int id);

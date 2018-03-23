@@ -31,6 +31,7 @@ bool DAO_Client::addClient(QString firstname, QString lastname, int telephone,
     // Check if the sql was executed
     if(sqlQuery.exec())
     {
+        DAO_Client::counter_insert++;
         QSqlQuery sqlQuery2(db);
         sqlQuery2.prepare("SELECT last_insert_rowid()");
         // Check if the sql 2 was executed
@@ -257,6 +258,8 @@ bool DAO_Client::addRessources(int idClient, vector<int> idRessources)
             qDebug() << sqlQuery.lastError();
             return false;
         }
+
+        DAO_Client::counter_insert++;
     }
 
     return true;

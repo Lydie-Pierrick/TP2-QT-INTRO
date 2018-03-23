@@ -21,6 +21,12 @@ bool Controller_employee::addEmployee(QString firstname, QString lastname, int i
     return daoEmployee.addEmployee(firstname, lastname, idType, username, password);
 }
 
+// Add an employee other
+bool Controller_employee::addEmployeeOther(QString firstname, QString lastname)
+{
+    return daoEmployee.addEmployeeOther(firstname, lastname);
+}
+
 // Search emloyee by ID
 Employee Controller_employee::searchEmployee(int id)
 {

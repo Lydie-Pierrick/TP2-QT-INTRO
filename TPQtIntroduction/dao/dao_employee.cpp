@@ -23,6 +23,7 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, 
     }
     else
     {
+        DAO_Employee::counter_insert++;
         // If the type is "Computer Scientist"
         if(convertIntToType(idType) == "Computer Scientist" && !username.isEmpty() && !password.isEmpty())
         {
@@ -36,10 +37,33 @@ bool DAO_Employee::addEmployee(QString firstname, QString lastname, int idType, 
             {
                 qDebug() << sqlQuery2.lastError();
             }
+
+            DAO_Employee::counter_insert++;
         }
 
         return true;
     }
+}
+
+// Add an employee
+bool DAO_Employee::addEmployeeOther(QString firstname, QString lastname)
+{
+    QSqlQuery sqlQuery(db);
+    sqlQuery.prepare("INSERT INTO TRessource (Nom, Prenom, IdType) VALUES (?, ?, ?)");
+    sqlQuery.addBindValue(lastname);
+    sqlQuery.addBindValue(firstname);
+    sqlQuery.addBindValue(6);
+
+    if(!sqlQuery.exec())
+    {
+        qDebug() << sqlQuery.lastError();
+
+        return false;
+    }
+
+    DAO_Employee::counter_insert++;
+
+    return true;
 }
 
 // Get all employees from database
@@ -155,6 +179,8 @@ void DAO_Employee::modify_TCompte_ITUser(int idType, QString username, QString p
             sqlQuery3.addBindValue(id);
             sqlQuery3.addBindValue(username);
             sqlQuery3.addBindValue(password);
+
+            DAO_Employee::counter_insert++;
         }
 
         if(!sqlQuery3.exec())

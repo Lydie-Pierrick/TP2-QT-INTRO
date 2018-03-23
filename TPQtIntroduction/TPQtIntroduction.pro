@@ -42,7 +42,8 @@ SOURCES += \
     dao/dao_client.cpp \
     dao/dao_employee.cpp \
     dao/singletondb.cpp \
-    controller/controller_appointment.cpp
+    controller/controller_appointment.cpp \
+    dialogothers.cpp
 
 HEADERS += \
         view/mainwindow.h \
@@ -62,7 +63,8 @@ HEADERS += \
     dao/dao_client.h \
     dao/dao_employee.h \
     dao/singletondb.h \
-    controller/controller_appointment.h
+    controller/controller_appointment.h \
+    dialogothers.h
 
 FORMS += \
     mainwindow.ui \
@@ -72,7 +74,8 @@ FORMS += \
     dialogaddemployee.ui \
     dialogmodifyemployee.ui \
     dialogchooseressource.ui \
-    dialogmodifyclient.ui
+    dialogmodifyclient.ui \
+    dialogothers.ui
 
 RESOURCES += \
     pictures.qrc

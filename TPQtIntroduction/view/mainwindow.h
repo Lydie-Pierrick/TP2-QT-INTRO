@@ -15,6 +15,7 @@
 #include "dialogidentification.h"
 #include "dialogmodifyemployee.h"
 #include "dialogmodifyclient.h"
+#include "dialogothers.h"
 
 namespace Ui {
 class MainWindow;
@@ -64,6 +65,9 @@ private slots:
     void on_pushBtn_ShowResult_clicked();
 
     void on_pushBtn_Export_clicked();
+    void on_pushButton_AddOtherEmployee_clicked();
+
+    bool compareDate(Client const * c1, Client const * c2);
 
 private:
     Ui::MainWindow *ui;

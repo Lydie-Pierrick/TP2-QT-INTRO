@@ -281,6 +281,13 @@
                </spacer>
               </item>
               <item>
+               <widget class="QPushButton" name="pushButton_AddOtherEmployee">
+                <property name="text">
+                 <string>Add Other Emp.</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="pushBtn_Export">
                 <property name="text">
                  <string>Export</string>

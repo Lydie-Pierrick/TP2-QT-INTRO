@@ -18,6 +18,7 @@ public:
     Controller_employee();
     bool checkLogin(QString username, QString password);
     bool addEmployee(QString firstname, QString lastname, int idType, QString username, QString password);
+    bool addEmployeeOther(QString firstname, QString lastname);
     Employee searchEmployee(int id);
     map<QString, QString> getEmployeeAccount(int id);
     bool searchEmployee(QString name);

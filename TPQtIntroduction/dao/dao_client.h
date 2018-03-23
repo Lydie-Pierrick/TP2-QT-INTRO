@@ -21,6 +21,7 @@ public:
     bool addRessources(int idClient, vector<int> idRessources);
     bool modifyRessources(int idClient, vector<int> idRessources);
     vector<int> searchRessourcesID(int idClient);
+    static int counter_insert;
 private:
     QSqlDatabase db;
     map<QString, QString> collectInfosClient(QSqlQuery sqlQuery);
