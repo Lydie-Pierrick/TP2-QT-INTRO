@@ -30,7 +30,6 @@ int main(int argc, char *argv[])
         mainWindow.show();
     }
     else {
-        cout << "Show number inserts SQL : " << (DAO_Employee::counter_insert + DAO_Employee::counter_insert) << endl;
         return 0;
     }
 

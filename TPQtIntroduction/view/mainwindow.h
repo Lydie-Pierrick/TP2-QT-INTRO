@@ -67,7 +67,7 @@ private slots:
     void on_pushBtn_Export_clicked();
     void on_pushButton_AddOtherEmployee_clicked();
 
-    bool compareDate(Client const * c1, Client const * c2);
+    //int compareName(Client const * c1, Client const * c2);
 
 private:
     Ui::MainWindow *ui;
@@ -78,6 +78,8 @@ private:
 
     vector<QStandardItem*> v_pointersTreeView;
     vector<QStandardItem*> v_pointersTableView;
+protected:
+     void closeEvent(QCloseEvent *event);
 };
 
 #endif // MAINWINDOW_H

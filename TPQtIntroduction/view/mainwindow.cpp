@@ -217,7 +217,8 @@ void MainWindow::initTableViewClients()
 // Function for refreshing the tableView
 void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 {
-    //deletePointersTableView();
+    //deletePointersTableView();    
+    //sort(v_clients.begin(), v_clients.end(), compareName);
 
     vector<int> idsRes;
     QString namesRes;
@@ -233,7 +234,7 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 
     // Get information of each clients
     for(unsigned int i = 0; i < v_clients.size(); i++)
-    {
+    {        
         // Get ressources IDs
         idsRes = v_clients[i].getIdRessources();
         namesRes = "";
@@ -653,7 +654,14 @@ void MainWindow::on_pushButton_AddOtherEmployee_clicked()
     }
 }
 
-bool compareDate(Client const * c1, Client const * c2)
+/*int compareName(Client const & c1, Client const & c2)
 {
-    return c1->lastname < c2->lastname;
+    return 0;
+    //return c1.getLastName().compare(c2.getLastName());
+}
+*/
+        //cout << "Show number inserts SQL : " << (DAO_Employee::counter_insert + DAO_Employee::counter_insert) << endl;
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+     cout << "Show number inserts SQL : " << (DAO_Employee::counter_insert + DAO_Employee::counter_insert) << endl;
 }
