@@ -142,7 +142,7 @@ void MainWindow::modifyEmployee()
 // Funciton for initialising the treeView
 void MainWindow::initTreeViewRessources()
 {
-    deletePointersTreeView();
+    //deletePointersTreeView();
     // Set model for treeView
     ui->treeView_Ressource->setModel(modelTreeView);
     // The items cannot be edited
@@ -214,7 +214,7 @@ void MainWindow::initTableViewClients()
 // Function for refreshing the tableView
 void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 {
-    deletePointersTableView();
+    //deletePointersTableView();
 
     vector<int> idsRes;
     QString namesRes;
@@ -554,6 +554,7 @@ void MainWindow::on_tabWidget_tabBarClicked(int index)
     }
 }
 
+// Slot : click the button plan
 void MainWindow::on_pushBtn_Plan_clicked()
 {
     QString fileName;
@@ -579,10 +580,12 @@ void MainWindow::on_pushBtn_Plan_clicked()
             QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully saved the file !"));
         }
     }
+    ui->statusBar->showMessage("You have consulted the list of clients !");
 }
 
-
+// Slot : click
 void MainWindow::on_pushBtn_ShowResult_clicked()
 {
     initTableViewPlanning();
+    ui->statusBar->showMessage("You have consulted the list of clients !");
 }
