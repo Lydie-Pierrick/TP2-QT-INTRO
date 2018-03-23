@@ -18,6 +18,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize two tables : tableView and treeView
     initTreeViewRessources();
     initTableViewClients();
+
+    // TP note
+    //ui->lineEdit_SearchByID->setText("ID");
+    ui->lineEdit_SearchByName->setText("His/Her firstname");
 }
 
 // Destructor
@@ -588,4 +592,56 @@ void MainWindow::on_pushBtn_ShowResult_clicked()
 {
     initTableViewPlanning();
     ui->statusBar->showMessage("You have consulted the list of clients !");
+}
+
+// TP note
+void MainWindow::on_pushBtn_Export_clicked()
+{
+    QString fileName;
+    // Set file name by default
+    QString fileNameDefault = "Ressources";
+    // Open file dialog and set the properties
+    fileName = QFileDialog::getSaveFileName(this,
+        tr("Export Ressources"), fileNameDefault, tr("XML (*.xml)"));
+
+    vector<Client> v_client = controllerClient.getAllClients();
+
+    if (!fileName.isEmpty()) // If the file name is not empty
+    {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly))
+        { // If fail to open a file in "WriteOnly"
+            QMessageBox::critical(this, tr("Error"), tr("Fail to open the file !"));
+        }
+        else
+        {
+            int size = v_client.size();
+
+            QTextStream stream(&file);
+            QString firstname, lastname;
+            int id;
+
+            // Write the text into file
+            stream << "<TRessource>\n";
+
+            for(int i = 0; i < size; i ++)
+            {
+                id = v_client[i].getId();
+                firstname = v_client[i].getFirstName();
+                lastname = v_client[i].getLastName();
+
+                stream << "\t<Ressource Id = \"" + QString::number(id) + "\">\n";
+                stream << "\t\t<Lastname>" + lastname + "<\/Lastname>\n";
+                stream << "\t\t<Firstname>" + firstname + "<\/Firstname>\n";
+                stream << "\t<\/Ressource>\n";
+            }
+
+            stream << "<TRessource>\n";
+
+            stream.flush();
+            // Close the file
+            file.close();
+        }
+    }
+    ui->statusBar->showMessage("You have exported the XML of clients !");
 }

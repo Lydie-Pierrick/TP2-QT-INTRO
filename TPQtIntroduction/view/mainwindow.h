@@ -63,6 +63,8 @@ private slots:
     void on_pushBtn_Plan_clicked();
     void on_pushBtn_ShowResult_clicked();
 
+    void on_pushBtn_Export_clicked();
+
 private:
     Ui::MainWindow *ui;
     Controller_employee controllerEmployee;

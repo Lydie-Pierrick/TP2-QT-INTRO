@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Company Management System</string>
+   <string>Gestion de RDV</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
@@ -66,7 +66,7 @@
          <bool>false</bool>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab_SearchClient">
          <property name="sizePolicy">
@@ -279,6 +279,13 @@
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushBtn_Export">
+                <property name="text">
+                 <string>Export</string>
+                </property>
+               </widget>
               </item>
               <item>
                <widget class="QPushButton" name="pushBtn_ModifyEmployee">

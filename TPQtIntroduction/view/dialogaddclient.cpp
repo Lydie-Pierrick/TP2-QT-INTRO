@@ -55,6 +55,7 @@ void DialogAddClient::on_pushButton_ok_clicked()
     int postalCode = ui->lineEdit_postalCode->text().toInt();
     int duration = ui->lineEdit_duration->text().toInt();
     QDate dateAppointment = ui->dateEdit->date();
+
     int priorityAppointment = ui->comboBox_priority->currentText().toInt();
     QString comment = ui->textEdit->toPlainText();
 
@@ -138,13 +139,14 @@ bool DialogAddClient::colorBoderFail()
     }
     else
         ui->lineEdit_duration->setStyleSheet("");
-    if(ui->dateEdit->date() < QDate::currentDate())
+    if((ui->dateEdit->date() < QDate::currentDate()) || (ui->dateEdit->date() > QDate::currentDate().addDays(30)))
     {
         ui->dateEdit->setStyleSheet("border: 1px solid red");
         noEmptyField = false;
     }
     else
         ui->dateEdit->setStyleSheet("");
+
     if(ui->label_status->text() == "0 ressources choosen.")
     {
         ui->label_status->setStyleSheet("border: 1px solid red");
