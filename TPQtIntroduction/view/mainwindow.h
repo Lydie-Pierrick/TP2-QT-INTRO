@@ -4,6 +4,7 @@
 #include <QStandardItemModel>
 #include <QStringList>
 #include <QApplication>
+#include <QFileDialog>
 #include <map>
 #include "ui_mainwindow.h"
 #include "dialogaddclient.h"
@@ -36,6 +37,7 @@ private slots:
     void initTreeViewRessources();
     void initTableViewClients();
     void refreshTableViewClients(vector<Client> v_clients);
+    void initTableViewPlanning();
     void deletePointersTreeView();
     void deletePointersTableView();
 
@@ -57,8 +59,9 @@ private slots:
     void on_tableView_SearchClient_clicked(const QModelIndex &index);
     void on_pushBtn_ModifyClient_clicked();
     void on_tableView_SearchClient_doubleClicked();
-
     void on_tabWidget_tabBarClicked(int index);
+    void on_pushBtn_Plan_clicked();
+    void on_pushBtn_ShowResult_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     // Initialize the contenus of interface
     ui->statusBar->showMessage("You logged in!");
-    ui->dateEdit_Planification->setDate(QDate::currentDate());
+    ui->dateEdit_Planning->setDate(QDate::currentDate());
     ui->dateEdit_From->setDate(QDate::currentDate());
     ui->dateEdit_To->setDate(QDate::currentDate());
 
@@ -204,6 +204,10 @@ void MainWindow::initTableViewClients()
     vector<Client> v_clients = controllerClient.getAllClients();
     // Refresh the tableView
     refreshTableViewClients(v_clients);
+    // Resizing the width of column 3 according the content
+    ui->tableView_SearchClient->resizeColumnToContents(3);
+    // Resizing the height of rows
+    ui->tableView_SearchClient->resizeRowsToContents();
 
 }
 
@@ -262,11 +266,32 @@ void MainWindow::refreshTableViewClients(vector<Client> v_clients)
         itemLastname = NULL;
         itemRes = NULL;
     }
+}
 
+void MainWindow::initTableViewPlanning()
+{
+    // Set model for tableView
+    ui->tableView_Planning->setModel(modelTableView);
+    // Hide the vertical header
+    ui->tableView_Planning->verticalHeader()->setVisible(false);
+    // The items cannot be edited
+    ui->tableView_Planning->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    // One case chosen, one row chosen
+    ui->tableView_Planning->setSelectionBehavior(QAbstractItemView::SelectRows);
+    // Set horizontal header labels
+    modelTableView->setHorizontalHeaderLabels((QStringList()<<QStringLiteral("ID")<<QStringLiteral("Firstname")<<
+                                               QStringLiteral("Lastname")<<QStringLiteral("Ressources")));
+    // Stretch the last section
+    ui->tableView_Planning->horizontalHeader()->setStretchLastSection(true);
+    // Get clients of this date
+    vector<Client> v_clients = controllerClient.searchClientsByDate(ui->dateEdit_Planning->date(),
+                                                                    ui->dateEdit_Planning->date());
+    // Refresh the tableView
+    refreshTableViewClients(v_clients);
     // Resizing the width of column 3 according the content
-    ui->tableView_SearchClient->resizeColumnToContents(3);
+    ui->tableView_Planning->resizeColumnToContents(3);
     // Resizing the height of rows
-    ui->tableView_SearchClient->resizeRowsToContents();
+    ui->tableView_Planning->resizeRowsToContents();
 }
 
 // Funciton for deleting the pointer in treeView
@@ -396,18 +421,17 @@ void MainWindow::on_pushBtn_SearchByDate_clicked()
     QDate dateFrom = ui->dateEdit_From->date();
     QDate dateTo = ui->dateEdit_To->date();
 
-    // Search clients between two dates
-    vector<Client> v_clients = controllerClient.searchClientsByDate(dateFrom, dateTo);
 
-    // Refresh the tableView
-    refreshTableViewClients(v_clients);
     if(dateFrom > dateTo)
     {
         QMessageBox::critical(this, tr("Error"), tr("Error date searched ! Please check your field."));
     }
     else
     {
+        // Search clients between two dates
         vector<Client> v_clients = controllerClient.searchClientsByDate(dateFrom, dateTo);
+
+        // Refresh the tableView
         refreshTableViewClients(v_clients);
 
         ui->statusBar->showMessage("You have searched clients by date.");
@@ -513,14 +537,52 @@ void MainWindow::on_tableView_SearchClient_doubleClicked()
     modifyClient();
 }
 
+// Slot : click the tabBar
 void MainWindow::on_tabWidget_tabBarClicked(int index)
 {
-    if(index == 0)
+    if(index == 0) // Interface : search client
     {
         initTableViewClients();
     }
-    else if(index == 1)
+    else if(index == 1) // Interface : ressources
     {
         initTreeViewRessources();
     }
+    else if(index == 2) // Interface : planning
+    {
+        initTableViewPlanning();
+    }
+}
+
+void MainWindow::on_pushBtn_Plan_clicked()
+{
+    QString fileName;
+    // Set file name by default
+    QString fileNameDefault = "Planning_" +
+            ui->dateEdit_Planning->date().toString("ddMMyyyy");
+    // Open file dialog and set the properties
+    fileName = QFileDialog::getSaveFileName(this,
+        tr("Save planning"), fileNameDefault, tr("Text (*.txt)"));
+
+    if (!fileName.isEmpty()) // If the file name is not empty
+    {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) { // If fail to open a file in "WriteOnly"
+            QMessageBox::critical(this, tr("Error"), tr("Fail to open the file !"));
+        } else { // If succeed
+            QTextStream stream(&file);
+            // Write the text into file
+            stream << ui->dateEdit_Planning->date().toString("ddMMyyyy");
+            stream.flush();
+            // Close the file
+            file.close();
+            QMessageBox::information(this, tr("Infomation"),tr("Operation accepted : Successfully saved the file !"));
+        }
+    }
+}
+
+
+void MainWindow::on_pushBtn_ShowResult_clicked()
+{
+    initTableViewPlanning();
 }
