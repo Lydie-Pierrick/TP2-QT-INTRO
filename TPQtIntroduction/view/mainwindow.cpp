@@ -217,9 +217,7 @@ void MainWindow::initTableViewClients()
 // Function for refreshing the tableView
 void MainWindow::refreshTableViewClients(vector<Client> v_clients)
 {
-    //deletePointersTableView();    
-    //sort(v_clients.begin(), v_clients.end(), compareName);
-
+    //deletePointersTableView();
     vector<int> idsRes;
     QString namesRes;
     int id;
@@ -654,13 +652,6 @@ void MainWindow::on_pushButton_AddOtherEmployee_clicked()
     }
 }
 
-/*int compareName(Client const & c1, Client const & c2)
-{
-    return 0;
-    //return c1.getLastName().compare(c2.getLastName());
-}
-*/
-        //cout << "Show number inserts SQL : " << (DAO_Employee::counter_insert + DAO_Employee::counter_insert) << endl;
 void MainWindow::closeEvent(QCloseEvent *event)
 {
      cout << "Show number inserts SQL : " << (DAO_Employee::counter_insert + DAO_Employee::counter_insert) << endl;

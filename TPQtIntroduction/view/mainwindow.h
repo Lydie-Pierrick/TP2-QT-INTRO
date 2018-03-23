@@ -63,12 +63,8 @@ private slots:
     void on_tabWidget_tabBarClicked(int index);
     void on_pushBtn_Plan_clicked();
     void on_pushBtn_ShowResult_clicked();
-
     void on_pushBtn_Export_clicked();
     void on_pushButton_AddOtherEmployee_clicked();
-
-    //int compareName(Client const * c1, Client const * c2);
-
 private:
     Ui::MainWindow *ui;
     Controller_employee controllerEmployee;
